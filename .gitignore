@@ -220,3 +220,8 @@ __marimo__/
 .streamlit/secrets.toml
 
 raw_data/
+# Frontend (Node / Vite)
+node_modules/
+frontend/dist/
+# Python "lib/" rule above must not hide the frontend source folder
+!frontend/src/lib/
