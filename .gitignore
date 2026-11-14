@@ -225,3 +225,4 @@ node_modules/
 frontend/dist/
 # Python "lib/" rule above must not hide the frontend source folder
 !frontend/src/lib/
+prep/rawFiles/
