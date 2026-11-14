@@ -69,3 +69,37 @@ h2 { font-size: 1.05rem; }
 .temp-results tr.selected { background: #2b1d12; }
 .temp-results .rank { font-weight: 700; }
 .temp-results .score { color: var(--muted); }
+
+/* Ranked Earth pins. Numbers match the temporary results table. */
+.earth-numbered-pin-wrapper { background: none; border: none; }
+.earth-numbered-pin {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #2563eb; color: #fff; border: 2px solid #fff;
+  font: 700 14px/1 system-ui, sans-serif;
+  box-shadow: 0 2px 7px rgb(0 0 0 / 45%);
+}
+/* Hover alone changes pin color; clicking/selecting does not. */
+.earth-numbered-pin:hover {
+  background: #dc2626;
+}
+
+/* Hover information for numbered Earth pins. */
+.leaflet-tooltip.earth-pin-tooltip {
+  background: #181b22;
+  border: 1px solid #444b58;
+  border-radius: 8px;
+  color: #e5e7eb;
+  padding: 0.6rem 0.8rem;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 40%);
+  line-height: 1.6;
+  font-size: 0.85rem;
+}
+.leaflet-tooltip-top.earth-pin-tooltip::before {
+  border-top-color: #181b22;
+}
+.earth-pin-tooltip-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}

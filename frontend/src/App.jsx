@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import MarsMap from './components/MarsMap.jsx';
+import EarthMap from './components/EarthMap.jsx';
 import WeightSliders from './components/WeightSliders.jsx';
 import SiteInfo from './components/SiteInfo.jsx';
 import { rankEarthCells } from './lib/similarity.js';
@@ -99,6 +100,10 @@ export default function App() {
         </div>
 
         <div className="column earth-column">
+          <section className="panel">
+            <h2>Earth map</h2>
+            <EarthMap results={results} selectedRank={selectedResult?.rank} onSelect={setSelectedResult} />
+          </section>
           <section className="panel temp-results">
             <h2>Earth analogs (temporary view)</h2>
             {!selectedSite && <p>Select a Mars site to see results.</p>}
