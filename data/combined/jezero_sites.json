@@ -1,0 +1,595 @@
+{
+  "planet": "mars",
+  "sites": [
+    {
+      "location_id": "jezero_01",
+      "name": "Jezero Crater",
+      "profile": {
+        "location_id": "jezero_01",
+        "name": "Jezero Crater",
+        "terrain": {
+          "id": "jezero_01",
+          "name": "Jezero Crater",
+          "source_dem": "M20_JezeroCrater_CTXDEM_20m.tif",
+          "source_crs_wkt": "PROJCS[\"Jezero_Crater_Projection\",GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"Mars_2000_(Sphere)\",SPHEROID[\"Mars_2000_Sphere\",3396190,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",18.4663],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+          "source_pixel_size_m": [
+            20.0,
+            20.0
+          ],
+          "center_projected_m": {
+            "x": 4354400.0,
+            "y": 1093600.0
+          },
+          "regional": {
+            "features": {
+              "median_slope_deg": 1.1163894890763975,
+              "steep_fraction": 0.0,
+              "relief_m": 203.2385498046874,
+              "roughness_m": 10.514040587334879
+            },
+            "additional_features": {
+              "mean_slope_deg": 1.411333916319762,
+              "slope_p90_deg": 2.7657288161003213,
+              "flat_fraction": 0.9896694214876033,
+              "elevation_std_m": 59.15575807697967,
+              "roughness_100m_m": 0.0007047021607472934,
+              "roughness_500m_m": 6.289230866631863
+            },
+            "quality": {
+              "valid_fraction_resampled": 1.0,
+              "valid_slope_fraction_resampled": 1.0,
+              "samples": 484
+            },
+            "region_km": 10.0,
+            "grid_width": 22,
+            "grid_height": 22,
+            "effective_pixel_size_m": [
+              454.545,
+              454.545
+            ]
+          },
+          "detailed": {
+            "features": {
+              "median_slope_deg": 2.2634314403826026,
+              "steep_fraction": 0.02101186847861164,
+              "relief_m": 144.41166992187482,
+              "roughness_m": 14.18289373562303
+            },
+            "additional_features": {
+              "mean_slope_deg": 3.0803104268484875,
+              "slope_p90_deg": 5.349186889071742,
+              "flat_fraction": 0.8837175947506185,
+              "elevation_std_m": 36.95721354416943,
+              "roughness_100m_m": 2.8045896204722087,
+              "roughness_500m_m": 9.14335272986624
+            },
+            "quality": {
+              "valid_fraction_resampled": 1.0,
+              "valid_slope_fraction_resampled": 1.0,
+              "samples": 27889
+            },
+            "region_km": 5.0,
+            "grid_width": 167,
+            "grid_height": 167,
+            "effective_pixel_size_m": [
+              29.94,
+              29.94
+            ]
+          },
+          "methods": {
+            "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+            "relief": "elevation percentile 95 minus percentile 5, in metres",
+            "roughness_m": "standard deviation of elevation minus valid-pixel-weighted Gaussian-smoothed elevation; sigma=1000 m (PROPOSED; coordinate with Earth team)",
+            "resampling": "GDAL average from source DEM to analysis grid",
+            "nodata": "masked; slope samples adjoining voids excluded"
+          }
+        },
+        "modules": {
+          "geology": {
+            "location_id": "jezero_01",
+            "category": "geology",
+            "analysis": {
+              "scale": "detailed",
+              "width_m": 5000.0,
+              "height_m": 5000.0,
+              "center_projected_m": {
+                "x": 4354400.0,
+                "y": 1093600.0
+              }
+            },
+            "data_status": "processed",
+            "features": {
+              "dominant_unit": "Jezero floor unit",
+              "mapped_units": [
+                {
+                  "unit_code": "2",
+                  "name": "Jezero floor unit",
+                  "fraction_of_region": 0.700151,
+                  "description": "Rugged, moderately-to-heavily cratered, light- to dark-toned, planar unit with margins defined by low-relief, sharp, lobate scarps, forms the central portion of the Jezero crater floor and overlies and embays units Nue and Nle, respectively. Most impact craters on this surface are <200 m. Can have dark, smooth surface texture, especially near contact with unit NHjf2. Type area: lat 18.43°N, long 77.65°E.",
+                  "interpretation": "Volcanic ash or eolian airfall deposit that drapes underlying topography. Correlates with unit Nnp2 based on common stratigraphic position and shared textural and morphologic characteristics. Emplaced during the Late Noachian before deposition of unit NHjf1. May have been modified by subsequent lacustrine activity during deposition of units NHjf1 and NHjf2. Dark, smooth surface texture near unit NHjf2 is due to a dark mantle deposit or erosional lag derived from erosion of unit NHjf2. Previously interpreted by Schon and others (2012) and Goudge and others (2015) as an extrusive volcanic flow."
+                },
+                {
+                  "unit_code": "3",
+                  "name": "Lower etched unit",
+                  "fraction_of_region": 0.155474,
+                  "description": "Rugged, lightly cratered, light- to intermediate-toned unit concentrically exposed on the floor of Jezero adjacent to unit Njf. Topographically lower than adjacent unit Nue. Contains NE-SW trending ridges that extend several hundred meters in length. When present, impact craters are typically >200 m in diameter. Type area: lat 18.28°N, long 77.49°E",
+                  "interpretation": "Volcanic ash deposit, similar to the origin of unit Nue. Could also be other clastic deposit of volcanic or eolian origin. Either deposited into an existing lake within Jezero or subsequently altered by later lacustrine processes during emplacement of units NHjf1 and NHjf2. Underlies unit Nue based on its consistently lower elevation. Ridges are yardangs (Day and Dorn, 2019)."
+                },
+                {
+                  "unit_code": "0",
+                  "name": "Jezero fan 2 unit",
+                  "fraction_of_region": 0.139883,
+                  "description": "Lightly cratered, intermediate-toned, stratified unit with margins defined by sharp scarps, located at the mouth of Neretva Vallis on the western portion of Jezero crater's floor. Occurs at higher elevation than unit NHjf1 (18.58°N, 77.48°E). Contain rugged arcuate ridges and troughs that branch out from nodes and define several overlapping lobes (Figure 7). Meter-scale sequences of alternating light and dark strata as well as some curvilinear strata (18.48°N, 77.39°E; 18.47°N, 77.37°E). Forms isolated outcrops that are <50 m in height on the Jezero crater floor east of the main unit. Some outcrops exhibit parallel stratification on their slopes (18.43°N, 77.36°E), while others do not exhibit obvious visible stratification at map scale (for example, 18.47°N, 77.50°E). Type areas: lat 18.49°N, long 77.36°E and lat 18.47°N, long 77.50°E.",
+                  "interpretation": "Deltaic fan deposits emplaced during the Late Noachian to Early Hesperian, postdating and overlying portions of unit NHjf1. Presence of inlet channels (Neretva, Sava Valles) and an outlet channel (Pliva Vallis) suggests deposition into a lacustrine environment. Rugged arcuate ridges are inverted channels based on their association with the fan deposit and radiation out from various  nodes. Overlapping lobes represent branching channel deposits and distinct episodes of sediment deposition (Figure 7). Isolated outcrops could be remnants of the main delta deposit, much of which has been eroded since initial deposition."
+                },
+                {
+                  "unit_code": "7",
+                  "name": "Eolian bedform unit",
+                  "fraction_of_region": 0.004243,
+                  "description": "Light-toned, linear, commonly parallel low-relief ridges prevalent in local topographic lows such as impact craters, including along the interior margin of Jezero crater, and at the base of steep scarps throughout Nili Planum. Superposes other map units. Type area: lat 18.41°N, long 77.36°E",
+                  "interpretation": "Amazonian-aged bedforms and transverse aeolian ridges (TARs) composed of unconsolidated sediment oriented orthogonal to the dominant east-west wind direction (Day and Dorn, 2019)."
+                },
+                {
+                  "unit_code": "10",
+                  "name": "Upper etched unit",
+                  "fraction_of_region": 0.000248,
+                  "description": "Indurated, rugged, moderately-to-heavily cratered, light-to-intermediate toned unit located along and on the northern Jezero crater rim and wall, along the interior margin of Jezero crater, and throughout Nili Planum. Overlies units Nnp1 and cr in Nili Planum and conformably overlies unit Nle in Jezero crater. Contains three different surface expressions with varying morphologic and erosional textures that grade into one another without clear or systematic stratigraphic contacts: a ridged expression in northern Jezero and northeastern Nili Planum, a heavily cratered expression in northern Nili Planum, and a light-toned rugged expression in southern Nili Planum (Figure 3). Type area: lat 18.67°N, long 77.57°E and lat 18.68°N, long 76.86°E and lat 17.77°N, long 76.86°E respectively.",
+                  "interpretation": "Volcanic ash deposit that drapes underlying units Nnp1, cr, and Nle. Could also be other clastic deposit of volcanic or eolian origin. The three distinct surface expressions could result from differential erosion or cementation, as no clear or systematic stratigraphic contacts are discernable between the three surface expressions. Ridges in the ridged Nue unit are yardangs (Day and Dorn, 2019). Long linear occurrences of the light-toned rugged Nue unit could have formed through infilling of preexisting fractures created by the Isidis impact."
+                }
+              ],
+              "mapped_fraction": 1.0
+            },
+            "quality": {
+              "coverage_fraction": 1.0,
+              "flags": []
+            },
+            "source": {
+              "dataset": "Sun and Stack (2020), USGS SIM 3464 geologic units",
+              "url": "https://doi.org/10.3133/sim3464",
+              "feature_service": "https://services.arcgis.com/v01gqwM5QqNysAAi/ArcGIS/rest/services/Jezero_FeatureServiceFromPro/FeatureServer/8",
+              "type": "mapped_geologic_interpretation"
+            },
+            "methods": {
+              "area": "Projected polygons clipped to site footprint; intersection areas divided by site area",
+              "caveat": "Geologic unit is mapped interpretation, not measured mineral composition."
+            }
+          },
+          "minerals": {
+            "location_id": "jezero_01",
+            "category": "minerals",
+            "analysis": {
+              "scale": "detailed",
+              "width_m": 5000.0,
+              "height_m": 5000.0,
+              "center_projected_m": {
+                "x": 4354400.0,
+                "y": 1093600.0
+              }
+            },
+            "data_status": "no_coverage",
+            "features": {
+              "dominant_mapped_class": null,
+              "mapped_classes": [],
+              "mapped_fraction": 0.0
+            },
+            "quality": {
+              "coverage_fraction": 0.0,
+              "flags": [
+                "mineral_class_area_is_not_mineral_abundance",
+                "no_intersection_with_mineral_polygons",
+                "incomplete_mineral_map_coverage"
+              ],
+              "intersecting_source_polygons": 0
+            },
+            "source": {
+              "dataset": "Jezero Western Rim Mineral Maps (CRISM; Valantinas et al.)",
+              "url": "https://zenodo.org/records/22257754",
+              "local_file": "geologic_map_CRISM.shp",
+              "class_field": "INTERP",
+              "type": "mapped_spectral_mineral_class"
+            },
+            "methods": {
+              "area": "Mapped class polygon area intersecting the actual site footprint",
+              "caveat": "Mineral class coverage is not abundance or percentage by weight. Zero overlap is unknown/not covered, NOT proof mineral is absent."
+            }
+          }
+        },
+        "missing_modules": [
+          "thermal",
+          "wind"
+        ],
+        "invalid_modules": []
+      }
+    },
+    {
+      "location_id": "jezero_rim_01",
+      "name": "Jezero Western Rim",
+      "profile": {
+        "location_id": "jezero_rim_01",
+        "name": "Jezero Western Rim",
+        "terrain": {
+          "id": "jezero_rim_01",
+          "name": "Jezero Western Rim",
+          "source_dem": "M20_JezeroCrater_CTXDEM_20m.tif",
+          "source_crs_wkt": "PROJCS[\"Jezero_Crater_Projection\",GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"Mars_2000_(Sphere)\",SPHEROID[\"Mars_2000_Sphere\",3396190,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",18.4663],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+          "source_pixel_size_m": [
+            20.0,
+            20.0
+          ],
+          "center_projected_m": {
+            "x": 4343800.0,
+            "y": 1090200.0
+          },
+          "regional": {
+            "features": {
+              "median_slope_deg": 5.317268805029698,
+              "steep_fraction": 0.014462809917355372,
+              "relief_m": 532.8628479003905,
+              "roughness_m": 45.84516861795973
+            },
+            "additional_features": {
+              "mean_slope_deg": 5.975339387849148,
+              "slope_p90_deg": 11.895311959055897,
+              "flat_fraction": 0.4690082644628099,
+              "elevation_std_m": 160.20678300147964,
+              "roughness_100m_m": 0.0018236868182852268,
+              "roughness_500m_m": 21.324063991778303
+            },
+            "quality": {
+              "valid_fraction_resampled": 1.0,
+              "valid_slope_fraction_resampled": 1.0,
+              "samples": 484
+            },
+            "region_km": 10.0,
+            "grid_width": 22,
+            "grid_height": 22,
+            "effective_pixel_size_m": [
+              454.545,
+              454.545
+            ]
+          },
+          "detailed": {
+            "features": {
+              "median_slope_deg": 7.5891589028081965,
+              "steep_fraction": 0.10964896554196996,
+              "relief_m": 339.12167968749986,
+              "roughness_m": 57.76508420749383
+            },
+            "additional_features": {
+              "mean_slope_deg": 8.44026566253466,
+              "slope_p90_deg": 15.324551919760726,
+              "flat_fraction": 0.2938075943920542,
+              "elevation_std_m": 100.28325723867836,
+              "roughness_100m_m": 3.9373654737306,
+              "roughness_500m_m": 28.136731312058245
+            },
+            "quality": {
+              "valid_fraction_resampled": 1.0,
+              "valid_slope_fraction_resampled": 1.0,
+              "samples": 27889
+            },
+            "region_km": 5.0,
+            "grid_width": 167,
+            "grid_height": 167,
+            "effective_pixel_size_m": [
+              29.94,
+              29.94
+            ]
+          },
+          "methods": {
+            "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+            "relief": "elevation percentile 95 minus percentile 5, in metres",
+            "roughness_m": "standard deviation of elevation minus valid-pixel-weighted Gaussian-smoothed elevation; sigma=1000 m (PROPOSED; coordinate with Earth team)",
+            "resampling": "GDAL average from source DEM to analysis grid",
+            "nodata": "masked; slope samples adjoining voids excluded"
+          }
+        },
+        "modules": {
+          "geology": {
+            "location_id": "jezero_rim_01",
+            "category": "geology",
+            "analysis": {
+              "scale": "detailed",
+              "width_m": 5000.0,
+              "height_m": 5000.0,
+              "center_projected_m": {
+                "x": 4343800.0,
+                "y": 1090200.0
+              }
+            },
+            "data_status": "processed",
+            "features": {
+              "dominant_unit": "Crater rim unit",
+              "mapped_units": [
+                {
+                  "unit_code": "11",
+                  "name": "Crater rim unit",
+                  "fraction_of_region": 0.681137,
+                  "description": "Rugged, light- to intermediate-toned, relatively high-relief scarps surrounding circular or quasicircular depressions >500 m in diameter. Type area: lat 18.04°N, long 77.51°E",
+                  "interpretation": "Undifferentiated target rock exposed and uplifted during impact. Target rock was unit Nnp1 for Jezero (cross sections). High standing outcrops of unit cr by the western and southern Jezero crater walls contain megabreccia and represent collapsed portions of the transient crater rim (cross section B-B’)."
+                },
+                {
+                  "unit_code": "10",
+                  "name": "Upper etched unit",
+                  "fraction_of_region": 0.209792,
+                  "description": "Indurated, rugged, moderately-to-heavily cratered, light-to-intermediate toned unit located along and on the northern Jezero crater rim and wall, along the interior margin of Jezero crater, and throughout Nili Planum. Overlies units Nnp1 and cr in Nili Planum and conformably overlies unit Nle in Jezero crater. Contains three different surface expressions with varying morphologic and erosional textures that grade into one another without clear or systematic stratigraphic contacts: a ridged expression in northern Jezero and northeastern Nili Planum, a heavily cratered expression in northern Nili Planum, and a light-toned rugged expression in southern Nili Planum (Figure 3). Type area: lat 18.67°N, long 77.57°E and lat 18.68°N, long 76.86°E and lat 17.77°N, long 76.86°E respectively.",
+                  "interpretation": "Volcanic ash deposit that drapes underlying units Nnp1, cr, and Nle. Could also be other clastic deposit of volcanic or eolian origin. The three distinct surface expressions could result from differential erosion or cementation, as no clear or systematic stratigraphic contacts are discernable between the three surface expressions. Ridges in the ridged Nue unit are yardangs (Day and Dorn, 2019). Long linear occurrences of the light-toned rugged Nue unit could have formed through infilling of preexisting fractures created by the Isidis impact."
+                },
+                {
+                  "unit_code": "6",
+                  "name": "Nili Planum 1 unit",
+                  "fraction_of_region": 0.06207,
+                  "description": "Stratigraphically lowest unit in the map area and underlies all other units. Contains three different surface expressions: a high-standing rugged outcrop expression, a rugged, light-to-intermediate toned, moderately cratered, high relief expression with irregularly or poorly defined margins, and a smooth, dark-toned, lightly-cratered, low relief expression occuring in local topographic lows. No clear stratigraphic contacts are discernable between the three expressions. Hummocks (~100s of meters in diameter and 10s of meters high), ridge crests, and megabreccia occur throughout this unit. Type areas: lat 17.90°N, long 76.94°E; lat 17.74°N, long 77.18°E, lat 17.90°N, long 77.12°E respectively.",
+                  "interpretation": "Crustal rocks of undetermined origin, representing pre-Isidis crust, syn-Isidis impact products, and syn-Jezero impact products. Nnp1 was the target rock for the Jezero impact. Megabreccias represent pre-Isidis and pre-Jezero crust. The smooth dark-toned surface expression could be lower-relief portions of these crustal rocks that have been preferentially covered by eroded sediments from local or regional units or mantled by an unconsolidated dark, smooth deposit (possibly su) of unknown origin. Linear ridge crests are inferred to be filled or cemented fractures."
+                },
+                {
+                  "unit_code": "7",
+                  "name": "Eolian bedform unit",
+                  "fraction_of_region": 0.024757,
+                  "description": "Light-toned, linear, commonly parallel low-relief ridges prevalent in local topographic lows such as impact craters, including along the interior margin of Jezero crater, and at the base of steep scarps throughout Nili Planum. Superposes other map units. Type area: lat 18.41°N, long 77.36°E",
+                  "interpretation": "Amazonian-aged bedforms and transverse aeolian ridges (TARs) composed of unconsolidated sediment oriented orthogonal to the dominant east-west wind direction (Day and Dorn, 2019)."
+                },
+                {
+                  "unit_code": "5",
+                  "name": "Nili Planum 2 unit",
+                  "fraction_of_region": 0.019217,
+                  "description": "Rugged, heavily cratered, light- to intermediate-toned, planar unit, margins defined by low-relief, sharp, lobate scarps, located throughout Nili Planum and on the western rim of Jezero crater (lat 18.39°N, long 77.28°E). Erosional texture contains meter-scale blocks at HiRISE-scale. Caps lobate mesa sequences by overlying units Nue, Nnp1, or cr. Banding or stratification visible along some margins (for example, 17.87°N, 77.09°E). Type areas at different elevations: 18.19°N, long 77.01°E; 18.39°N, 77.27°E; 18.08°N, 77.26°E",
+                  "interpretation": "Volcanic ash or eolian airfall deposit emplaced during the Late Noachian, possibly in multiple, localized episodes of deposition, that drapes underlying topography, for example on the Jezero crater rim. Correlates with unit Njf based on common stratigraphic position and shared textural and morphologic characteristics."
+                },
+                {
+                  "unit_code": "9",
+                  "name": "Rugged bright unit",
+                  "fraction_of_region": 0.003197,
+                  "description": "Rugged, light-to-intermediate toned, high standing outcrops up to several hundred meters in height that occur throughout Nili Planum and along the Jezero crater rim and interior margin. Peaks are generally rugged (for example, 18.602°N, 77.031°E), with dark-toned and smooth slopes that sometimes expose underlying unit Nue (Figure 6). Nonconformable contacts with unit Nue occur at different elevations (Cross Section B-B'). Type area: lat 17.81°N, long 76.92°E.",
+                  "interpretation": "Indurated remnant deposits of a more extensive unit of undetermined sedimentary or volcanic origin that was emplaced during the Late Noachian. Nonconformably deposited on top of unit Nue, as contacts between the two units occur at different elevations. Subsequently eroded to its current form as isolated outcrops."
+                }
+              ],
+              "mapped_fraction": 0.999464
+            },
+            "quality": {
+              "coverage_fraction": 0.999464,
+              "flags": []
+            },
+            "source": {
+              "dataset": "Sun and Stack (2020), USGS SIM 3464 geologic units",
+              "url": "https://doi.org/10.3133/sim3464",
+              "feature_service": "https://services.arcgis.com/v01gqwM5QqNysAAi/ArcGIS/rest/services/Jezero_FeatureServiceFromPro/FeatureServer/8",
+              "type": "mapped_geologic_interpretation"
+            },
+            "methods": {
+              "area": "Projected polygons clipped to site footprint; intersection areas divided by site area",
+              "caveat": "Geologic unit is mapped interpretation, not measured mineral composition."
+            }
+          },
+          "minerals": {
+            "location_id": "jezero_rim_01",
+            "category": "minerals",
+            "analysis": {
+              "scale": "detailed",
+              "width_m": 5000.0,
+              "height_m": 5000.0,
+              "center_projected_m": {
+                "x": 4343800.0,
+                "y": 1090200.0
+              }
+            },
+            "data_status": "processed",
+            "features": {
+              "dominant_mapped_class": "bulk rim",
+              "mapped_classes": [
+                {
+                  "mapped_class": "bulk rim",
+                  "fraction_of_region": 0.374453
+                },
+                {
+                  "mapped_class": "olivine, weak",
+                  "fraction_of_region": 0.116646
+                },
+                {
+                  "mapped_class": "altered olivine (1.9 + 2.3)",
+                  "fraction_of_region": 0.096806
+                },
+                {
+                  "mapped_class": "pyroxene-rich (LCP)",
+                  "fraction_of_region": 0.011586
+                },
+                {
+                  "mapped_class": "olivine-rich + carbonate (2.5)",
+                  "fraction_of_region": 0.003192
+                }
+              ],
+              "mapped_fraction": 0.602682
+            },
+            "quality": {
+              "coverage_fraction": 0.602682,
+              "flags": [
+                "mineral_class_area_is_not_mineral_abundance",
+                "incomplete_mineral_map_coverage"
+              ],
+              "intersecting_source_polygons": 176
+            },
+            "source": {
+              "dataset": "Jezero Western Rim Mineral Maps (CRISM; Valantinas et al.)",
+              "url": "https://zenodo.org/records/22257754",
+              "local_file": "geologic_map_CRISM.shp",
+              "class_field": "INTERP",
+              "type": "mapped_spectral_mineral_class"
+            },
+            "methods": {
+              "area": "Mapped class polygon area intersecting the actual site footprint",
+              "caveat": "Mineral class coverage is not abundance or percentage by weight. Zero overlap is unknown/not covered, NOT proof mineral is absent."
+            }
+          },
+          "thermal": {
+            "location_id": "jezero_rim_01",
+            "category": "thermal",
+            "data_status": "processed",
+            "features": {
+              "median_ti": 251.0,
+              "mean_ti": 250.16666666666666,
+              "p10_ti": 223.0,
+              "p90_ti": 276.5,
+              "min_ti": 217.0,
+              "max_ti": 277.0
+            },
+            "analysis": {
+              "center_geographic": {
+                "lat": 18.392333,
+                "lon_east": 77.260676
+              },
+              "source_resolution_m": 2963.6,
+              "measurement_type": "coarse_satellite_thermal_inertia"
+            },
+            "quality": {
+              "flags": [
+                "coarse_resolution",
+                "not_used_in_default_terrain_similarity",
+                "requires_comparable_earth_thermal_data"
+              ],
+              "detailed_valid_fraction": 1.0
+            },
+            "source": {
+              "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+              "source_file": "global_ti_day_2007.img",
+              "source_mask_file": "global_ti_msk_day_2007.img",
+              "unit": "thermal inertia, J m^-2 K^-1 s^-0.5 (tiu); raw int16 used as-is",
+              "input_json": "data\\jezero_rim_01_ti.json"
+            },
+            "regional": {
+              "region_km": 10.0,
+              "grid_width": 5,
+              "grid_height": 4,
+              "effective_pixel_size_m": [
+                2963.6,
+                2963.6
+              ],
+              "features": {
+                "median_ti": 244.5,
+                "mean_ti": 250.625,
+                "p10_ti": 224.5,
+                "p90_ti": 283.5,
+                "min_ti": 217.0,
+                "max_ti": 290.0
+              },
+              "quality": {
+                "samples": 16,
+                "samples_valid": 16,
+                "valid_fraction": 1.0,
+                "status": "ok"
+              },
+              "data_status": "processed"
+            },
+            "detailed": {
+              "region_km": 5.0,
+              "grid_width": 3,
+              "grid_height": 3,
+              "effective_pixel_size_m": [
+                2963.6,
+                2963.6
+              ],
+              "features": {
+                "median_ti": 251.0,
+                "mean_ti": 250.16666666666666,
+                "p10_ti": 223.0,
+                "p90_ti": 276.5,
+                "min_ti": 217.0,
+                "max_ti": 277.0
+              },
+              "quality": {
+                "samples": 6,
+                "samples_valid": 6,
+                "valid_fraction": 1.0,
+                "status": "ok"
+              },
+              "data_status": "processed"
+            },
+            "context": {
+              "region_km": 50.0,
+              "grid_width": 19,
+              "grid_height": 18,
+              "effective_pixel_size_m": [
+                2963.6,
+                2963.6
+              ],
+              "features": {
+                "median_ti": 290.0,
+                "mean_ti": 309.29824561403507,
+                "p10_ti": 231.1,
+                "p90_ti": 423.30000000000024,
+                "min_ti": 159.0,
+                "max_ti": 598.0
+              },
+              "quality": {
+                "samples": 342,
+                "samples_valid": 342,
+                "valid_fraction": 1.0,
+                "status": "ok"
+              },
+              "data_status": "processed"
+            }
+          },
+          "wind": {
+            "location_id": "jezero_rim_01",
+            "category": "wind",
+            "data_status": "processed_regional_context",
+            "features": {
+              "mean_wind_speed_ms": 4.724250729975174,
+              "p95_wind_speed_ms": 10.119913287445495,
+              "wind_speed_std_ms": 2.669443694769042,
+              "prevailing_wind_direction_deg": 102.10109045122931,
+              "mean_surface_pressure_pa": 618.1392395443387
+            },
+            "analysis": {
+              "requested_center": {
+                "lat": 18.392333,
+                "lon_east": 77.260676
+              },
+              "source_model_point": {
+                "lat": 18.4,
+                "lon_east": 77.5
+              },
+              "distance_from_site_km": 13.469,
+              "measurement_type": "nearby_modeled_atmospheric_data"
+            },
+            "quality": {
+              "sample_count": 1440,
+              "valid_wind_samples": 1440,
+              "flags": [
+                "model_not_direct_observation",
+                "source_location_differs_from_site",
+                "sampled_periods_not_full_martian_year",
+                "not_used_in_default_terrain_similarity"
+              ]
+            },
+            "source": {
+              "dataset": "MACDA v2.0",
+              "data_type": "modeled atmospheric reanalysis",
+              "source_location_id": "jezero_crater",
+              "sampled_period_count": 4,
+              "mars_years_sampled": [
+                25
+              ],
+              "wind_height_note": "Lowest model sigma level; not necessarily 10 m above ground",
+              "sampling_note": "Combined statistics across 4 downloaded MACDA periods; only sampled portions of the Martian year are covered, not a full-year average.",
+              "input_json": "data\\jezero_crater.json"
+            }
+          }
+        },
+        "missing_modules": [],
+        "invalid_modules": []
+      }
+    }
+  ],
+  "scientific_categories": [
+    "terrain",
+    "geology",
+    "minerals",
+    "thermal",
+    "wind"
+  ],
+  "excluded_categories": [
+    "albedo",
+    "dust"
+  ],
+  "notes": "Jezero crater floor and western rim are separate terrain regions. Wind represents nearby modeled atmospheric conditions. Thermal inertia is coarse-resolution context. Only compatible terrain metrics are used in the default Earth similarity ranking."
+}
