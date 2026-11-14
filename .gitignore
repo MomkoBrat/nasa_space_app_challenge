@@ -219,6 +219,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+raw_data/
 # Frontend (Node / Vite)
 node_modules/
 frontend/dist/
