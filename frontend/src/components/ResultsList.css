@@ -1,0 +1,146 @@
+.earth-results {
+  color: var(--text);
+}
+
+.earth-results-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.earth-results-heading h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.earth-results-heading > span {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.earth-results-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+}
+
+.earth-results-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  min-height: 66px;
+  padding: 0.6rem 0.75rem;
+  background: #20242d;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.earth-results-item:hover {
+  background: #292f3a;
+  border-color: #465268;
+}
+
+.earth-results-item:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+.earth-results-item.is-selected {
+  background: #2b1d12;
+  border-color: var(--accent);
+}
+
+.earth-results-rank {
+  flex: 0 0 3rem;
+  font-size: 2rem;
+  font-weight: 750;
+  line-height: 1;
+  color: #93c5fd;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.is-selected .earth-results-rank {
+  color: var(--accent);
+}
+
+.earth-results-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.earth-results-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.earth-results-coordinates {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.earth-results-score {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  margin-left: auto;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.earth-results-score strong {
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.earth-results-score span {
+  font-size: 0.68rem;
+}
+
+.earth-results-note {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+.earth-results-empty {
+  padding: 1.6rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: #20242d;
+  text-align: center;
+}
+
+.earth-results-empty h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.earth-results-empty p {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}

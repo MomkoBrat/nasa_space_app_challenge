@@ -1,0 +1,17 @@
+.limitations-panel { min-width: 0; }
+.limitations-intro, .limitations-caption, .limitations-footer {
+  color: var(--muted, #9ca3af);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.limitations-group { padding: 0.65rem 0; border-top: 1px solid var(--border, #2a2f3a); }
+.limitations-heading { margin: 0 0 0.35rem; font-size: 0.97rem; }
+.limitations-heading-match { color: #86efac; }
+.limitations-heading-differ { color: #fdba74; }
+.limitations-heading-unknown { color: #c4b5fd; }
+.limitations-caption { margin: 0 0 0.4rem; }
+.limitations-group ul { margin: 0; padding-left: 1.3rem; }
+.limitations-group li { margin: 0.35rem 0; font-size: 0.85rem; line-height: 1.5; }
+.limitations-group strong { color: var(--text, #e5e7eb); }
+.limitations-footer { padding-top: 0.5rem; border-top: 1px solid var(--border, #2a2f3a); }
+.limitations-mock { font-size: 0.83rem; color: var(--warn, #fbbf24); }

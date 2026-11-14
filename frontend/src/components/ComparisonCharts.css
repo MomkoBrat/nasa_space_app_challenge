@@ -1,0 +1,17 @@
+.comparison-charts { min-width: 0; }
+.comparison-subtitle { margin: 0.3rem 0 0.6rem; font-weight: 600; }
+.comparison-note, .comparison-empty { color: var(--muted, #9ca3af); font-size: 0.85rem; line-height: 1.5; }
+.comparison-chart-container { width: 100%; min-width: 0; margin-top: 0.6rem; }
+.comparison-tooltip {
+  background: #20242d;
+  color: #e5e7eb;
+  border: 1px solid #424a5a;
+  border-radius: 6px;
+  padding: 0.65rem 0.8rem;
+  line-height: 1.6;
+  font-size: 0.8rem;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 40%);
+}
+.comparison-tooltip-scale { color: #aeb4c1; margin-top: 0.2rem; }
+.comparison-error { color: #f87171; }
+.comparison-mock { color: var(--warn, #fbbf24); font-size: 0.82rem; }
