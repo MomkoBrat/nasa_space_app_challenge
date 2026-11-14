@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "planet": "mars",
+  "source_dataset": "MACDA v2.0",
+  "sites": [
+    {
+      "id": "jezero_crater",
+      "name": "Jezero Crater",
+      "path": "jezero_crater.json",
+      "summary": {
+        "sample_count": 1440,
+        "valid_wind_samples": 1440,
+        "valid_pressure_samples": 1440,
+        "mean_wind_speed_ms": 4.724250729975174,
+        "p95_wind_speed_ms": 10.119913287445495,
+        "wind_speed_std_ms": 2.669443694769042,
+        "prevailing_wind_direction_deg": 102.10109045122931,
+        "mean_surface_pressure_pa": 618.1392395443387
+      }
+    },
+    {
+      "id": "gale_crater",
+      "name": "Gale Crater",
+      "path": "gale_crater.json",
+      "summary": {
+        "sample_count": 1440,
+        "valid_wind_samples": 1440,
+        "valid_pressure_samples": 1440,
+        "mean_wind_speed_ms": 5.254616064078344,
+        "p95_wind_speed_ms": 10.25035989419427,
+        "wind_speed_std_ms": 2.5696372319802765,
+        "prevailing_wind_direction_deg": 221.46348990207662,
+        "mean_surface_pressure_pa": 575.6347213109334
+      }
+    },
+    {
+      "id": "nili_patera",
+      "name": "Nili Patera",
+      "path": "nili_patera.json",
+      "summary": {
+        "sample_count": 1440,
+        "valid_wind_samples": 1440,
+        "valid_pressure_samples": 1440,
+        "mean_wind_speed_ms": 4.864499337718038,
+        "p95_wind_speed_ms": 9.735230713548027,
+        "wind_speed_std_ms": 2.7677955726181396,
+        "prevailing_wind_direction_deg": 144.8032872523849,
+        "mean_surface_pressure_pa": 478.1622757169935
+      }
+    },
+    {
+      "id": "athabasca_valles",
+      "name": "Athabasca Valles",
+      "path": "athabasca_valles.json",
+      "summary": {
+        "sample_count": 1440,
+        "valid_wind_samples": 1440,
+        "valid_pressure_samples": 1440,
+        "mean_wind_speed_ms": 1.927804247631236,
+        "p95_wind_speed_ms": 4.660348063666334,
+        "wind_speed_std_ms": 1.3965667905872186,
+        "prevailing_wind_direction_deg": 72.59948108469257,
+        "mean_surface_pressure_pa": 703.6155603620741
+      }
+    },
+    {
+      "id": "victoria_crater",
+      "name": "Victoria Crater",
+      "path": "victoria_crater.json",
+      "summary": {
+        "sample_count": 1440,
+        "valid_wind_samples": 1440,
+        "valid_pressure_samples": 1440,
+        "mean_wind_speed_ms": 2.948592107990314,
+        "p95_wind_speed_ms": 6.688021421773132,
+        "wind_speed_std_ms": 2.0014888470736936,
+        "prevailing_wind_direction_deg": 138.64470598840805,
+        "mean_surface_pressure_pa": 621.0059151543511
+      }
+    }
+  ]
+}
