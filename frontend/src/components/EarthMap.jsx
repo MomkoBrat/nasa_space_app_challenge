@@ -1,7 +1,78 @@
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { useEffect, useMemo, useState } from 'react';
+import { divIcon } from 'leaflet';
+import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
 
-// Basic Earth map. Ranked analog markers will be added later.
-export default function EarthMap() {
+// The parent App supplies the already-ranked Earth results.
+function numberedIcon(rank, isSelected) {
+  return divIcon({
+    className: 'earth-numbered-pin-wrapper',
+    html: `<span class="earth-numbered-pin${isSelected ? ' selected' : ''}">${rank}</span>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  });
+}
+
+// Country names are derived from the Natural Earth (1:110m) boundary dataset.
+// These boundaries are approximate; prefer a supplied country field when available.
+function isInsideRing(lon, lat, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i];
+    const [xj, yj] = ring[j];
+    if ((yi > lat) !== (yj > lat) && lon < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) {
+      inside = !inside;
+    }
+  }
+  return inside;
+}
+
+function isInsidePolygon(lon, lat, rings) {
+  if (!isInsideRing(lon, lat, rings[0])) return false;
+  // A point inside a hole is outside the country's land area.
+  return !rings.slice(1).some((hole) => isInsideRing(lon, lat, hole));
+}
+
+function lookupCountry(lat, lon, countries) {
+  for (const feature of countries) {
+    const { type, coordinates } = feature.geometry;
+    const polygons = type === 'Polygon' ? [coordinates] : coordinates;
+    if (polygons.some((polygon) => isInsidePolygon(lon, lat, polygon))) {
+      return feature.properties.name;
+    }
+  }
+  return null;
+}
+
+function formatCoordinates(lat, lon) {
+  const latitude = `${Math.abs(lat).toFixed(2)}° ${lat < 0 ? 'S' : 'N'}`;
+  const longitude = `${Math.abs(lon).toFixed(2)}° ${lon < 0 ? 'W' : 'E'}`;
+  return `${latitude}, ${longitude}`;
+}
+
+export default function EarthMap({ results = [], selectedRank = null, onSelect }) {
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    let active = true;
+    fetch('/data/countries.geojson')
+      .then((response) => {
+        if (!response.ok) throw new Error('Could not load country boundaries');
+        return response.json();
+      })
+      .then((data) => {
+        if (active) setCountries(data.features);
+      })
+      .catch((error) => console.warn('Country labels unavailable:', error));
+    return () => { active = false; };
+  }, []);
+
+  const countryById = useMemo(() => {
+    return new Map(results.map((result) => [
+      result.id,
+      result.country || lookupCountry(result.lat, result.lon, countries) || 'Not available',
+    ]));
+  }, [results, countries]);
+
   return (
     <div className="map earth-map">
       <MapContainer
@@ -15,6 +86,21 @@ export default function EarthMap() {
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
+        {results.map((result) => (
+          <Marker
+            key={result.id}
+            position={[result.lat, result.lon]}
+            icon={numberedIcon(result.rank, result.rank === selectedRank)}
+            eventHandlers={{ click: () => onSelect?.(result) }}
+          >
+            <Tooltip direction="top" offset={[0, -16]} opacity={1} className="earth-pin-tooltip">
+              <div className="earth-pin-tooltip-title">Earth Analog №{result.rank}</div>
+              <div>Country: {countryById.get(result.id)}</div>
+              <div>Coordinates: {formatCoordinates(result.lat, result.lon)}</div>
+              <div>Similarity Score: {result.score.toFixed(1)} / 100</div>
+            </Tooltip>
+          </Marker>
+        ))}
       </MapContainer>
     </div>
   );

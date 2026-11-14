@@ -102,7 +102,7 @@ export default function App() {
         <div className="column earth-column">
           <section className="panel">
             <h2>Earth map</h2>
-            <EarthMap />
+            <EarthMap results={results} selectedRank={selectedResult?.rank} onSelect={setSelectedResult} />
           </section>
           <section className="panel temp-results">
             <h2>Earth analogs (temporary view)</h2>
