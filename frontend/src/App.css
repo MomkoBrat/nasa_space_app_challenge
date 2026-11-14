@@ -1,0 +1,71 @@
+:root {
+  --bg: #0f1115;
+  --panel: #181b22;
+  --border: #2a2f3a;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #f97316;
+  --warn: #fbbf24;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); }
+h1, h2 { margin: 0 0 0.5rem; }
+h2 { font-size: 1.05rem; }
+
+.app { max-width: 1400px; margin: 0 auto; padding: 1rem; }
+.app-header .subtitle { margin: 0; color: var(--muted); }
+.app-status { padding: 2rem; text-align: center; }
+.app-status.error { color: #f87171; }
+
+.mock-banner {
+  margin: 0.75rem 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--warn);
+  border-radius: 6px;
+  color: var(--warn);
+  font-weight: 600;
+}
+
+.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.column { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+.warning { color: var(--warn); }
+
+/* Maps need a fixed height for Leaflet. */
+.map { height: 360px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.mars-map .leaflet-container { background: #3b2418; }
+
+/* SiteInfo */
+.badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
+.badge { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 999px; border: 1px solid var(--border); }
+.badge.verified { background: #14532d; border-color: #22c55e; }
+.badge.regional { background: #1e293b; }
+.badge.mock { background: #451a03; border-color: var(--warn); color: var(--warn); }
+.badge.group { text-transform: capitalize; color: var(--muted); }
+.coords { color: var(--muted); font-size: 0.85rem; margin: 0.25rem 0; }
+.feature-table th { text-align: left; font-weight: 500; color: var(--muted); padding-right: 1rem; }
+
+/* WeightSliders */
+.presets { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+.presets button {
+  background: #232834; color: var(--text); border: 1px solid var(--border);
+  border-radius: 6px; padding: 0.35rem 0.7rem; cursor: pointer;
+}
+.presets button:hover { border-color: var(--accent); }
+.slider-row { display: grid; grid-template-columns: 8rem 1fr 3rem; align-items: center; gap: 0.5rem; margin: 0.35rem 0; }
+.slider-share { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+
+/* Temporary results table (until Person B's components land) */
+.temp-results table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.temp-results th, .temp-results td { padding: 0.3rem 0.4rem; text-align: left; border-bottom: 1px solid var(--border); }
+.temp-results tbody tr { cursor: pointer; }
+.temp-results tbody tr:hover { background: #20242d; }
+.temp-results tr.selected { background: #2b1d12; }
+.temp-results .rank { font-weight: 700; }
+.temp-results .score { color: var(--muted); }
