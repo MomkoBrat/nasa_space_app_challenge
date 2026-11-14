@@ -213,12 +213,162 @@
         "area": "Mapped class polygon area intersecting the actual site footprint",
         "caveat": "Mineral class coverage is not abundance or percentage by weight. Zero overlap is unknown/not covered, NOT proof mineral is absent."
       }
+    },
+    "thermal": {
+      "location_id": "jezero_rim_01",
+      "category": "thermal",
+      "data_status": "processed",
+      "features": {
+        "median_ti": 251.0,
+        "mean_ti": 250.16666666666666,
+        "p10_ti": 223.0,
+        "p90_ti": 276.5,
+        "min_ti": 217.0,
+        "max_ti": 277.0
+      },
+      "analysis": {
+        "center_geographic": {
+          "lat": 18.392333,
+          "lon_east": 77.260676
+        },
+        "source_resolution_m": 2963.6,
+        "measurement_type": "coarse_satellite_thermal_inertia"
+      },
+      "quality": {
+        "flags": [
+          "coarse_resolution",
+          "not_used_in_default_terrain_similarity",
+          "requires_comparable_earth_thermal_data"
+        ],
+        "detailed_valid_fraction": 1.0
+      },
+      "source": {
+        "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+        "source_file": "global_ti_day_2007.img",
+        "source_mask_file": "global_ti_msk_day_2007.img",
+        "unit": "thermal inertia, J m^-2 K^-1 s^-0.5 (tiu); raw int16 used as-is",
+        "input_json": "data\\jezero_rim_01_ti.json"
+      },
+      "regional": {
+        "region_km": 10.0,
+        "grid_width": 5,
+        "grid_height": 4,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 244.5,
+          "mean_ti": 250.625,
+          "p10_ti": 224.5,
+          "p90_ti": 283.5,
+          "min_ti": 217.0,
+          "max_ti": 290.0
+        },
+        "quality": {
+          "samples": 16,
+          "samples_valid": 16,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "data_status": "processed"
+      },
+      "detailed": {
+        "region_km": 5.0,
+        "grid_width": 3,
+        "grid_height": 3,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 251.0,
+          "mean_ti": 250.16666666666666,
+          "p10_ti": 223.0,
+          "p90_ti": 276.5,
+          "min_ti": 217.0,
+          "max_ti": 277.0
+        },
+        "quality": {
+          "samples": 6,
+          "samples_valid": 6,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "data_status": "processed"
+      },
+      "context": {
+        "region_km": 50.0,
+        "grid_width": 19,
+        "grid_height": 18,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 290.0,
+          "mean_ti": 309.29824561403507,
+          "p10_ti": 231.1,
+          "p90_ti": 423.30000000000024,
+          "min_ti": 159.0,
+          "max_ti": 598.0
+        },
+        "quality": {
+          "samples": 342,
+          "samples_valid": 342,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "data_status": "processed"
+      }
+    },
+    "wind": {
+      "location_id": "jezero_rim_01",
+      "category": "wind",
+      "data_status": "processed_regional_context",
+      "features": {
+        "mean_wind_speed_ms": 4.724250729975174,
+        "p95_wind_speed_ms": 10.119913287445495,
+        "wind_speed_std_ms": 2.669443694769042,
+        "prevailing_wind_direction_deg": 102.10109045122931,
+        "mean_surface_pressure_pa": 618.1392395443387
+      },
+      "analysis": {
+        "requested_center": {
+          "lat": 18.392333,
+          "lon_east": 77.260676
+        },
+        "source_model_point": {
+          "lat": 18.4,
+          "lon_east": 77.5
+        },
+        "distance_from_site_km": 13.469,
+        "measurement_type": "nearby_modeled_atmospheric_data"
+      },
+      "quality": {
+        "sample_count": 1440,
+        "valid_wind_samples": 1440,
+        "flags": [
+          "model_not_direct_observation",
+          "source_location_differs_from_site",
+          "sampled_periods_not_full_martian_year",
+          "not_used_in_default_terrain_similarity"
+        ]
+      },
+      "source": {
+        "dataset": "MACDA v2.0",
+        "data_type": "modeled atmospheric reanalysis",
+        "source_location_id": "jezero_crater",
+        "sampled_period_count": 4,
+        "mars_years_sampled": [
+          25
+        ],
+        "wind_height_note": "Lowest model sigma level; not necessarily 10 m above ground",
+        "sampling_note": "Combined statistics across 4 downloaded MACDA periods; only sampled portions of the Martian year are covered, not a full-year average.",
+        "input_json": "data\\jezero_crater.json"
+      }
     }
   },
-  "missing_modules": [
-    "thermal",
-    "albedo",
-    "dust",
-    "wind"
-  ]
+  "missing_modules": [],
+  "invalid_modules": []
 }
