@@ -1,0 +1,77 @@
+{
+  "id": "jezero_01",
+  "name": "Jezero Crater",
+  "source_dem": "M20_JezeroCrater_CTXDEM_20m.tif",
+  "source_crs_wkt": "PROJCS[\"Jezero_Crater_Projection\",GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"Mars_2000_(Sphere)\",SPHEROID[\"Mars_2000_Sphere\",3396190,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",18.4663],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "source_pixel_size_m": [
+    20.0,
+    20.0
+  ],
+  "center_projected_m": {
+    "x": 4354400.0,
+    "y": 1093600.0
+  },
+  "regional": {
+    "features": {
+      "median_slope_deg": 1.1163894890763975,
+      "steep_fraction": 0.0,
+      "relief_m": 203.2385498046874,
+      "roughness_m": 10.514040587334879
+    },
+    "additional_features": {
+      "mean_slope_deg": 1.411333916319762,
+      "slope_p90_deg": 2.7657288161003213,
+      "flat_fraction": 0.9896694214876033,
+      "elevation_std_m": 59.15575807697967,
+      "roughness_100m_m": 0.0007047021607472934,
+      "roughness_500m_m": 6.289230866631863
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 484
+    },
+    "region_km": 10.0,
+    "grid_width": 22,
+    "grid_height": 22,
+    "effective_pixel_size_m": [
+      454.545,
+      454.545
+    ]
+  },
+  "detailed": {
+    "features": {
+      "median_slope_deg": 2.2634314403826026,
+      "steep_fraction": 0.02101186847861164,
+      "relief_m": 144.41166992187482,
+      "roughness_m": 14.18289373562303
+    },
+    "additional_features": {
+      "mean_slope_deg": 3.0803104268484875,
+      "slope_p90_deg": 5.349186889071742,
+      "flat_fraction": 0.8837175947506185,
+      "elevation_std_m": 36.95721354416943,
+      "roughness_100m_m": 2.8045896204722087,
+      "roughness_500m_m": 9.14335272986624
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 27889
+    },
+    "region_km": 5.0,
+    "grid_width": 167,
+    "grid_height": 167,
+    "effective_pixel_size_m": [
+      29.94,
+      29.94
+    ]
+  },
+  "methods": {
+    "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+    "relief": "elevation percentile 95 minus percentile 5, in metres",
+    "roughness_m": "standard deviation of elevation minus valid-pixel-weighted Gaussian-smoothed elevation; sigma=1000 m (PROPOSED; coordinate with Earth team)",
+    "resampling": "GDAL average from source DEM to analysis grid",
+    "nodata": "masked; slope samples adjoining voids excluded"
+  }
+}
