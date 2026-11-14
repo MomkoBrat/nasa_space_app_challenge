@@ -32,14 +32,20 @@ h2 { font-size: 1.05rem; }
 
 .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
 .column { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
-@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+/* Comparison chart + limitations span both columns below the maps. */
+.comparison-row { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+.comparison-row > * { min-width: 0; }
+@media (max-width: 900px) {
+  .layout, .comparison-row { grid-template-columns: 1fr; }
+}
 
 .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
 .warning { color: var(--warn); }
 
 /* Maps need a fixed height for Leaflet. */
 .map { height: 360px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
-.mars-map .leaflet-container { background: #3b2418; }
+/* Dark space outside the planet; the planet itself is drawn by MarsMap (fallback + MOLA tiles). */
+.mars-map .leaflet-container { background: #07080b; }
 
 /* SiteInfo */
 .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
@@ -62,10 +68,42 @@ h2 { font-size: 1.05rem; }
 .slider-share { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
 
 /* Temporary results table (until Person B's components land) */
-.temp-results table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-.temp-results th, .temp-results td { padding: 0.3rem 0.4rem; text-align: left; border-bottom: 1px solid var(--border); }
-.temp-results tbody tr { cursor: pointer; }
-.temp-results tbody tr:hover { background: #20242d; }
-.temp-results tr.selected { background: #2b1d12; }
-.temp-results .rank { font-weight: 700; }
-.temp-results .score { color: var(--muted); }
+
+/* Ranked Earth pins. Numbers match the temporary results table. */
+.earth-numbered-pin-wrapper { background: none; border: none; }
+.earth-numbered-pin {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #2563eb; color: #fff; border: 2px solid #fff;
+  font: 700 14px/1 system-ui, sans-serif;
+  box-shadow: 0 2px 7px rgb(0 0 0 / 45%);
+}
+/* Hover = red; the selected result (shown in the table/chart) = orange, slightly larger. */
+.earth-numbered-pin:hover {
+  background: #dc2626;
+}
+.earth-numbered-pin.selected {
+  background: var(--accent);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 3px rgb(249 115 22 / 45%), 0 2px 7px rgb(0 0 0 / 45%);
+}
+
+/* Hover information for numbered Earth pins. */
+.leaflet-tooltip.earth-pin-tooltip {
+  background: #181b22;
+  border: 1px solid #444b58;
+  border-radius: 8px;
+  color: #e5e7eb;
+  padding: 0.6rem 0.8rem;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 40%);
+  line-height: 1.6;
+  font-size: 0.85rem;
+}
+.leaflet-tooltip-top.earth-pin-tooltip::before {
+  border-top-color: #181b22;
+}
+.earth-pin-tooltip-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}

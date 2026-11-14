@@ -1,16 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import MarsMap from './components/MarsMap.jsx';
+import EarthMap from './components/EarthMap.jsx';
 import WeightSliders from './components/WeightSliders.jsx';
 import SiteInfo from './components/SiteInfo.jsx';
+import ResultsList from './components/ResultsList.jsx';
+import ComparisonCharts from './components/ComparisonCharts.jsx';
+import LimitationsPanel from './components/LimitationsPanel.jsx';
 import { rankEarthCells } from './lib/similarity.js';
 import { canRecommend } from './lib/siteRules.js';
-import { formatFeature } from './lib/featureLabels.js';
-
-// TODO: replace the temporary results table below with Person B's components once stubbed:
-// <EarthMap results={results} selectedRank={selectedResult?.rank} onSelect={setSelectedResult} />
-// <ResultsList results={results} selectedRank={selectedResult?.rank} onSelect={setSelectedResult} />
-// <ComparisonCharts site={selectedSite} result={selectedResult} />
-// <LimitationsPanel site={selectedSite} result={selectedResult} />
 
 async function loadJson(path) {
   const res = await fetch(path);
@@ -99,46 +96,24 @@ export default function App() {
         </div>
 
         <div className="column earth-column">
-          <section className="panel temp-results">
-            <h2>Earth analogs (temporary view)</h2>
-            {!selectedSite && <p>Select a Mars site to see results.</p>}
-            {selectedSite && !canRecommend(selectedSite) && (
-              <p>No Earth recommendations for polar sites.</p>
-            )}
-            {results.length > 0 && (
-              <table>
-                <thead>
-                  <tr>
-                    <th>Rank</th>
-                    <th>Lat, lon</th>
-                    <th>Slope</th>
-                    <th>Steep</th>
-                    <th>Relief</th>
-                    <th>Rough.</th>
-                    <th>Score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {results.map((r) => (
-                    <tr
-                      key={r.id}
-                      className={r.rank === selectedResult?.rank ? 'selected' : ''}
-                      onClick={() => setSelectedResult(r)}
-                    >
-                      <td className="rank">#{r.rank}</td>
-                      <td>
-                        {r.lat.toFixed(2)}, {r.lon.toFixed(2)}
-                      </td>
-                      {config.feature_keys.map((k) => (
-                        <td key={k}>{formatFeature(k, r.features[k], config)}</td>
-                      ))}
-                      <td className="score">{r.score.toFixed(1)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+          <section className="panel">
+            <h2>Earth map</h2>
+            <EarthMap results={results} selectedRank={selectedResult?.rank} onSelect={setSelectedResult} />
           </section>
+          <section className="panel">
+            {/* null = no Mars site selected; [] = site selected but no recommendations (e.g. polar). */}
+            <ResultsList
+              results={selectedSite ? results : null}
+              selectedRank={selectedResult?.rank}
+              onSelect={setSelectedResult}
+            />
+          </section>
+        </div>
+
+        {/* Full-width row: one shared selectedResult drives map, list, chart and limitations. */}
+        <div className="comparison-row">
+          <ComparisonCharts site={selectedSite} result={selectedResult} />
+          <LimitationsPanel site={selectedSite} result={selectedResult} />
         </div>
       </main>
     </div>
