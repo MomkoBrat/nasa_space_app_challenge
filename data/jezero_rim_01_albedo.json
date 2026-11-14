@@ -1,0 +1,96 @@
+{
+  "id": "jezero_rim_01",
+  "name": "Jezero Western Rim",
+  "source": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+  "source_file": "ALBEDO_R1080_EQU_MAP.tiff",
+  "source_resolution_m": 1481.8,
+  "source_grid": {
+    "rows": 7200,
+    "cols": 14400,
+    "ppd": 40.0
+  },
+  "center_geographic": {
+    "lat": 18.392333,
+    "lon_east": 77.260676
+  },
+  "regional": {
+    "region_km": 10.0,
+    "grid_width": 8,
+    "grid_height": 8,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": -2.157050132751465,
+      "mean_albedo": -2.113706111907959,
+      "p10_albedo": -2.2463297843933105,
+      "p90_albedo": -1.9146599769592285,
+      "min_albedo": -2.28439998626709,
+      "max_albedo": -1.68340003490448
+    },
+    "quality": {
+      "samples": 64,
+      "samples_valid": 64,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "detailed": {
+    "region_km": 5.0,
+    "grid_width": 5,
+    "grid_height": 4,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": -2.1506500244140625,
+      "mean_albedo": -2.1014301776885986,
+      "p10_albedo": -2.2369799613952637,
+      "p90_albedo": -1.8404799699783325,
+      "min_albedo": -2.273099899291992,
+      "max_albedo": -1.68340003490448
+    },
+    "quality": {
+      "samples": 20,
+      "samples_valid": 20,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "methods": {
+    "unit": "albedo (dimensionless, 0-1); raw int16 divided by 10000",
+    "validity": "finite (NoData -32768 excluded; real albedo near 0 is valid)",
+    "statistics": "median, mean, p10, p90, min, max over valid pixels",
+    "window": "square in km; latitude/longitude half-widths from KM_PER_DEG and cos(lat)"
+  },
+  "role": "contextual_only",
+  "note": "Albedo is CONTEXTUAL INFORMATION ONLY and is NOT used in the similarity score (project plan section 6).  Similar albedo does not mean similar composition.  OMEGA NIR is not the same spectral quantity as TES bolometric albedo or Earth MODIS.",
+  "context": {
+    "region_km": 50.0,
+    "grid_width": 37,
+    "grid_height": 35,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": -2.231800079345703,
+      "mean_albedo": -2.205702543258667,
+      "p10_albedo": -2.334660053253174,
+      "p90_albedo": -2.0481998920440674,
+      "min_albedo": -2.4572999477386475,
+      "max_albedo": -1.2955000400543213
+    },
+    "quality": {
+      "samples": 1295,
+      "samples_valid": 1295,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  }
+}
