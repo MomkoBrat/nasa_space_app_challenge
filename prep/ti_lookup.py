@@ -30,7 +30,7 @@ MAX_LAT = 87.0                # maps are only infilled between 87S and 87N
 MIN_VALID_FRACTION = 0.5      # below this the window is flagged (put in shared config)
 
 
-def load_maps(ti_path="global_ti_day_2007.img", mask_path="global_ti_msk_day_2007.img"):
+def load_maps(ti_path=Path(__file__).resolve().parent.parent / "prep"/"rawFiles" / "global_ti_day_2007.img", mask_path=Path(__file__).resolve().parent.parent / "prep"/"rawFiles" / "global_ti_msk_day_2007.img"):
     """Return (thermal_inertia, mask) arrays. Values are NOT modified here."""
     ti = np.fromfile(ti_path, dtype=">i2").reshape(NROWS, NCOLS)   # big-endian int16
     mask = np.fromfile(mask_path, dtype=np.uint8).reshape(NROWS, NCOLS)
@@ -122,9 +122,9 @@ def save_check_plot(ti, mask, path):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--ti", default=Path(__file__).resolve().parent.parent / "data" / "global_ti_day_2007.img")
+    ap.add_argument("--ti", default=Path(__file__).resolve().parent.parent / "prep"/"rawFiles" / "global_ti_day_2007.img")
 
-    ap.add_argument("--mask", default=Path(__file__).resolve().parent.parent / "data" / "global_ti_msk_day_2007.img")
+    ap.add_argument("--mask", default=Path(__file__).resolve().parent.parent / "prep"/"rawFiles" / "global_ti_msk_day_2007.img")
     ap.add_argument("--lat", type=float, help="planetocentric latitude, degrees")
     ap.add_argument("--lon", type=float, help="EAST longitude, degrees (0-360 or -180..180)")
     ap.add_argument("--size", type=float, default=10.0, help="window size in km (default 10)")

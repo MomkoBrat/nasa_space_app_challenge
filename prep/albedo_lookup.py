@@ -34,7 +34,7 @@ NODATA = -32768
 MIN_VALID_FRACTION = 0.5      # flag windows below this (same convention as ti_lookup)
 
 
-def load_albedo(tif_path=Path(__file__).resolve().parent.parent / "data" / "ALBEDO_R1080_EQU_MAP.tiff"):
+def load_albedo(tif_path=Path(__file__).resolve().parent.parent / "prep"/"rawFiles" / "ALBEDO_R1080_EQU_MAP.tiff"):
     """Return the albedo array as float32 with NoData set to NaN.
 
     Raw values are divided by SCALE so the returned array is physical albedo.
@@ -131,7 +131,7 @@ def save_check_plot(albedo, path):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--tif", default=Path(__file__).resolve().parent.parent / "data" / "ALBEDO_R1080_EQU_MAP.tiff",
+    ap.add_argument("--tif", default=Path(__file__).resolve().parent.parent / "prep"/"rawFiles" / "ALBEDO_R1080_EQU_MAP.tiff",
                     help="OMEGA albedo GeoTIFF")
     ap.add_argument("--lat", type=float, help="planetocentric latitude, degrees")
     ap.add_argument("--lon", type=float, help="EAST longitude, degrees")
