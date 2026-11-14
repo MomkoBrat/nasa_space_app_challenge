@@ -79,9 +79,14 @@ h2 { font-size: 1.05rem; }
   font: 700 14px/1 system-ui, sans-serif;
   box-shadow: 0 2px 7px rgb(0 0 0 / 45%);
 }
-/* Hover alone changes pin color; clicking/selecting does not. */
+/* Hover = red; the selected result (shown in the table/chart) = orange, slightly larger. */
 .earth-numbered-pin:hover {
   background: #dc2626;
+}
+.earth-numbered-pin.selected {
+  background: var(--accent);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 3px rgb(249 115 22 / 45%), 0 2px 7px rgb(0 0 0 / 45%);
 }
 
 /* Hover information for numbered Earth pins. */
