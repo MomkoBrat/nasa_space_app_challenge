@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "planet": "mars",
+  "id": "gale_crater",
+  "name": "Gale Crater",
+  "lat": -5.4,
+  "lon": 137.8,
+  "coordinate_source": "hardcoded_project_reference",
+  "coordinate_quality": "approximate_reference",
+  "source_dataset": "MACDA v2.0",
+  "data_type": "modeled atmospheric reanalysis",
+  "data_status": "processed",
+  "wind_height_note": "Lowest model sigma level; not necessarily 10 m above ground",
+  "sampling_note": "Combined statistics across 4 downloaded MACDA periods; only sampled portions of the Martian year are covered, not a full-year average.",
+  "summary": {
+    "sample_count": 1440,
+    "valid_wind_samples": 1440,
+    "valid_pressure_samples": 1440,
+    "mean_wind_speed_ms": 5.254616064078344,
+    "p95_wind_speed_ms": 10.25035989419427,
+    "wind_speed_std_ms": 2.5696372319802765,
+    "prevailing_wind_direction_deg": 221.46348990207662,
+    "mean_surface_pressure_pa": 575.6347213109334
+  },
+  "source_files": [
+    "mgs-tes-reanalysis_mars_MY25SOY023_MY25SOY053_v2-0.nc",
+    "mgs-tes-reanalysis_mars_MY25SOY173_MY25SOY203_v2-0.nc",
+    "mgs-tes-reanalysis_mars_MY25SOY353_MY25SOY383_v2-0.nc",
+    "mgs-tes-reanalysis_mars_MY25SOY533_MY25SOY563_v2-0.nc"
+  ],
+  "sampled_period_count": 4,
+  "mars_years_sampled": [
+    25
+  ]
+}
