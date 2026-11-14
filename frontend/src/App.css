@@ -39,7 +39,8 @@ h2 { font-size: 1.05rem; }
 
 /* Maps need a fixed height for Leaflet. */
 .map { height: 360px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
-.mars-map .leaflet-container { background: #3b2418; }
+/* Dark space outside the planet; the planet itself is drawn by MarsMap (fallback + MOLA tiles). */
+.mars-map .leaflet-container { background: #07080b; }
 
 /* SiteInfo */
 .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
