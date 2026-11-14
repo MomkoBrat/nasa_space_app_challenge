@@ -1,6 +1,9 @@
 
 import sys
 import rasterio
+import numpy as np
+mask = np.fromfile("global_ti_msk_day_2007.img", dtype=np.uint8).reshape(3600, 7200)
+valid_fraction = mask[r0:r1, c0:c1].mean()   # share of real pixels in a window
 
 def inspect_dem(file_path):
     with rasterio.open(file_path) as dem:
