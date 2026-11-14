@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "sites": [
+    {
+      "id": "mars_site_001",
+      "name": "Mars example site (MOCK)",
+      "group": "crater",
+      "lat": 18.44,
+      "lon": 77.45,
+      "description": "Example only. All measurements in this record are invented.",
+      "analysis": {"window_size_m": 10000, "analysis_resolution_m": 460},
+      "features": {"median_slope_deg": 4.5, "steep_fraction": 0.08, "relief_m": 170, "roughness_m": 22},
+      "quality": {"coverage_fraction": 0.98, "flags": [], "data_status": "mock"},
+      "sources": [{"dataset": "MOCK", "native_resolution_m": null, "url": null}],
+      "image_url": null,
+      "detail_available": false
+    }
+  ]
+}
