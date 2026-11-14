@@ -1,0 +1,98 @@
+{
+  "id": "jezero_rim_01",
+  "name": "Jezero Western Rim",
+  "source": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+  "source_file": "global_ti_day_2007.img",
+  "source_mask_file": "global_ti_msk_day_2007.img",
+  "source_resolution_m": 2963.6,
+  "source_grid": {
+    "rows": 3600,
+    "cols": 7200,
+    "ppd": 20.0
+  },
+  "center_geographic": {
+    "lat": 18.392333,
+    "lon_east": 77.260676
+  },
+  "regional": {
+    "region_km": 10.0,
+    "grid_width": 5,
+    "grid_height": 4,
+    "effective_pixel_size_m": [
+      2963.6,
+      2963.6
+    ],
+    "features": {
+      "median_ti": 244.5,
+      "mean_ti": 250.625,
+      "p10_ti": 224.5,
+      "p90_ti": 283.5,
+      "min_ti": 217.0,
+      "max_ti": 290.0
+    },
+    "quality": {
+      "samples": 16,
+      "samples_valid": 16,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "quantitative_feature"
+  },
+  "detailed": {
+    "region_km": 5.0,
+    "grid_width": 3,
+    "grid_height": 3,
+    "effective_pixel_size_m": [
+      2963.6,
+      2963.6
+    ],
+    "features": {
+      "median_ti": 251.0,
+      "mean_ti": 250.16666666666666,
+      "p10_ti": 223.0,
+      "p90_ti": 276.5,
+      "min_ti": 217.0,
+      "max_ti": 277.0
+    },
+    "quality": {
+      "samples": 6,
+      "samples_valid": 6,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "quantitative_feature"
+  },
+  "methods": {
+    "unit": "thermal inertia, J m^-2 K^-1 s^-0.5 (tiu); raw int16 used as-is",
+    "validity": "value > 0 AND mask == 1 (interpolated pixels excluded)",
+    "statistics": "median, mean, p10, p90, min, max over valid pixels",
+    "window": "square in km; latitude/longitude half-widths from KM_PER_DEG and cos(lat)",
+    "coverage_limit": "|lat| > 87 deg is flagged outside_coverage"
+  },
+  "role": "quantitative_feature",
+  "note": "Thermal inertia is a physical surface property.  It may enter the similarity score only when a defensible Earth-side equivalent (e.g. MODIS-derived apparent thermal inertia) is available and the cross-dataset comparison is validated.  Until then, treat as a quantitative context feature, not a default ranking input.",
+  "context": {
+    "region_km": 50.0,
+    "grid_width": 19,
+    "grid_height": 18,
+    "effective_pixel_size_m": [
+      2963.6,
+      2963.6
+    ],
+    "features": {
+      "median_ti": 290.0,
+      "mean_ti": 309.29824561403507,
+      "p10_ti": 231.1,
+      "p90_ti": 423.30000000000024,
+      "min_ti": 159.0,
+      "max_ti": 598.0
+    },
+    "quality": {
+      "samples": 342,
+      "samples_valid": 342,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "quantitative_feature"
+  }
+}
