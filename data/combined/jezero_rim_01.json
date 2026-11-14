@@ -232,7 +232,7 @@
           "lon_east": 77.260676
         },
         "source_resolution_m": 2963.6,
-        "measurement_type": "coarse_satellite_thermal_inertia"
+        "measurement_type": "coarse_satellite_context"
       },
       "quality": {
         "flags": [
@@ -247,7 +247,8 @@
         "source_file": "global_ti_day_2007.img",
         "source_mask_file": "global_ti_msk_day_2007.img",
         "unit": "thermal inertia, J m^-2 K^-1 s^-0.5 (tiu); raw int16 used as-is",
-        "input_json": "data\\jezero_rim_01_ti.json"
+        "input_json": "data/jezero_rim_01_ti.json",
+        "role": "contextual_only"
       },
       "regional": {
         "region_km": 10.0,
@@ -322,6 +323,115 @@
         "data_status": "processed"
       }
     },
+    "albedo": {
+      "location_id": "jezero_rim_01",
+      "category": "albedo",
+      "data_status": "processed",
+      "features": {
+        "median_albedo": 0.21182042360305786,
+        "mean_albedo": 0.21896831691265106,
+        "p10_albedo": 0.19928327202796936,
+        "p90_albedo": 0.25686442852020264,
+        "min_albedo": 0.1940377950668335,
+        "max_albedo": 0.2796761691570282
+      },
+      "analysis": {
+        "center_geographic": {
+          "lat": 18.392333,
+          "lon_east": 77.260676
+        },
+        "source_resolution_m": 1481.8,
+        "measurement_type": "coarse_satellite_context"
+      },
+      "quality": {
+        "flags": [
+          "coarse_resolution",
+          "not_used_in_default_terrain_similarity",
+          "nir_albedo_contextual_only"
+        ],
+        "detailed_valid_fraction": 1.0
+      },
+      "source": {
+        "dataset": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+        "source_file": "ALBEDO_R1080_EQU_MAP.tiff",
+        "source_mask_file": null,
+        "unit": "albedo (dimensionless, I/F / cos(i) at 1.08 um, Lambertian); decoded as raw * 1.4522365285e-05 + 0.52414565669 per the PDS label",
+        "input_json": "data/jezero_rim_01_albedo.json",
+        "role": "contextual_only"
+      },
+      "regional": {
+        "region_km": 10.0,
+        "grid_width": 8,
+        "grid_height": 8,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.210890993475914,
+          "mean_albedo": 0.21718552708625793,
+          "p10_albedo": 0.19792543351650238,
+          "p90_albedo": 0.24609175324440002,
+          "min_albedo": 0.19239675998687744,
+          "max_albedo": 0.2796761691570282
+        },
+        "quality": {
+          "samples": 64,
+          "samples_valid": 64,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "data_status": "processed"
+      },
+      "detailed": {
+        "region_km": 5.0,
+        "grid_width": 5,
+        "grid_height": 4,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.21182042360305786,
+          "mean_albedo": 0.21896831691265106,
+          "p10_albedo": 0.19928327202796936,
+          "p90_albedo": 0.25686442852020264,
+          "min_albedo": 0.1940377950668335,
+          "max_albedo": 0.2796761691570282
+        },
+        "quality": {
+          "samples": 20,
+          "samples_valid": 20,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "data_status": "processed"
+      },
+      "context": {
+        "region_km": 50.0,
+        "grid_width": 37,
+        "grid_height": 35,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.20003551244735718,
+          "mean_albedo": 0.20382551848888397,
+          "p10_albedo": 0.1850978136062622,
+          "p90_albedo": 0.22669857740402222,
+          "min_albedo": 0.16728758811950684,
+          "max_albedo": 0.3360084295272827
+        },
+        "quality": {
+          "samples": 1295,
+          "samples_valid": 1295,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "data_status": "processed"
+      }
+    },
     "wind": {
       "location_id": "jezero_rim_01",
       "category": "wind",
@@ -365,7 +475,7 @@
         ],
         "wind_height_note": "Lowest model sigma level; not necessarily 10 m above ground",
         "sampling_note": "Combined statistics across 4 downloaded MACDA periods; only sampled portions of the Martian year are covered, not a full-year average.",
-        "input_json": "data\\jezero_crater.json"
+        "input_json": "data/jezero_crater.json"
       }
     }
   },
