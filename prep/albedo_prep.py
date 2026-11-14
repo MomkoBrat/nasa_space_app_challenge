@@ -1,14 +1,24 @@
 """Extract reproducible OMEGA NIR albedo context for a Mars site.
 
-Sibling to mars_prep.py.  Input is the OMEGA/MEx albedo GeoTIFF
-(ALBEDO_R1080_EQU_MAP.tiff): int16 scaled albedo (x10000), nodata -32768,
-shape 7200 x 14400, 40 ppd (~1.48 km/pixel), simple cylindrical,
-planetocentric lat, east-positive lon, row 0 = 90N, col 0 = 180W.
+Sibling to mars_prep.py.  Input is the OMEGA/MEx albedo map
+(ALBEDO_R1080_EQU_MAP.tiff) from the ESA PSA Mars Maps page:
+int16 samples, nodata -32768, shape 7200 x 14400, 40 ppd (~1.48 km/pixel),
+simple cylindrical, planetocentric lat, east-positive lon,
+row 0 = 90N, col 0 = 180W.
+
+SCALING (from the PDS label ALBEDO_R1080_EQU_MAP.LBL)
+  albedo = raw * SCALING_FACTOR + OFFSET
+  SCALING_FACTOR = 1.4522365285e-05, OFFSET = 5.2414565669e-01
+  -> raw -32767..+32767 maps to albedo ~0.048..1.000
+  (label MIN 0.048, MAX 1.000, MEAN 0.294).
+  This is NOT "x10000"; dividing by 10000 gives values in -3.3..+3.3.
+  If the GeoTIFF carries its own scale/offset tags, those are used instead.
 
 Scientific role (project plan, section 6):
   Albedo is CONTEXTUAL INFORMATION ONLY.  It does NOT enter the similarity
-  score.  Similar albedo does not mean similar composition.  OMEGA NIR is
-  not the same spectral quantity as TES bolometric albedo or Earth MODIS.
+  score.  Similar albedo does not mean similar composition.  OMEGA NIR
+  (I/F / cos(i) at 1.08 um) is not the same spectral quantity as TES
+  bolometric albedo or Earth MODIS.
 
 Install: python -m pip install rasterio numpy matplotlib
 Example:
@@ -26,13 +36,20 @@ from pathlib import Path
 
 import numpy as np
 
-# --- OMEGA albedo map constants (from the GeoTIFF transform) ---
+# --- OMEGA albedo map constants ---
 RES = 40.0                    # pixels per degree (14400 cols / 360 deg)
 NROWS, NCOLS = 7200, 14400
-SCALE = 10000.0               # int16 -> albedo
 NODATA = -32768
 RADIUS_KM = 3396.0
 KM_PER_DEG = 2 * math.pi * RADIUS_KM / 360.0   # ~59.27 km per degree
+
+# Linear scaling from the PDS label (albedo = raw * SCALING_FACTOR + OFFSET)
+SCALING_FACTOR = 1.4522365285e-05
+OFFSET = 5.2414565669e-01
+
+# Sanity bounds for decoded albedo (PDS label: min 0.048, max 1.000)
+ALBEDO_SANE_MIN = -0.01
+ALBEDO_SANE_MAX = 1.05
 
 MIN_VALID_FRACTION = 0.5      # flag below this (matches ti_lookup.py convention)
 
@@ -42,20 +59,59 @@ DEFAULT_TIF = (
     / "ALBEDO_R1080_EQU_MAP.tiff"
 )
 
+FEATURE_KEYS = (
+    "median_albedo", "mean_albedo", "p10_albedo", "p90_albedo",
+    "min_albedo", "max_albedo",
+)
+
 
 def load_albedo(tif_path=DEFAULT_TIF):
-    """Return albedo as float32 with NoData set to NaN."""
+    """Return physical albedo (float32) with NoData set to NaN.
+
+    Applies the PDS scaling (raw * 1.4522e-05 + 0.52415) to int16 data.
+    Fails loudly if decoded values are outside a plausible albedo range.
+    """
     import rasterio
     with rasterio.open(tif_path) as src:
-        raw = src.read(1).astype(np.float32)
-        nodata = src.nodata if src.nodata is not None else NODATA
-        if raw.shape != (NROWS, NCOLS):
+        if (src.height, src.width) != (NROWS, NCOLS):
             raise ValueError(
-                f"Unexpected shape {raw.shape}, expected {(NROWS, NCOLS)}. "
-                "Check that this is the 40 ppd OMEGA global albedo map."
+                f"Unexpected shape {(src.height, src.width)}, expected "
+                f"{(NROWS, NCOLS)}. Check that this is the 40 ppd OMEGA "
+                "global albedo map."
             )
-    albedo = raw / SCALE
-    albedo[raw == nodata] = np.nan
+        raw = src.read(1)
+        nodata = src.nodata if src.nodata is not None else NODATA
+        tag_scale = src.scales[0] if src.scales else 1.0
+        tag_offset = src.offsets[0] if src.offsets else 0.0
+
+    if np.issubdtype(raw.dtype, np.floating):
+        # Already float: assume physical albedo unless tags say otherwise.
+        valid = np.isfinite(raw) & (raw != nodata)
+        scale, offset = tag_scale, tag_offset
+    else:
+        valid = raw != nodata
+        if (tag_scale, tag_offset) != (1.0, 0.0):
+            scale, offset = tag_scale, tag_offset      # GeoTIFF's own tags
+        else:
+            scale, offset = SCALING_FACTOR, OFFSET     # PDS label values
+
+    albedo = raw.astype(np.float32)
+    del raw
+    albedo *= np.float32(scale)
+    albedo += np.float32(offset)
+    albedo[~valid] = np.nan
+
+    finite = albedo[np.isfinite(albedo)]
+    if finite.size == 0:
+        raise ValueError("No valid pixels found in the albedo map.")
+    lo, hi = float(finite.min()), float(finite.max())
+    if lo < ALBEDO_SANE_MIN or hi > ALBEDO_SANE_MAX:
+        raise ValueError(
+            f"Decoded albedo range {lo:.3f}..{hi:.3f} is outside the "
+            f"plausible {ALBEDO_SANE_MIN}..{ALBEDO_SANE_MAX} (PDS label says "
+            "~0.048..1.000). The file's scaling is probably different from "
+            "the PDS one; check the GeoTIFF with `rio info` / gdalinfo."
+        )
     return albedo
 
 
@@ -68,12 +124,16 @@ def lon_to_col(lon_east):
     return int(math.floor((lon + 180.0) * RES)) % NCOLS
 
 
+def _half_widths(lat, size_km):
+    """Latitude and longitude half-widths (deg) of a square window."""
+    lat_half = (size_km / 2.0) / KM_PER_DEG
+    coslat = max(math.cos(math.radians(lat)), 1e-3)
+    return lat_half, lat_half / coslat
+
+
 def _window(albedo, lat, lon_east, size_km):
     """Slice a square window centred on the point. Returns the 2-D block."""
-    half_km = size_km / 2.0
-    lat_half = half_km / KM_PER_DEG
-    coslat = max(math.cos(math.radians(lat)), 1e-3)
-    lon_half = lat_half / coslat
+    lat_half, lon_half = _half_widths(lat, size_km)
 
     r0 = lat_to_row(min(lat + lat_half, 90.0))
     r1 = lat_to_row(max(lat - lat_half, -90.0))
@@ -98,7 +158,6 @@ def _stats(block):
     else:
         status = "ok"
 
-    nan = float("nan")
     if n_valid:
         features = {
             "median_albedo": float(np.median(vals)),
@@ -109,10 +168,8 @@ def _stats(block):
             "max_albedo": float(vals.max()),
         }
     else:
-        features = {k: nan for k in (
-            "median_albedo", "mean_albedo", "p10_albedo", "p90_albedo",
-            "min_albedo", "max_albedo",
-        )}
+        # None -> JSON null (json.dumps(allow_nan=False) rejects NaN)
+        features = {k: None for k in FEATURE_KEYS}
 
     return features, {
         "samples": n_total,
@@ -127,9 +184,8 @@ def window_context(albedo, lat, lon_east, size_km):
     block = _window(albedo, lat, lon_east, size_km)
     features, quality = _stats(block)
 
-    lat_half = (size_km / 2.0) / KM_PER_DEG
-    coslat = max(math.cos(math.radians(lat)), 1e-3)
-    lon_half = lat_half / coslat
+    _, lon_half = _half_widths(lat, size_km)
+    lat_half, _ = _half_widths(lat, size_km)
     gw = int(round(2 * lon_half * RES)) + 1
     gh = int(round(2 * lat_half * RES)) + 1
 
@@ -186,6 +242,9 @@ def main():
     args = p.parse_args()
 
     albedo = load_albedo(args.tif)
+    print(f"Global albedo: min={np.nanmin(albedo):.3f} "
+          f"max={np.nanmax(albedo):.3f} mean={np.nanmean(albedo):.3f} "
+          "(PDS label: 0.048 / 1.000 / 0.294)")
 
     if args.plot:
         save_check_plot(albedo, args.plot)
@@ -206,7 +265,9 @@ def main():
         "regional": regional,
         "detailed": detailed,
         "methods": {
-            "unit": "albedo (dimensionless, 0-1); raw int16 divided by 10000",
+            "unit": ("albedo (dimensionless, I/F / cos(i) at 1.08 um, "
+                     "Lambertian); decoded as raw * 1.4522365285e-05 + "
+                     "0.52414565669 per the PDS label"),
             "validity": "finite (NoData -32768 excluded; real albedo near 0 is valid)",
             "statistics": "median, mean, p10, p90, min, max over valid pixels",
             "window": "square in km; latitude/longitude half-widths from KM_PER_DEG and cos(lat)",
