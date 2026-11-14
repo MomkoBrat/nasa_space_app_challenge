@@ -20,6 +20,7 @@ Usage:
 import argparse
 import math
 import numpy as np
+from pathlib import Path
 
 RES = 20.0                    # pixels per degree (from label)
 RADIUS_KM = 3396.0            # sphere radius (from label)
@@ -121,8 +122,9 @@ def save_check_plot(ti, mask, path):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--ti", default="global_ti_day_2007.img")
-    ap.add_argument("--mask", default="global_ti_msk_day_2007.img")
+    ap.add_argument("--ti", default=Path(__file__).resolve().parent.parent / "data" / "global_ti_day_2007.img")
+
+    ap.add_argument("--mask", default=Path(__file__).resolve().parent.parent / "data" / "global_ti_msk_day_2007.img")
     ap.add_argument("--lat", type=float, help="planetocentric latitude, degrees")
     ap.add_argument("--lon", type=float, help="EAST longitude, degrees (0-360 or -180..180)")
     ap.add_argument("--size", type=float, default=10.0, help="window size in km (default 10)")
