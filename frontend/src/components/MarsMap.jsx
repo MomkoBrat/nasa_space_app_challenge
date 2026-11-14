@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import L from 'leaflet';
-import { MapContainer, CircleMarker, Tooltip } from 'react-leaflet';
+import { MapContainer, CircleMarker, Tooltip, useMap } from 'react-leaflet';
 
 // Equirectangular CRS so the full ±90° latitude range (polar sites) is visible
 // and so it lines up with Mars Trek / OpenPlanetary equirectangular tiles later.
@@ -16,20 +17,35 @@ const GROUP_COLORS = {
   other: '#94a3b8',
 };
 
+// Keeps the whole planet as the furthest zoom-out level, re-measured when the
+// window (and so the map box) changes size. Leaflet clamps the current zoom itself.
+function FitPlanet() {
+  const map = useMap();
+  useEffect(() => {
+    const updateMinZoom = () => map.setMinZoom(map.getBoundsZoom(BOUNDS));
+    updateMinZoom();
+    map.on('resize', updateMinZoom);
+    return () => {
+      map.off('resize', updateMinZoom);
+    };
+  }, [map]);
+  return null;
+}
+
 export default function MarsMap({ sites, selectedId, onSelect }) {
   return (
     <div className="map mars-map">
       <MapContainer
         crs={L.CRS.EPSG4326}
-        center={[0, 0]}
-        zoom={0}
-        minZoom={0}
+        bounds={BOUNDS}
+        zoomSnap={0.1}
         maxZoom={6}
         maxBounds={BOUNDS}
         maxBoundsViscosity={1}
         worldCopyJump={false}
         style={{ height: '100%', width: '100%' }}
       >
+        <FitPlanet />
         {sites.map((site) => {
           const selected = site.id === selectedId;
           return (
