@@ -55,6 +55,20 @@ def centre(d):
     raise ValueError(f"{d['location_id']}: no centre coordinates")
 
 
+# Mars-specific thermal inertia classes (tiu), after Putzig & Mellon (2007) / Fergason et al. (2006).
+# Only meaningful on Mars: the same material has a much higher TI under Earth's thick atmosphere.
+def mars_surface_class(ti):
+    if not finite(ti):
+        return None
+    if ti < 150:
+        return "dust / very fine-grained"
+    if ti < 350:
+        return "sand / fine-grained"
+    if ti < 700:
+        return "coarse / mixed with rock or crust"
+    return "rock / bedrock dominated"
+
+
 def module_context(m):
     th, al, wi = m.get("thermal", {}), m.get("albedo", {}), m.get("wind", {})
     geo, mins = m.get("geology", {}), m.get("minerals", {})
@@ -66,6 +80,7 @@ def module_context(m):
                [c["mineral_class"] for c in mf.get("reported_mineral_classes", [])]
     return {
         "thermal_inertia_tiu": rounded(th_reg.get("median_ti"), 1),
+        "surface_class": mars_surface_class(th_reg.get("median_ti")),
         "albedo_1080nm": rounded(al_reg.get("median_albedo"), 4),
         "wind_speed_ms": rounded(wf.get("mean_wind_speed_ms"), 2),
         "wind_speed_p95_ms": rounded(wf.get("p95_wind_speed_ms"), 2),

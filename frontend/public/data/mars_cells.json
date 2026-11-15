@@ -64,6 +64,7 @@
       ],
       "context": {
         "thermal_inertia_tiu": 163.5,
+        "surface_class": "sand / fine-grained",
         "albedo_1080nm": 0.39,
         "wind_speed_ms": 1.93,
         "wind_speed_p95_ms": 4.66,
@@ -160,6 +161,7 @@
       ],
       "context": {
         "thermal_inertia_tiu": 198.0,
+        "surface_class": "sand / fine-grained",
         "albedo_1080nm": 0.2675,
         "wind_speed_ms": 5.25,
         "wind_speed_p95_ms": 10.25,
@@ -256,6 +258,7 @@
       ],
       "context": {
         "thermal_inertia_tiu": 244.5,
+        "surface_class": "sand / fine-grained",
         "albedo_1080nm": 0.2109,
         "wind_speed_ms": 4.72,
         "wind_speed_p95_ms": 10.12,
@@ -348,6 +351,7 @@
       ],
       "context": {
         "thermal_inertia_tiu": 528.0,
+        "surface_class": "coarse / mixed with rock or crust",
         "albedo_1080nm": 0.1173,
         "wind_speed_ms": 4.86,
         "wind_speed_p95_ms": 9.74,
@@ -447,6 +451,7 @@
       ],
       "context": {
         "thermal_inertia_tiu": 161.5,
+        "surface_class": "sand / fine-grained",
         "albedo_1080nm": 0.2064,
         "wind_speed_ms": 2.95,
         "wind_speed_p95_ms": 6.69,
