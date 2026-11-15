@@ -567,3 +567,66 @@ Price, J. C. (1977). *Thermal inertia mapping: A new view of the Earth.* Journal
 - **Mars landscape (explorer header):** NASA/JPL-Caltech/ASU/MSSS
 - **Earth (landing page):** NASA / Apollo 17, "Blue Marble" — https://commons.wikimedia.org/wiki/File:Blue_Marble_transparent.png
 - **Mars (landing page):** NASA / JPL / USGS — https://science.nasa.gov/photojournal/global-color-views-of-mars/
+
+---
+
+## Frontend Development and Visual Design — Sources and Attribution
+
+This section documents the **frontend work developed and revised during the November 2026 Mars-to-Earth Analog Finder design sessions**. It distinguishes third-party **libraries and image/data sources** from **project-specific interface code and styling**. Refer to the earlier *Maps and Imagery in the Web Application* section for the existing Mars and Earth basemap and Natural Earth citations. These frontend references do not establish scientific validity for the similarity scores.
+
+### React Interface and Application Setup
+
+**Technologies:** React 18 with JavaScript/JSX, Vite 5 and the React plugin (versions from the frontend `package.json` reviewed during development).
+
+**Usage:** Component-based rendering of the landing page, the main explorer, selected Mars site and Earth analog state, feature-weight controls, conditional loading/empty states, and updates to the maps, results, charts and limitations panel.
+
+**References:**
+
+- React Team. *React Documentation — Quick Start*. https://react.dev/learn
+- Vite Contributors. *Vite — Getting Started*. https://vite.dev/guide/
+
+### Interactive Mars and Earth Maps — Leaflet and React Leaflet
+
+**Technologies:** Leaflet 1.9 and React Leaflet 4.2 (as specified in the frontend dependencies).
+
+**Usage:** `MarsMap.jsx` and `EarthMap.jsx` use these libraries for geographic tile layers, zooming, panning, map markers, tooltips and click selection. Frontend development included numbered Earth candidate pins, hover cards displaying rank/country/coordinates/match score, responsive map sizing, restricted map bounds, non-wrapping world tiles, and centering the Earth view at the minimum zoom level. These behaviors are **application-specific implementations**, not functionality or scientific results authored by the library maintainers.
+
+**References:**
+
+- Leaflet Contributors. *Leaflet — API Reference*. https://leafletjs.com/reference.html
+- React Leaflet Contributors. *React Leaflet v4 — Introduction*. https://react-leaflet.js.org/docs/v4/start-introduction/
+- React Leaflet Contributors. *React Leaflet v4 — Setup*. https://react-leaflet.js.org/docs/v4/start-setup/
+
+**Map and geographic-data attributions:** The Mars base imagery is supplied by NASA Mars Trek; the Earth base imagery by NASA EOSDIS GIBS Blue Marble; and approximate country identification uses Natural Earth Admin 0 boundaries. See the earlier *Mars Base Map*, *Earth Base Map* and *Country Borders* entries for the original service and data references. Country names inferred from small-scale boundaries may be unavailable or imprecise near coastlines.
+
+### Ranked Results and Terrain Comparison Visualizations
+
+**Usage:** `ResultsList.jsx` presents the top ten Earth candidates as selectable ranked results linked to the map. `ComparisonCharts.jsx` visualizes Mars/Earth terrain features, dividing each displayed quantity by its feature-specific `normalization_scales` from `features.json`; tooltips use `formatFeature()` to show the original measurements and units. `LimitationsPanel.jsx` presents the Matches / Differs / Unknown categories, including terrain resolution, mock-data cautions and unassessed environmental factors. The ranking, normalization inputs and interpretation belong to the **project's own data contract and comparison methodology**; Recharts is the visualization library, not a scientific data source.
+
+**Reference:**
+
+- Recharts Contributors. *Recharts — BarChart API and chart components*. https://recharts.github.io/en-US/api/BarChart/
+
+### Landing Page, Mars Transition and Styling
+
+**Usage:** The landing-page/explorer design includes a dark Mars-themed palette, starfield and gradient styling, responsive panels, a two-map explorer layout, a rocky terrain image, and a “Begin the Mission” control. Custom CSS, JSX layout and visual behavior were developed for this project. Navigation from the landing page to the explorer uses browser view-transition features where supported, with a fallback; the Mars illustration moves into its position on the explorer page. The page presentation is an original UI adaptation inspired by design references supplied during development, not a NASA-provided interface.
+
+**Reference for the browser animation API:**
+
+- Mozilla Developer Network (MDN). *Document: startViewTransition() method*. https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition
+- Mozilla Developer Network (MDN). *Using the View Transition API*. https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API/Using
+
+**Image credits used or referenced in the page designs:**
+
+- **Mars planet image:** NASA/JPL/USGS. *Global Color Views of Mars* (Viking Orbiter 1; image **PIA00407**, 1998). https://science.nasa.gov/photojournal/global-color-views-of-mars/
+- **Earth planet image:** NASA, Apollo 17. *Blue Marble* (1972). https://www.nasa.gov/image-article/apollo-17-blue-marble/ ; the transparent cutout used in the frontend was referenced from https://commons.wikimedia.org/wiki/File:Blue_Marble_transparent.png (check that derivative file's specific licensing/attribution if redistributed).
+- **Rocky Martian landscape:** NASA/JPL-Caltech/ASU/MSSS. *Mastcam-Z Views Santa Cruz on Mars* (Perseverance rover, image **PIA24546**, 2021). https://science.nasa.gov/photojournal/mastcam-z-views-santa-cruz-on-mars/
+- **Mars and Earth map imagery:** NASA Mars Trek and NASA EOSDIS GIBS, respectively (already cited in the *Maps and Imagery in the Web Application* section).
+- **Custom rocket silhouette:** An image supplied within the project design conversation and cleaned for UI use. **Original creator and license have not been verified**; it should not be attributed to NASA without evidence, and reuse permission should be confirmed before public distribution.
+
+### Development Provenance and Scientific Scope
+
+The custom frontend elements developed during these sessions include `EarthMap.jsx`, `ResultsList.jsx`, `ComparisonCharts.jsx`, `LimitationsPanel.jsx`, landing-page elements, project layout, map interaction changes, and themed CSS. Implementation and revisions were carried out with **OpenAI ChatGPT assistance**, guided by the team's requirements and supplied visual references. This statement records development assistance; it is **not** a substitute for citations to the datasets, libraries or imagery above.
+
+The interface is a visualization and comparison tool. A relative match score should **not** be read as the percentage to which an Earth site is physically identical to Mars, and the presence of real NASA imagery does **not** imply that mock terrain measurements are genuine NASA data or that NASA endorses the tool.
+
