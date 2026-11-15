@@ -1,0 +1,157 @@
+{
+  "location_id": "athabasca_valles_01",
+  "category": "minerals",
+  "analysis": {
+    "scale": "detailed",
+    "width_m": 5000.0,
+    "height_m": 5000.0,
+    "center_projected_m": {
+      "x": 9172188.84179023,
+      "y": 509762.39870043343
+    },
+    "center_geographic": {
+      "lat": 8.6,
+      "lon_east": 156.5
+    },
+    "regional_window_km": 10.0,
+    "planet_radius_km": 3396.19
+  },
+  "data_status": "literature_supported",
+  "features": {
+    "dominant_mapped_class": null,
+    "mapped_classes": [],
+    "mapped_fraction": 0.0,
+    "reported_mineral_classes": [
+      {
+        "mineral_class": "pyroxene",
+        "mineral_subclass": "high_calcium_pyroxene",
+        "spatial_scope": "cerberus_fossae_source_fissures_not_verified_in_5km_footprint",
+        "evidence_strength": "weak_tentative_CRISM_spectral_signature",
+        "evidence": "Jaeger et al. (2010) report a weak CRISM high-calcium-pyroxene signature from sandy and rocky talus on the northern walls of Cerberus Fossae (CRISM FRT0000851B). The talus may mix Athabasca flood lava with older underlying strata. This is not an unambiguous mineral detection across Athabasca Valles and has not been located within the selected 5 km square.",
+        "references": [
+          "https://doi.org/10.1016/j.icarus.2009.09.011"
+        ],
+        "instrument": "MRO CRISM",
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": false
+      }
+    ],
+    "candidate_mineral_classes_not_confirmed": [
+      {
+        "mineral_class": "olivine",
+        "spatial_scope": "athabasca_flood_lava_regional_interpretation",
+        "evidence_strength": "possible_mafic_spectral_contributor_not_diagnostic_detection",
+        "evidence": "CRISM spectral slopes in comparatively dust-free Athabasca lava exposures are consistent with mafic minerals, especially olivine, but are not diagnostic. Jaeger et al. (2010) specifically caution that reddish olivine-index colors over dust-covered plains likely arise from image stretching, not olivine-rich dust. Do not treat olivine as confirmed.",
+        "references": [
+          "https://doi.org/10.1016/j.icarus.2009.09.011"
+        ],
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": false
+      }
+    ],
+    "reported_lithology_classes": [
+      {
+        "lithology_class": "mafic_to_ultramafic_flood_lava",
+        "spatial_scope": "athabasca_valles_flood_lava_region",
+        "evidence_strength": "published_compositional_interpretation_not_direct_geochemical_measurement",
+        "evidence": "Orbital observations and CRISM spectral comparisons favor mafic to ultramafic Athabasca flood lava, potentially analogous to basalt to picrobasalt. These are rock-composition interpretations, not mineral identifications or abundance measurements for this exact footprint.",
+        "references": [
+          "https://doi.org/10.1016/j.icarus.2009.09.011",
+          "https://doi.org/10.1002/2014JE004761",
+          "https://doi.org/10.1029/2023JE007947"
+        ],
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": false
+      }
+    ],
+    "published_observations": [
+      {
+        "feature": "tentative_high_calcium_pyroxene_CRISM_FRT0000851B",
+        "location_description": "Northern walls of Cerberus Fossae, upstream source area of Athabasca Valles",
+        "coordinate_precision": "paper_region_only_no_georeferenced_observation_geometry_clipped",
+        "within_5km_detailed_footprint": null,
+        "within_10km_regional_footprint": null,
+        "interpretation": "Weak high-calcium pyroxene signal in rocky/sandy talus; cannot attribute uniquely to Athabasca flow or extrapolate to the study site.",
+        "instrument": "MRO CRISM",
+        "observation_id": "FRT0000851B",
+        "source_url": "https://doi.org/10.1016/j.icarus.2009.09.011"
+      },
+      {
+        "feature": "mafic_like_reflectance_CRISM_athabasca_flow",
+        "location_description": "Dust-reduced exposures in Athabasca flood lava region, not pinned to study footprint",
+        "coordinate_precision": "regional_observation_only",
+        "within_5km_detailed_footprint": null,
+        "within_10km_regional_footprint": null,
+        "interpretation": "Spectral slope resembles mafic/ultramafic lava and Spirit Adirondack-type rocks, but the slope is not uniquely diagnostic of a specific mineral.",
+        "instrument": "MRO CRISM",
+        "source_url": "https://doi.org/10.1016/j.icarus.2009.09.011"
+      }
+    ],
+    "spectral_caveats": [
+      {
+        "class": "low_calcium_pyroxene",
+        "interpretation": "Apparent green CRISM-index areas on the southern fissure walls lie in shadow and were considered unlikely to reflect true mineralogy.",
+        "classification": "not_accepted_as_positive_detection",
+        "reference": "https://doi.org/10.1016/j.icarus.2009.09.011"
+      },
+      {
+        "class": "hydrated_minerals",
+        "interpretation": "Voigt et al. (2023) summarize that hydrated minerals had not been detected by CRISM or OMEGA across Elysium Planitia in the cited surveys. Non-detection is not proof of absence at this study site.",
+        "classification": "published_regional_non_detection_not_site_absence",
+        "reference": "https://doi.org/10.1029/2023JE007947"
+      }
+    ]
+  },
+  "quality": {
+    "coverage_fraction": 0.0,
+    "flags": [
+      "literature_based_mineralogy_not_spatial_mineral_class_mapping",
+      "dust_cover_limits_CRISM_mineral_identification",
+      "no_unambiguous_mineral_signature_on_examined_athabasca_flow_exposures",
+      "reported_pyroxene_signature_is_weak_and_from_fissure_talus",
+      "olivine_not_confirmed_by_diagnostic_mineral_index",
+      "no_quantitative_mineral_map_coverage",
+      "mineral_class_area_is_not_mineral_abundance",
+      "exclude_from_stage2_quantitative_similarity_until_compatible_map_available"
+    ],
+    "intersecting_source_polygons": 0,
+    "stage2_quantitative_scoring_eligible": false
+  },
+  "source": {
+    "dataset": "Published orbital spectral and geological studies of Athabasca Valles",
+    "url": "https://doi.org/10.1016/j.icarus.2009.09.011",
+    "references": [
+      {
+        "authors": "Jaeger et al.",
+        "year": 2010,
+        "title": "Emplacement of the youngest flood lava on Mars: A short, turbulent story",
+        "url": "https://doi.org/10.1016/j.icarus.2009.09.011",
+        "role": "Primary MRO/CRISM evidence and explicit limitations of mineral detections"
+      },
+      {
+        "authors": "Cataldo et al.",
+        "year": 2015,
+        "title": "Limited role for thermal erosion by turbulent lava in proximal Athabasca Valles, Mars",
+        "url": "https://doi.org/10.1002/2014JE004761",
+        "role": "Subsequent synthesis of the mafic-ultramafic CRISM lava interpretation and dust limitation"
+      },
+      {
+        "authors": "Voigt et al.",
+        "year": 2023,
+        "title": "Revealing Elysium Planitia's Young Geologic History: Constraints on Lava Emplacement, Areas, and Volumes",
+        "url": "https://doi.org/10.1029/2023JE007947",
+        "role": "Regional volcanic setting and published absence of hydrated-mineral detections in prior orbital surveys"
+      }
+    ],
+    "type": "peer_reviewed_literature_mineral_observations_and_interpretation",
+    "instrument": "Mars Reconnaissance Orbiter CRISM; supporting MRO HiRISE/CTX and Mars Global Surveyor TES",
+    "map_product_used": false
+  },
+  "methods": {
+    "area": "No georeferenced mineral-class polygon or CRISM pixel map was intersected with the actual 5 km footprint. mapped_fraction=0 indicates lack of measured map coverage, not absence of minerals.",
+    "literature_extraction": "Mineral identification claims are restricted to published CRISM evidence. Regional lithology (mafic-ultramafic) is stored separately from individual mineral detections and from non-diagnostic mineral candidates.",
+    "location_test": "The selected footprint is centered on 8.6N 156.5E; published mineral images were not georeferenced and clipped to this 5 km or 10 km area. No inclusion or exclusion claim is made for individual CRISM pixels.",
+    "caveat": "Do not interpret mafic or ultramafic rock descriptions as specific mineral percentages; do not treat the tentative pyroxene signal or olivine candidate as mapped site minerals. No positive mineral abundance can be assigned.",
+    "stage2_scoring": "Context only. Do not calculate Earth-Mars mineral-similarity scores from this literature profile; await comparable quantitative mineral-class maps."
+  }
+}

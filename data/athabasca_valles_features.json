@@ -1,0 +1,87 @@
+{
+  "id": "athabasca_valles_01",
+  "name": "Athabasca Valles",
+  "source_dem": "megt44n090hb.img",
+  "source_crs_wkt": "PROJCS[\"Mars_Athabasca_Valles_local_EQC\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",8.6],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "source_pixel_size_m": [
+    457.877,
+    463.084
+  ],
+  "center_projected_m": {
+    "x": 9172188.84179023,
+    "y": 509762.39870043343
+  },
+  "center_geographic": {
+    "lat": 8.6,
+    "lon_east": 156.5
+  },
+  "coordinate_source": "8.6N, 156.5E project reference from existing TI/albedo sources; transformed using Mars sphere",
+  "regional": {
+    "features": {
+      "median_slope_deg": 0.45509911688791493,
+      "steep_fraction": 0.0,
+      "relief_m": 56.0,
+      "roughness_m": 4.178289133633254
+    },
+    "additional_features": {
+      "mean_slope_deg": 0.5432197691118823,
+      "slope_p90_deg": 1.0077998535074801,
+      "flat_fraction": 1.0,
+      "elevation_std_m": 18.673669734770797,
+      "roughness_100m_m": 0.00018327184805309255,
+      "roughness_500m_m": 2.314387591093692
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 484
+    },
+    "region_km": 10.0,
+    "grid_width": 22,
+    "grid_height": 22,
+    "effective_pixel_size_m": [
+      457.877,
+      463.084
+    ],
+    "quality_note": "MOLA bins may contain interpolated elevations where no laser shot existed; this is not 30m DEM data."
+  },
+  "detailed": {
+    "features": {
+      "median_slope_deg": 0.44230637820093116,
+      "steep_fraction": 0.0,
+      "relief_m": 29.550000000000182,
+      "roughness_m": 2.9010900970738644
+    },
+    "additional_features": {
+      "mean_slope_deg": 0.47039276133694663,
+      "slope_p90_deg": 0.6150504532627986,
+      "flat_fraction": 1.0,
+      "elevation_std_m": 10.05045124598562,
+      "roughness_100m_m": 0.00016423045445887834,
+      "roughness_500m_m": 1.7402011961738193
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 110
+    },
+    "region_km": 5.0,
+    "grid_width": 10,
+    "grid_height": 11,
+    "effective_pixel_size_m": [
+      457.877,
+      463.084
+    ],
+    "quality_note": "MOLA bins may contain interpolated elevations where no laser shot existed; this is not 30m DEM data."
+  },
+  "methods": {
+    "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+    "steep_fraction": "fraction of slope samples greater than 15 degrees",
+    "relief": "elevation percentile 95 minus percentile 5, in metres",
+    "roughness_m": "SD of elevation minus weighted Gaussian-smoothed elevation; sigma=1000m, matching mars_prep.py",
+    "resampling": "NONE: native MOLA 128 pixels/degree, pixel centres inside a projected 10km/5km square",
+    "nodata": "NASA PDS MOLA gridded topography; some source bins are interpolated when shot coverage is absent",
+    "native_source_grid": "Planetocentric 90E-180E, 44N-0N, 128 pixels/degree, MSB signed int16 topography metres",
+    "resolution_limit": "Both regional and detailed computed at native ~460m. NO 30m detail exists in this source."
+  }
+}
