@@ -11,16 +11,15 @@ import { rankEarthCells } from './lib/similarity.js';
 import { canRecommend } from './lib/siteRules.js';
 
 async function loadJson(path) {
-  const res = await fetch(path);
-  if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
-  return res.json();
+  const response = await fetch(path);
+  if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
+  return response.json();
 }
 
-// similarity.js expects weights that sum to 1 (DATA_CONTRACT §5).
 function normalizeWeights(weights) {
-  const total = Object.values(weights).reduce((s, w) => s + w, 0);
+  const total = Object.values(weights).reduce((sum, weight) => sum + weight, 0);
   if (total <= 0) return null;
-  return Object.fromEntries(Object.entries(weights).map(([k, w]) => [k, w / total]));
+  return Object.fromEntries(Object.entries(weights).map(([key, weight]) => [key, weight / total]));
 }
 
 export default function App({ initialData = null }) {
@@ -34,8 +33,6 @@ export default function App({ initialData = null }) {
   const [selectedResult, setSelectedResult] = useState(null);
 
   useEffect(() => {
-    // Landing page preloads the three datasets so the FULL explorer can morph
-    // into place immediately. Direct links to #/explore still load normally.
     if (initialData) return;
     Promise.all([
       loadJson('/data/mars_cells.json'),
@@ -48,10 +45,10 @@ export default function App({ initialData = null }) {
         setConfig(cfg);
         setWeights({ ...cfg.default_weights });
       })
-      .catch((err) => setLoadError(err.message));
+      .catch((error) => setLoadError(error.message));
   }, [initialData]);
 
-  // A new site invalidates the selected result.
+  // Switching Mars locations clears the selected Earth result.
   useEffect(() => setSelectedResult(null), [selectedSite]);
 
   const results = useMemo(() => {
@@ -65,21 +62,38 @@ export default function App({ initialData = null }) {
       scales: config.normalization_scales,
       limit: config.ranking.default_results,
       minSeparationKm: config.ranking.min_separation_km,
-    }).map((r, i) => ({ ...r, rank: i + 1 }));
+    }).map((result, index) => ({ ...result, rank: index + 1 }));
   }, [selectedSite, earthCells, weights, config]);
 
   const usingMock =
-    marsSites.some((s) => s.quality?.data_status === 'mock') ||
-    earthCells.some((c) => c.quality?.data_status === 'mock');
+    marsSites.some((site) => site.quality?.data_status === 'mock') ||
+    earthCells.some((cell) => cell.quality?.data_status === 'mock');
 
   return (
-    <div className="app">
-      <header className="app-header">
+    <div className="app explorer-app">
+      <header className="app-header explorer-hero">
+        <nav className="explorer-hero-nav" aria-label="Explorer heading">
+          <span className="explorer-brand"><span className="explorer-brand-star" aria-hidden="true">✦</span> NASA SPACE APPS <span className="explorer-brand-divider">/</span> ANALOG FINDER</span>
+          <span className="explorer-nav-note">PLANETARY FIELD LAB <span>•</span> 2026</span>
+        </nav>
+
         <div className="explorer-mars-planet" aria-hidden="true">
           <img src={MARS_IMAGE} alt="" />
         </div>
-        <h1>Mars-to-Earth Analog Finder</h1>
-        <p className="subtitle">Rover mobility &amp; surface testing — terrain-only matching</p>
+        {/* The single page backdrop is painted above the lower portion of Mars,
+            making the planet disappear behind the photographed rocky horizon. */}
+        <div className="explorer-terrain-foreground" aria-hidden="true" />
+
+        <div className="explorer-hero-copy">
+          <p className="explorer-hero-eyebrow">DISCOVER TWO WORLDS. CONNECT THEIR TERRAIN.</p>
+          <h1>Mars-to-Earth<br />Analog Finder</h1>
+          <p className="subtitle">Rover mobility &amp; surface testing — terrain-only matching</p>
+        </div>
+        <div className="explorer-hero-bottom" aria-hidden="true">
+          <span>REAL PLANETARY DATA <span>•</span> TERRAIN ANALYSIS</span>
+          <span>SCROLL TO EXPLORE <span className="scroll-chevron">⌄</span></span>
+        </div>
+        <span className="explorer-landscape-credit">Mars terrain imagery: NASA/JPL-Caltech/ASU/MSSS</span>
       </header>
 
       {loadError ? (
@@ -88,40 +102,69 @@ export default function App({ initialData = null }) {
         <div className="app-status">Loading terrain data…</div>
       ) : (
         <>
-      {usingMock && (
-        <div className="mock-banner">
-          MOCK DATA — values on this page are invented for development and are not NASA measurements.
-        </div>
-      )}
+          {usingMock && (
+            <div className="mock-banner">MOCK DATA — values on this page are invented for development and are not NASA measurements.</div>
+          )}
 
-      <main className="layout">
-        <div className="column mars-column">
-          <MarsMap sites={marsSites} selectedId={selectedSite?.id} onSelect={setSelectedSite} />
-          <SiteInfo site={selectedSite} />
-          <WeightSliders config={config} weights={weights} onChange={setWeights} />
-        </div>
+          <main className="explorer-main">
+            <section className="explorer-section mission-maps-section" aria-labelledby="explorer-maps-title">
+              <div className="explorer-section-title">
+                <div>
+                  <span className="explorer-step">01 / SELECT &amp; EXPLORE</span>
+                  <h2 id="explorer-maps-title">Explore the terrain</h2>
+                </div>
+                <p>Choose a Martian region to find its closest terrestrial analogs.</p>
+              </div>
 
-        <div className="column earth-column">
-          <section className="panel">
-            <h2>Earth map</h2>
-            <EarthMap results={results} selectedRank={selectedResult?.rank} onSelect={setSelectedResult} />
-          </section>
-          <section className="panel">
-            {/* null = no Mars site selected; [] = site selected but no recommendations (e.g. polar). */}
-            <ResultsList
-              results={selectedSite ? results : null}
-              selectedRank={selectedResult?.rank}
-              onSelect={setSelectedResult}
-            />
-          </section>
-        </div>
+              <div className="layout mission-map-grid">
+                <div className="column mars-column">
+                  <section className="panel map-panel mars-map-panel">
+                    <div className="map-panel-heading"><span className="map-panel-world">01 <span>/</span> MARS</span><span className="map-panel-caption">SELECT TARGET SITE</span></div>
+                    <MarsMap sites={marsSites} selectedId={selectedSite?.id} onSelect={setSelectedSite} />
+                  </section>
+                  <SiteInfo site={selectedSite} />
+                </div>
+                <div className="column earth-column">
+                  <section className="panel map-panel earth-map-panel">
+                    <div className="map-panel-heading"><span className="map-panel-world">02 <span>/</span> EARTH</span><span className="map-panel-caption">TOP TERRAIN ANALOGS</span></div>
+                    <EarthMap results={results} selectedRank={selectedResult?.rank} onSelect={setSelectedResult} />
+                  </section>
+                  <WeightSliders config={config} weights={weights} onChange={setWeights} />
+                </div>
+              </div>
+            </section>
 
-        {/* Full-width row: one shared selectedResult drives map, list, chart and limitations. */}
-        <div className="comparison-row">
-          <ComparisonCharts site={selectedSite} result={selectedResult} />
-          <LimitationsPanel site={selectedSite} result={selectedResult} />
-        </div>
-      </main>
+            <section className="explorer-section ranking-section" aria-labelledby="explorer-ranking-title">
+              <div className="explorer-section-title">
+                <div>
+                  <span className="explorer-step">02 / ANALOG SEARCH</span>
+                  <h2 id="explorer-ranking-title">The closest Earth matches</h2>
+                </div>
+                <p>Select any result to inspect it on the Earth map.</p>
+              </div>
+              <section className="panel ranking-panel">
+                <ResultsList
+                  results={selectedSite ? results : null}
+                  selectedRank={selectedResult?.rank}
+                  onSelect={setSelectedResult}
+                />
+              </section>
+            </section>
+
+            <section className="explorer-section science-section" aria-labelledby="explorer-science-title">
+              <div className="explorer-section-title">
+                <div>
+                  <span className="explorer-step">03 / SCIENTIFIC ANALYSIS</span>
+                  <h2 id="explorer-science-title">Understand the comparison</h2>
+                </div>
+                <p>Explore measurements and limitations behind each match.</p>
+              </div>
+              <div className="comparison-row">
+                <ComparisonCharts site={selectedSite} result={selectedResult} />
+                <LimitationsPanel site={selectedSite} result={selectedResult} />
+              </div>
+            </section>
+          </main>
         </>
       )}
     </div>

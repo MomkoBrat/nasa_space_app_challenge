@@ -39,16 +39,35 @@ function BoundPanToZoom({ minimumZoom }) {
   }, [map, minimumZoom]);
 
   useEffect(() => {
-    const updateDragging = () => {
-      if (map.getZoom() <= map.getMinZoom() + 0.01) {
+    const updateWorldView = () => {
+      const atMinimumZoom = map.getZoom() <= map.getMinZoom() + 0.01;
+
+      if (atMinimumZoom) {
+        // At minimum zoom Earth fills the frame's width exactly. Always
+        // restore the centered world view instead of leaving a clipped map
+        // when zooming out from a location near the edge.
         map.dragging.disable();
+        const center = map.getCenter();
+        if (
+          Math.abs(center.lat) > 0.0001 ||
+          Math.abs(center.lng) > 0.0001 ||
+          Math.abs(map.getZoom() - map.getMinZoom()) > 0.0001
+        ) {
+          map.setView([0, 0], map.getMinZoom(), { animate: false });
+        }
       } else {
         map.dragging.enable();
       }
     };
-    updateDragging();
-    map.on('zoomend', updateDragging);
-    return () => map.off('zoomend', updateDragging);
+
+    updateWorldView();
+    // moveend also catches cursor-centered zooming and touch gestures.
+    map.on('zoomend', updateWorldView);
+    map.on('moveend', updateWorldView);
+    return () => {
+      map.off('zoomend', updateWorldView);
+      map.off('moveend', updateWorldView);
+    };
   }, [map, minimumZoom]);
 
   return null;
