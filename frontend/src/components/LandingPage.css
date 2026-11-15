@@ -2,9 +2,8 @@
    the existing Mars/Earth explorer and Leaflet styles untouched. */
 .landing-page {
   min-height: 100vh;
-  padding: clamp(14px, 3vw, 38px);
-  display: grid;
-  place-items: center;
+  padding: 0;
+  display: block;
   color: #fff7f4;
   user-select: none;
   -webkit-user-select: none;
@@ -18,16 +17,17 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  width: min(100%, 1500px);
-  min-height: clamp(700px, 87vh, 885px);
-  border: 1px solid rgba(232, 139, 123, .22);
-  border-radius: clamp(18px, 2.4vw, 32px);
+  width: 100%;
+  min-height: 100svh;
+  height: 100svh;
+  border: 0;
+  border-radius: 0;
   background:
     radial-gradient(ellipse at 58% 18%, rgba(119, 45, 52, .43), transparent 40%),
     radial-gradient(ellipse at 9% 88%, rgba(111, 28, 55, .42), transparent 45%),
     radial-gradient(ellipse at 90% 84%, rgba(44, 26, 69, .62), transparent 60%),
     linear-gradient(145deg, #250f20 0%, #160c1a 38%, #0e0b1a 76%, #1a0d21 100%);
-  box-shadow: 0 36px 100px rgba(0, 0, 0, .42), inset 0 1px 0 rgba(255, 212, 205, .08);
+  box-shadow: none;
 }
 
 .landing-scene::before {
@@ -311,4 +311,42 @@
   .landing-cta-note { max-width: 290px; line-height: 1.8; }
   .landing-corner-label-earth, .landing-corner-label-mars { display: none; }
   .landing-credits { right: 18px; bottom: 18px; font-size: .56rem; text-align: right; max-width: 210px; }
+}
+
+/* Full-bleed starfield: a dense third layer of small, restrained stars. */
+.landing-stars-extra {
+  opacity: .75;
+  background-image:
+    radial-gradient(1px 1px at 12px 17px, #f9e9e3 99%, transparent),
+    radial-gradient(.7px .7px at 84px 97px, #f8e8e7 99%, transparent),
+    radial-gradient(.9px .9px at 162px 55px, #fff 99%, transparent),
+    radial-gradient(1px 1px at 249px 139px, #fad8c8 99%, transparent),
+    radial-gradient(.75px .75px at 346px 39px, #ffffff 99%, transparent),
+    radial-gradient(.9px .9px at 437px 170px, #e8d5f0 99%, transparent),
+    radial-gradient(.8px .8px at 31px 209px, #ffffff 99%, transparent),
+    radial-gradient(1px 1px at 131px 281px, #f9e9e3 99%, transparent),
+    radial-gradient(.8px .8px at 205px 233px, #ffffff 99%, transparent),
+    radial-gradient(.65px .65px at 299px 293px, #ffded3 99%, transparent),
+    radial-gradient(1px 1px at 380px 261px, #ffffff 99%, transparent),
+    radial-gradient(.9px .9px at 456px 322px, #f4defa 99%, transparent),
+    radial-gradient(.7px .7px at 68px 346px, #ffffff 99%, transparent),
+    radial-gradient(.75px .75px at 475px 53px, #fff 99%, transparent),
+    radial-gradient(.9px .9px at 316px 202px, #ffefdf 99%, transparent);
+  background-size: 497px 367px;
+  animation: landing-twinkle 11s ease-in-out infinite alternate-reverse;
+}
+
+/* The new full-screen scene keeps planets and typography proportional on laptops. */
+@media (max-width: 950px) {
+  .landing-scene { min-height: 100svh; }
+}
+@media (max-width: 640px) {
+  .landing-page { padding: 0; }
+  .landing-scene { min-height: 100svh; height: max(100svh, 670px); border-radius: 0; }
+  .landing-main-content { top: 43%; }
+}
+.landing-cta-arrow svg { transition: transform 200ms ease; }
+.landing-cta:hover .landing-cta-arrow svg { transform: translate(2px, -2px) rotate(6deg); }
+@media (prefers-reduced-motion: reduce) {
+  .landing-stars-extra { animation: none; }
 }

@@ -285,3 +285,60 @@ input[type="range"] { accent-color: var(--accent-strong); }
   .app-header h1 { font-size: 2rem; }
   .mock-banner { font-size: 0.92rem; }
 }
+
+/* The actual NASA Mars disk replaces the decorative red CSS orb. */
+.app-header::after { content: none; }
+.explorer-mars-planet {
+  position: absolute;
+  z-index: 0;
+  right: 7%;
+  top: -16px;
+  width: 335px;
+  height: 335px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 50px rgba(244, 114, 82, .16));
+}
+.explorer-mars-planet img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.explorer-mars-planet::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 37% 29%, transparent 26%, rgba(11,5,18,.02) 50%, rgba(8,3,15,.48) 100%);
+  box-shadow: inset -23px -25px 36px rgba(18,5,17,.24);
+}
+.explorer-route-entering .explorer-mars-planet { opacity: 0; }
+.explorer-route-entering .app { animation: explorer-arrival 820ms ease-out both; }
+
+.mars-flight {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: visible;
+  filter: drop-shadow(0 0 40px rgba(255, 110, 76, .3));
+  transition:
+    left 1200ms cubic-bezier(.28,.05,.26,1),
+    top 1200ms cubic-bezier(.28,.05,.26,1),
+    width 1200ms cubic-bezier(.28,.05,.26,1),
+    height 1200ms cubic-bezier(.28,.05,.26,1),
+    filter 1200ms ease;
+}
+.mars-flight img { width: 100%; height: 100%; display: block; border-radius: 50%; object-fit: cover; }
+.mars-flight-moving { filter: drop-shadow(0 0 45px rgba(255, 127, 91, .13)); }
+@keyframes explorer-arrival { from { opacity: 0.2; filter: blur(3px); } to { opacity: 1; filter: blur(0); } }
+@media (max-width: 900px) {
+  .explorer-mars-planet { right: -60px; top: -10px; width: 240px; height: 240px; opacity: .85; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mars-flight { transition: none; }
+  .explorer-route-entering .app { animation: none; }
+}

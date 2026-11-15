@@ -1,3 +1,4 @@
+import { MARS_IMAGE } from './planetImages.js';
 import { useEffect, useMemo, useState } from 'react';
 import MarsMap from './components/MarsMap.jsx';
 import EarthMap from './components/EarthMap.jsx';
@@ -78,6 +79,9 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
+        <div className="explorer-mars-planet" aria-hidden="true">
+          <img src={MARS_IMAGE} alt="" />
+        </div>
         <h1>Mars-to-Earth Analog Finder</h1>
         <p className="subtitle">Rover mobility &amp; surface testing — terrain-only matching</p>
       </header>

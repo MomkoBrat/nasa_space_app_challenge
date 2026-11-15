@@ -1,19 +1,22 @@
+import { useRef } from 'react';
+import { EARTH_IMAGE, MARS_IMAGE } from '../planetImages.js';
 import './LandingPage.css';
 
-// Full-disk imagery from NASA; the two assets remain unmodified photographs/mosaics.
-// Earth: NASA Apollo 17 "Blue Marble" (transparent cutout hosted on Wikimedia Commons).
-// Mars: NASA/JPL/USGS Viking Orbiter 1 global color mosaic, PIA00407.
-const EARTH_IMAGE =
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Blue_Marble_transparent.png/960px-Blue_Marble_transparent.png';
-const MARS_IMAGE =
-  'https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA00407.jpg';
+export default function LandingPage({ onBegin }) {
+  const marsRef = useRef(null);
 
-export default function LandingPage() {
+  const beginMission = (event) => {
+    if (onBegin) {
+      event.preventDefault();
+      onBegin(marsRef.current);
+    }
+  };
   return (
     <div className="landing-page">
       <main className="landing-scene" aria-labelledby="landing-title">
         <div className="landing-stars landing-stars-far" aria-hidden="true" />
         <div className="landing-stars landing-stars-near" aria-hidden="true" />
+        <div className="landing-stars landing-stars-extra" aria-hidden="true" />
         <div className="landing-nebula" aria-hidden="true" />
 
         <nav className="landing-navigation" aria-label="Landing page navigation">
@@ -21,15 +24,10 @@ export default function LandingPage() {
             <span className="landing-brand-mark" aria-hidden="true">✦</span>
             <span>NASA SPACE APPS <span className="landing-brand-split">/</span> ANALOG FINDER</span>
           </a>
-          <div className="landing-nav-right">
-            <span className="landing-nav-detail">PLANETARY EXPLORATION · 2026</span>
-            <a className="landing-nav-link" href="#/explore">
-              Explore <span aria-hidden="true">↗</span>
-            </a>
-          </div>
+          <span className="landing-nav-detail">PLANETARY EXPLORATION · 2026</span>
         </nav>
 
-        <div className="landing-planet landing-planet-mars" aria-hidden="true">
+        <div className="landing-planet landing-planet-mars" ref={marsRef} aria-hidden="true">
           <img src={MARS_IMAGE} alt="" decoding="async" fetchPriority="high" />
         </div>
         <div className="landing-planet landing-planet-earth" aria-hidden="true">
@@ -37,11 +35,6 @@ export default function LandingPage() {
         </div>
 
         <div className="landing-main-content">
-          <p className="landing-eyebrow">
-            <span className="landing-eyebrow-line" />
-            EXPLORE THE SCIENCE OF SIMILAR WORLDS
-            <span className="landing-eyebrow-line" />
-          </p>
           <h1 id="landing-title">
             Discover Earth&apos;s closest <span>matches to Mars.</span>
           </h1>
@@ -50,20 +43,19 @@ export default function LandingPage() {
             prepare for future missions to Mars.
           </p>
 
-          <a className="landing-cta" href="#/explore">
+          <a className="landing-cta" href="#/explore" onClick={beginMission}>
             <span>Begin the Mission</span>
-            <span className="landing-cta-arrow" aria-hidden="true">→</span>
+            <span className="landing-cta-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4.5 16.5c-1.7 1.3-2 4.5-2 4.5s3.2-.3 4.5-2" />
+                <path d="m9 15-2.5 2.5-2.2-2.2 2.5-2.5" />
+                <path d="m15 9 2.5-2.5 2.2 2.2-2.5 2.5" />
+                <path d="M7.2 12.8 11.4 8.6c2.9-2.9 6.4-4.1 10.1-4.1 0 3.7-1.2 7.2-4.1 10.1l-4.2 4.2-6-6Z" />
+                <circle cx="15.5" cy="10.5" r="1.6" />
+              </svg>
+            </span>
           </a>
           <p className="landing-cta-note">MARS TERRAIN <span>·</span> EARTH ANALOGS <span>·</span> SCIENTIFIC DISCOVERY</p>
-        </div>
-
-        <div className="landing-corner-label landing-corner-label-earth" aria-hidden="true">
-          <span className="landing-label-line" />
-          <span>01 / EARTH</span>
-        </div>
-        <div className="landing-corner-label landing-corner-label-mars" aria-hidden="true">
-          <span className="landing-label-line" />
-          <span>02 / MARS</span>
         </div>
 
         <footer className="landing-credits">
