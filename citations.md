@@ -148,6 +148,10 @@ Terrain statistics are calculated for 10 × 10 km regional and 5 × 5 km detaile
 
 **Limitations:** MOLA's approximately 460 m resolution cannot resolve small rocks, narrow channels or steep crater walls. In particular, the Victoria Crater profile uses MOLA-only elevation statistics, which do not adequately capture the approximately 800 m-wide crater's rim and interior.
 
+**Official Citation:**
+
+Smith, D. E., Zuber, M. T., Frey, H. V., Garvin, J. B., et al. (2001). *Mars Orbiter Laser Altimeter: Experiment summary after the first year of global mapping of Mars.* Journal of Geophysical Research: Planets, 106(E10), 23689–23722. https://doi.org/10.1029/2000JE001364
+
 ---
 
 ### Jezero Crater — CTX Digital Elevation Model
@@ -167,7 +171,8 @@ The elevation model provides substantially finer spatial detail than the global 
 
 ### Gale Crater — HRSC Digital Elevation Model
 
-**Source:** Gale Crater HRSC Digital Terrain Model Mosaic  
+**Source:** 30-m HRSC DTM Mosaic of Gale Crater, Mars  
+**Authors:** Persaud, D. M., Putri, A. D. R., & Muller, J.-P. (2021), Zenodo  
 **Instrument:** High Resolution Stereo Camera (HRSC), Mars Express  
 **Dataset URL:** https://doi.org/10.5281/zenodo.5808354  
 **Resolution Used:** Approximately 30 m per pixel  
@@ -395,7 +400,7 @@ Fergason, R. L., Christensen, P. R., & Kieffer, H. H. (2006). *High-resolution t
 ### Mars Near-Infrared Albedo — OMEGA
 
 **Source:** OMEGA, Mars Express near-infrared albedo product  
-**Reference:** Ody et al. (2012)  
+**Reference:** Ody et al. (2012) — https://doi.org/10.1029/2012JE004117  
 **Instrument:** Observatoire pour la Minéralogie, l'Eau, les Glaces et l'Activité (OMEGA)  
 **Source File:** `ALBEDO_R1080_EQU_MAP.tiff`  
 **Wavelength:** Approximately 1.08 μm
@@ -403,6 +408,10 @@ Fergason, R. L., Christensen, P. R., & Kieffer, H. H. (2006). *High-resolution t
 **Usage:** TerraMatch AI includes near-infrared albedo statistics for the selected Mars locations. The regional median albedo is also used by the optional **"Albedo (approx.)"** slider (default weight 0), where it is compared with Earth MODIS broadband albedo (see *Earth Surface Temperature, Albedo and Apparent Thermal Inertia*).
 
 **Limitations:** Near-infrared albedo at 1.08 μm is not directly equivalent to broadband Earth albedo. Differences in observation conditions, wavelength and surface properties must be considered before interpreting Earth–Mars similarity.
+
+**Official Citation:**
+
+Ody, A., Poulet, F., Langevin, Y., Bibring, J.-P., et al. (2012). *Global maps of anhydrous minerals at the surface of Mars from OMEGA/MEx.* Journal of Geophysical Research: Planets, 117(E11). https://doi.org/10.1029/2012JE004117
 
 ---
 
