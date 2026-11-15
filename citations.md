@@ -382,7 +382,13 @@ Hartmann, J., & Moosdorf, N. (2012). *The New Global Lithological Map Database G
 
 **Usage:** TerraMatch AI includes TES-based thermal inertia statistics in the combined Mars location profiles.
 
+**Usage (rockiness class):** Each Mars site is assigned a display-only surface class from its regional median thermal inertia, using commonly applied Mars ranges: below 150 tiu dust / very fine-grained; 150–350 sand / fine-grained; 350–700 coarse or mixed with rock or crust; above 700 rock / bedrock dominated (after Putzig & Mellon, 2007 and Fergason et al., 2006).
+
 **Limitations:** The source data has a coarse spatial resolution and is not directly equivalent to an Earth surface-material measurement.
+
+**Additional Reference:**
+
+Fergason, R. L., Christensen, P. R., & Kieffer, H. H. (2006). *High-resolution thermal inertia derived from the Thermal Emission Imaging System (THEMIS): Thermal model and applications.* Journal of Geophysical Research: Planets, 111, E12004. https://doi.org/10.1029/2006JE002735
 
 ---
 
@@ -394,7 +400,7 @@ Hartmann, J., & Moosdorf, N. (2012). *The New Global Lithological Map Database G
 **Source File:** `ALBEDO_R1080_EQU_MAP.tiff`  
 **Wavelength:** Approximately 1.08 μm
 
-**Usage:** TerraMatch AI includes near-infrared albedo statistics for the selected Mars locations.
+**Usage:** TerraMatch AI includes near-infrared albedo statistics for the selected Mars locations. The regional median albedo is also used by the optional **"Albedo (approx.)"** slider (default weight 0), where it is compared with Earth MODIS broadband albedo (see *Earth Surface Temperature, Albedo and Apparent Thermal Inertia*).
 
 **Limitations:** Near-infrared albedo at 1.08 μm is not directly equivalent to broadband Earth albedo. Differences in observation conditions, wavelength and surface properties must be considered before interpreting Earth–Mars similarity.
 
@@ -417,4 +423,147 @@ Similarly, literature-supported Martian mineral occurrences cannot be interprete
 
 **Therefore, geological and mineralogical information is retained as scientific context rather than treated as a fully validated quantitative Earth–Mars mineral similarity score.**
 
-The primary quantitative terrain comparison remains based on median slope, steep terrain fraction, relief and roughness.
+The quantitative comparison is based on median slope, local relief and roughness, with mean wind speed and albedo available as optional sliders (default weight 0). The steep terrain fraction (slopes above 15°) is still computed and stored but is not scored or shown, because at the ~455 m analysis resolution it is zero for almost every site.
+
+---
+
+## Earth Terrain and Candidate Selection
+
+### Copernicus DEM GLO-30
+
+**Source:** Copernicus Digital Elevation Model, GLO-30 (30 m global)  
+**Provider:** European Space Agency (ESA) and Airbus, distributed through the Copernicus programme  
+**Access:** AWS Open Data Registry, `copernicus-dem-30m` bucket — https://registry.opendata.aws/copernicus-dem/  
+**DOI:** https://doi.org/10.5270/ESA-c5d3d65  
+**Resolution:** Approximately 30 m
+
+**Usage:** TerraMatch AI uses GLO-30 to calculate the terrain features of all 17,735 Earth candidate locations. For each location, a 10 × 10 km square centred on the location is average-resampled onto a 22 × 22 grid (~455 m pixels) in a local Transverse Mercator projection. The terrain features are then computed with **the same code as for Mars** (`terrain_features()` in `prep/mars_prep.py`): median slope, steep terrain fraction (slopes above 15°), local relief (95th minus 5th elevation percentile) and roughness (Gaussian smoothing, σ = 1000 m).
+
+**Limitations:** At ~455 m resolution, individual rocks, small channels and short steep slopes are not resolved.
+
+**Official Citation:**
+
+European Space Agency, & Airbus. (2022). *Copernicus DEM* [Data set]. European Space Agency. https://doi.org/10.5270/ESA-c5d3d65
+
+---
+
+### MODIS Vegetation Continuous Fields — MOD44B
+
+**Source:** MODIS/Terra Vegetation Continuous Fields Yearly L3 Global 250 m, Version 6.1 (`MOD44B`)  
+**Provider:** NASA Land Processes Distributed Active Archive Center (LP DAAC)  
+**DOI:** https://doi.org/10.5067/MODIS/MOD44B.061
+
+**Usage:** The `Percent_NonVegetated` band, averaged over 2022–2024, is used to keep only Earth locations that are **at least 70 % non-vegetated**.
+
+**Official Citation:**
+
+DiMiceli, C., Sohlberg, R., & Townshend, J. (2022). *MODIS/Terra Vegetation Continuous Fields Yearly L3 Global 250m SIN Grid V061* [Data set]. NASA EOSDIS Land Processes Distributed Active Archive Center. https://doi.org/10.5067/MODIS/MOD44B.061
+
+---
+
+### MODIS Land Cover Type — MCD12Q1
+
+**Source:** MODIS/Terra+Aqua Land Cover Type Yearly L3 Global 500 m, Version 6.1 (`MCD12Q1`), IGBP classification (`LC_Type1`)  
+**Provider:** NASA LP DAAC  
+**DOI:** https://doi.org/10.5067/MODIS/MCD12Q1.061
+
+**Usage:** A mosaic of the 2020–2025 land-cover maps (newest year on top) is used to exclude Earth locations where more than 10 % of the area is cropland, urban, cropland/natural vegetation mosaic, snow and ice, or water (IGBP classes 12, 13, 14, 15 and 17), and to record the barren fraction (class 16). Locations must also have **at least 90 % elevation-data coverage** (Copernicus DEM).
+
+**Official Citation:**
+
+Friedl, M., & Sulla-Menashe, D. (2022). *MODIS/Terra+Aqua Land Cover Type Yearly L3 Global 500m SIN Grid V061* [Data set]. NASA EOSDIS Land Processes Distributed Active Archive Center. https://doi.org/10.5067/MODIS/MCD12Q1.061
+
+---
+
+### Google Earth Engine
+
+**Source:** Google Earth Engine (cloud platform for geospatial analysis)  
+**Reference:** Gorelick et al. (2017)
+
+**Usage:** Earth Engine is used to evaluate the eligibility filters (MOD44B, MCD12Q1, Copernicus DEM coverage) for 25,467 candidate cells in 29 regions (`prep/earth_export.js`), and to compute the MODIS temperature and albedo statistics per cell (`prep/earththermal_prep.py`).
+
+**Official Citation:**
+
+Gorelick, N., Hancher, M., Dixon, M., Ilyushchenko, S., Thau, D., & Moore, R. (2017). *Google Earth Engine: Planetary-scale geospatial analysis for everyone.* Remote Sensing of Environment, 202, 18–27. https://doi.org/10.1016/j.rse.2017.06.031
+
+---
+
+## Earth Surface Temperature, Albedo and Apparent Thermal Inertia
+
+### MODIS Land Surface Temperature — MOD11A2
+
+**Source:** MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 1 km, Version 6.1 (`MOD11A2`)  
+**Provider:** NASA LP DAAC  
+**DOI:** https://doi.org/10.5067/MODIS/MOD11A2.061
+
+**Usage:** Day and night land surface temperatures for 2023 are averaged over each 10 × 10 km Earth location, using only composites in which both day and night values are valid and of good quality. Their difference gives the day–night temperature range.
+
+**Official Citation:**
+
+Wan, Z., Hook, S., & Hulley, G. (2021). *MODIS/Terra Land Surface Temperature/Emissivity 8-Day L3 Global 1km SIN Grid V061* [Data set]. NASA EOSDIS Land Processes Distributed Active Archive Center. https://doi.org/10.5067/MODIS/MOD11A2.061
+
+---
+
+### MODIS Albedo — MCD43A3
+
+**Source:** MODIS/Terra+Aqua BRDF/Albedo Daily L3 Global 500 m, Version 6.1 (`MCD43A3`)  
+**Provider:** NASA LP DAAC  
+**DOI:** https://doi.org/10.5067/MODIS/MCD43A3.061
+
+**Usage:** The 2023 annual mean shortwave (0.3–5 µm) black-sky albedo is computed per Earth location (quality-filtered). It is shown as context and used by the optional **"Albedo (approx.)"** slider, compared with Mars OMEGA 1.08 µm albedo.
+
+**Limitations:** Broadband shortwave albedo and single-wavelength near-infrared albedo are different measurements, so the albedo comparison is approximate.
+
+**Official Citation:**
+
+Schaaf, C., & Wang, Z. (2021). *MODIS/Terra+Aqua BRDF/Albedo Daily L3 Global – 500m V061* [Data set]. NASA EOSDIS Land Processes Distributed Active Archive Center. https://doi.org/10.5067/MODIS/MCD43A3.061
+
+---
+
+### Apparent Thermal Inertia (ATI)
+
+**Method:** ATI = (1 − albedo) / (day–night temperature range), after Price (1977).
+
+**Usage:** ATI is computed for every Earth location and shown as display-only context, together with a relative class (low, medium or high: the lower, middle and upper thirds of all valid candidate locations). ATI is set to "not available" for 276 locations above 60° latitude or with a day–night range below 5 K, where the method does not apply. Locations with few valid MODIS observations (359) or processed without the MODIS quality filter (125) are flagged.
+
+**Limitations:** ATI is a relative index (1/K), not a physical thermal inertia, and it is strongly affected by soil moisture. It is **not comparable** with Mars TES thermal inertia (J m⁻² K⁻¹ s⁻½) and is therefore not used in the score.
+
+**Official Citation:**
+
+Price, J. C. (1977). *Thermal inertia mapping: A new view of the Earth.* Journal of Geophysical Research, 82(18), 2582–2590. https://doi.org/10.1029/JC082i018p02582
+
+---
+
+## Maps and Imagery in the Web Application
+
+### Mars Base Map — Viking MDIM 2.1 Colour Mosaic
+
+**Source:** Viking Mars Digital Image Model (MDIM) 2.1 colour mosaic, ~232 m per pixel (NASA / JPL / USGS)  
+**Access:** NASA Mars Trek WMTS tile service, layer `Mars_Viking_MDIM21_ClrMosaic_global_232m` — https://trek.nasa.gov/mars/
+
+**Usage:** Background map on which the Mars study sites are selected.
+
+---
+
+### Earth Base Map — NASA GIBS Blue Marble
+
+**Source:** Blue Marble Shaded Relief and Bathymetry  
+**Access:** NASA Global Imagery Browse Services (GIBS), part of NASA EOSDIS — https://earthdata.nasa.gov/gibs
+
+**Usage:** Background map showing the Earth analog locations.
+
+---
+
+### Country Borders — Natural Earth
+
+**Source:** Natural Earth 1:110m Admin 0 – Countries (public domain) — https://www.naturalearthdata.com/
+
+**Usage:** Country outlines on the Earth map and the approximate country names in `data/earth_eligible_locations.csv`. At this scale, a few coastal locations fall outside the outlines and have no country name.
+
+---
+
+### Page Imagery
+
+- **Mars landscape (explorer header):** NASA/JPL-Caltech/ASU/MSSS
+- **Earth (landing page):** NASA / Apollo 17, "Blue Marble" — https://commons.wikimedia.org/wiki/File:Blue_Marble_transparent.png
+- **Mars (landing page):** NASA / JPL / USGS — https://science.nasa.gov/photojournal/global-color-views-of-mars/
