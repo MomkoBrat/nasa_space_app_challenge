@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>New Horizon — Mission Briefing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Exo+2:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="deck.css" />
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div id="nebula" aria-hidden="true"></div>
+  <div id="ripples" aria-hidden="true"></div>
+
+  <div id="viewport">
+    <div id="stage">
+
+      <!-- ============================== 01 TITLE ============================== -->
+      <section class="slide" data-label="Launch" data-transition="warp">
+        <div class="title-orbit" aria-hidden="true">
+          <svg viewBox="0 0 1920 1080"><ellipse cx="1180" cy="520" rx="760" ry="250" class="orbit-line" /></svg>
+        </div>
+        <img class="planet mars-big intro" style="--d:.1s" src="img/mars.jpg" alt="Mars (NASA/JPL/USGS Viking mosaic)" />
+        <img class="planet earth-small intro" style="--d:.35s" src="img/earth.png" alt="Earth (NASA Apollo 17 Blue Marble)" />
+        <div class="title-block">
+          <p class="kicker intro" style="--d:.2s">NASA SPACE APPS CHALLENGE · 2026</p>
+          <h1 class="mega intro glow-text" style="--d:.45s">NEW<br />HORIZON</h1>
+          <p class="subtitle step stg" style="--i:0" data-step="1" data-anim="rise">Mars-to-Earth Analog Finder</p>
+          <p class="tagline step stg" style="--i:1" data-step="1" data-anim="rise">Find Mars — <span class="hl-earth">on Earth.</span></p>
+          <p class="team-chip step stg" style="--i:2" data-step="1" data-anim="rise"><span class="dot"></span> Team <b data-config="TEAM_NAME">New Neighbours</b></p>
+        </div>
+      </section>
+
+      <!-- ============================== 02 CREW ============================== -->
+      <section class="slide" data-label="Crew" data-transition="iris">
+        <p class="kicker intro">01 // INTRODUCTIONS</p>
+        <h2 class="headline intro" style="--d:.15s">Meet the <span class="hl-mars">crew</span></h2>
+        <div class="crew">
+          <article class="crew-card step stg" style="--i:0" data-step="1" data-anim="rise">
+            <div class="avatar"><span>AI</span><img src="img/team/albert.jpg" alt="" onerror="this.remove()" /></div>
+            <h3>Albert Ivanitzov</h3><p>Scientific data researcher</p><i class="crew-tag">THERMAL · ALBEDO</i>
+          </article>
+          <article class="crew-card step stg" style="--i:1" data-step="1" data-anim="rise">
+            <div class="avatar"><span>BH</span><img src="img/team/boris.jpg" alt="" onerror="this.remove()" /></div>
+            <h3>Boris Hristov</h3><p>Geospatial data engineer</p><i class="crew-tag">MARS SITES · GEOLOGY</i>
+          </article>
+          <article class="crew-card step stg" style="--i:2" data-step="1" data-anim="rise">
+            <div class="avatar"><span>BG</span><img src="img/team/boyan.jpg" alt="" onerror="this.remove()" /></div>
+            <h3>Boyan Georgiev</h3><p>Fullstack software engineer</p><i class="crew-tag">APP · EARTH PIPELINE</i>
+          </article>
+          <article class="crew-card step stg" style="--i:3" data-step="1" data-anim="rise">
+            <div class="avatar"><span>KM</span><img src="img/team/kristiyan.jpg" alt="" onerror="this.remove()" /></div>
+            <h3>Kristiyan Miltiyadov</h3><p>Data engineer</p><i class="crew-tag">WIND · PRESSURE</i>
+          </article>
+          <article class="crew-card step stg" style="--i:4" data-step="1" data-anim="rise">
+            <div class="avatar"><span>MI</span><img src="img/team/momchil.jpg" alt="" onerror="this.remove()" /></div>
+            <h3>Momchil Indzhov</h3><p>Frontend &amp; UI/UX developer</p><i class="crew-tag">INTERFACE · DESIGN</i>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================== 03 CHALLENGE ============================== -->
+      <section class="slide" data-label="Challenge" data-transition="glitch">
+        <p class="kicker intro">02 // THE CHALLENGE</p>
+        <div class="center-stack">
+          <p class="statement step stg" style="--i:0" data-step="1" data-anim="rise">Every mission to Mars is rehearsed on Earth first.</p>
+          <p class="statement big hl-mars step stg" style="--i:1" data-step="1" data-anim="rise">But where on Earth is most like the place we are going?</p>
+          <div class="challenge-box step" data-step="2" data-anim="wipe-right">
+            <span class="cb-label">OUR CHALLENGE</span>
+            <span class="cb-text" data-config="CHALLENGE">Finding the best Earth analogs for Mars rover mobility &amp; surface testing — with open space data.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== 04 INSPIRATION ============================== -->
+      <section class="slide" data-label="Inspiration" data-transition="slice">
+        <p class="kicker intro">03 // WHAT INSPIRED US</p>
+        <h2 class="headline intro" style="--d:.15s">Mars is already <span class="hl-mars">tested on Earth</span></h2>
+        <div class="inspo">
+          <img class="planet inspo-earth intro" style="--d:.25s" src="img/earth.png" alt="" />
+          <div class="inspo-sites">
+            <div class="site-pin step" data-step="1" data-anim="scatter" style="--i:0"><b>Mojave Desert</b><span>USA · rover driving tests</span></div>
+            <div class="site-pin step" data-step="1" data-anim="scatter" style="--i:1"><b>Atacama Desert</b><span>Chile · driest place on Earth</span></div>
+            <div class="site-pin step" data-step="1" data-anim="scatter" style="--i:2"><b>Devon Island</b><span>Canada · Arctic crater research</span></div>
+            <div class="site-pin step" data-step="1" data-anim="scatter" style="--i:3"><b>Utah</b><span>USA · Mars Desert Research Station</span></div>
+          </div>
+        </div>
+        <p class="inspo-but step stg" style="--i:0" data-step="2" data-anim="rise">These places were chosen by <b>experience and reputation</b> —<br />not by a measured, planet-wide comparison.</p>
+        <p class="inspo-whatif step stg neon" style="--i:1" data-step="2" data-anim="rise">What if anyone could search the whole Earth for <em>their</em> Mars?</p>
+      </section>
+
+      <!-- ============================== 05 PROBLEM ============================== -->
+      <section class="slide" data-label="Problem" data-transition="cube">
+        <p class="kicker intro">04 // THE PROBLEM</p>
+        <h2 class="headline intro" style="--d:.15s">Mars is not <span class="hl-mars">one place</span></h2>
+        <div class="relief-chart">
+          <div class="rc-row step" data-step="1" data-anim="unfold" style="--i:0"><span class="rc-name">Victoria Crater</span><span class="rc-bar"><i style="--w:3.6%"></i></span><span class="rc-val">19 m relief · 0.2°</span></div>
+          <div class="rc-row step" data-step="1" data-anim="unfold" style="--i:1"><span class="rc-name">Athabasca Valles</span><span class="rc-bar"><i style="--w:10.5%"></i></span><span class="rc-val">56 m · 0.5°</span></div>
+          <div class="rc-row step" data-step="1" data-anim="unfold" style="--i:2"><span class="rc-name">Gale · Bradbury Landing</span><span class="rc-bar"><i style="--w:33.6%"></i></span><span class="rc-val">179 m · 1.1°</span></div>
+          <div class="rc-row step" data-step="1" data-anim="unfold" style="--i:3"><span class="rc-name">Nili Patera</span><span class="rc-bar"><i style="--w:35.1%"></i></span><span class="rc-val">187 m · 1.4°</span></div>
+          <div class="rc-row step" data-step="1" data-anim="unfold" style="--i:4"><span class="rc-name">Jezero Western Rim</span><span class="rc-bar"><i style="--w:100%"></i></span><span class="rc-val">533 m · 5.3°</span></div>
+        </div>
+        <p class="stamp-text step" data-step="2" data-anim="stamp">One famous analog can't fit every mission.</p>
+        <p class="sub-statement step stg" style="--i:3" data-step="2" data-anim="rise">Teams need the right Earth twin for <b>their</b> site — fast, open and backed by data.</p>
+      </section>
+
+            <!-- ============================== 06 HOW IT WORKS ============================== -->
+      <section class="slide" data-label="Solution" data-transition="iris">
+        <p class="kicker intro">05 // OUR SOLUTION</p>
+        <h2 class="headline intro" style="--d:.15s">Introducing <span class="glow-text">NEW HORIZON</span></h2>
+        <div class="pipeline">
+          <svg class="pipe-svg" viewBox="0 0 1700 120" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="170" y1="60" x2="510" y2="60" class="pipe-seg step stg" style="--i:1" data-step="1" data-anim="draw" />
+            <line x1="510" y1="60" x2="850" y2="60" class="pipe-seg step stg" style="--i:2" data-step="1" data-anim="draw" />
+            <line x1="850" y1="60" x2="1190" y2="60" class="pipe-seg step stg" style="--i:3" data-step="1" data-anim="draw" />
+            <line x1="1190" y1="60" x2="1530" y2="60" class="pipe-seg step stg" style="--i:4" data-step="1" data-anim="draw" />
+          </svg>
+          <div class="node step stg" style="--i:0" data-step="1" data-anim="rise"><div class="node-icon">◉</div><h4>Mars terrain</h4><p>5 landing &amp; science sites<br />MOLA · CTX · HRSC elevation</p></div>
+          <div class="node step stg" style="--i:1" data-step="1" data-anim="rise"><div class="node-icon">⌖</div><h4>Terrain fingerprint</h4><p>10 × 10 km · ~455 m grid<br /><b>same code on both planets</b></p></div>
+          <div class="node step stg" style="--i:2" data-step="1" data-anim="rise"><div class="node-icon">◍</div><h4>Earth screening</h4><p><b data-count="25467">0</b> cells in 29 regions<br />MODIS + Copernicus filters</p></div>
+          <div class="node step stg" style="--i:3" data-step="1" data-anim="rise"><div class="node-icon">✦</div><h4>Bare-ground twins</h4><p><b data-count="17735">0</b> eligible cells<br />≥ 70 % unvegetated</p></div>
+          <div class="node node-final step stg" style="--i:4" data-step="1" data-anim="rise"><div class="node-icon">★</div><h4>Ranking</h4><p>Weighted distance<br />top 10, 50 km apart</p></div>
+        </div>
+      </section>
+
+                  <!-- ============================== 07 SCORE ============================== -->
+      <section class="slide" data-label="The score" data-transition="cube">
+        <p class="kicker intro">06 // THE MATCH SCORE</p>
+        <h2 class="headline intro" style="--d:.15s">Transparent maths, <span class="hl-earth">no black box</span></h2>
+        <div class="formula step stg" style="--i:0" data-step="1" data-anim="rise">distance = √ Σ wᵢ · ((Marsᵢ − Earthᵢ) / scaleᵢ)²
+score    = 100 / (1 + distance)</div>
+        <div class="score-example">
+          <table class="ex-table step stg" style="--i:1" data-step="1" data-anim="rise">
+            <thead><tr><th></th><th class="mars-c">Jezero Western Rim</th><th class="earth-c">Puna de Atacama, Chile</th></tr></thead>
+            <tbody>
+              <tr><td>Median slope</td><td>5.32°</td><td>5.35°</td></tr>
+              <tr><td>Local relief</td><td>533 m</td><td>534 m</td></tr>
+              <tr><td>Roughness</td><td>45.8 m</td><td>46.9 m</td></tr>
+            </tbody>
+          </table>
+          <div class="gauge step" data-step="2" data-anim="gauge">
+            <svg viewBox="0 0 200 200"><circle class="g-bg" cx="100" cy="100" r="84" /><circle class="g-fg" cx="100" cy="100" r="84" style="--p:.974" /></svg>
+            <div class="g-val"><b data-count="97.4" data-dec="1">0</b><span>match score</span></div>
+          </div>
+        </div>
+        <p class="note step" data-step="2" data-anim="fade-late">Scored: slope · relief · roughness (+ optional wind &amp; albedo). A ranking value — not a “% Mars”.</p>
+      </section>
+
+      <!-- ============================== 08 UX: EXPLORE ============================== -->
+      <section class="slide" data-label="Experience · Explore" data-transition="tilt">
+        <p class="kicker intro">07 // USER EXPERIENCE · 1</p>
+        <h2 class="headline intro" style="--d:.15s">Pick a site. <span class="hl-mars">Tune the mission.</span></h2>
+        <div class="ux">
+          <figure class="shot step" data-step="1" data-anim="slide-3d">
+            <img src="img/explore.png" alt="Explore screen: Mars map, Earth map, site panel and sliders" />
+            <span class="marker step stg" data-step="2" data-anim="pop" style="--i:0;left:30%;top:36%">1</span>
+            <span class="marker step stg" data-step="2" data-anim="pop" style="--i:1;left:22%;top:79%">2</span>
+            <span class="marker step stg" data-step="2" data-anim="pop" style="--i:2;left:68%;top:78%">3</span>
+            <span class="marker step stg" data-step="2" data-anim="pop" style="--i:3;left:72%;top:35%">4</span>
+          </figure>
+          <ol class="callouts">
+            <li class="step stg" style="--i:0" data-step="2" data-anim="rise"><b>1</b> Click a site on the Viking colour map of Mars</li>
+            <li class="step stg" style="--i:1" data-step="2" data-anim="rise"><b>2</b> See its terrain fingerprint, measured from orbit</li>
+            <li class="step stg" style="--i:2" data-step="2" data-anim="rise"><b>3</b> Choose what matters: presets &amp; sliders</li>
+            <li class="step stg" style="--i:3" data-step="2" data-anim="rise"><b>4</b> Earth twins appear instantly on the globe</li>
+          </ol>
+        </div>
+      </section>
+
+            <!-- ============================== 09 UX: UNDERSTAND ============================== -->
+      <section class="slide" data-label="Experience · Results" data-transition="slice">
+        <p class="kicker intro">08 // USER EXPERIENCE · 2</p>
+        <h2 class="headline intro" style="--d:.15s">Ten twins, ranked — and <span class="hl-mars">explained</span></h2>
+        <div class="stack-shots">
+          <figure class="shot s1 step" data-step="1" data-anim="fly-left"><img src="img/results.png" alt="Ranked list of the 10 closest Earth matches" /></figure>
+          <figure class="shot s2 step" data-step="2" data-anim="fly-right"><img src="img/analysis.png" alt="Terrain comparison chart and scientific limitations" /></figure>
+        </div>
+        <div class="tri-labels">
+          <span class="tri ok step stg" data-step="2" data-anim="pop" style="--i:3;">✔ Matches</span>
+          <span class="tri diff step stg" data-step="2" data-anim="pop" style="--i:4;">≠ Differs</span>
+          <span class="tri unk step stg" data-step="2" data-anim="pop" style="--i:5;">? Not comparable — and why</span>
+        </div>
+      </section>
+
+      <!-- ============================== 10 DISCOVERIES ============================== -->
+      <section class="slide" data-label="Discoveries" data-transition="warp">
+        <p class="kicker intro">09 // WHAT NEW HORIZON FOUND</p>
+        <h2 class="headline intro" style="--d:.15s">Mars sites and their <span class="hl-earth">Earth twins</span></h2>
+        <div class="twins">
+          <div class="twin step stg" style="--i:0" data-step="1" data-anim="rise"><span class="t-mars">Jezero Western Rim <small>Perseverance</small></span><span class="t-beam"></span><span class="t-earth">Puna de Atacama, Chile</span><b class="t-score">97.4</b></div>
+          <div class="twin step stg" style="--i:1" data-step="1" data-anim="rise"><span class="t-mars">Gale · Bradbury Landing <small>Curiosity</small></span><span class="t-beam"></span><span class="t-earth">Afar, Ethiopia</span><b class="t-score">98.7</b></div>
+          <div class="twin step stg" style="--i:2" data-step="1" data-anim="rise"><span class="t-mars">Victoria Crater <small>Opportunity</small></span><span class="t-beam"></span><span class="t-earth">Taklamakan Desert, China</span><b class="t-score">99.6</b></div>
+          <div class="twin step stg" style="--i:3" data-step="1" data-anim="rise"><span class="t-mars">Nili Patera <small>volcanic caldera</small></span><span class="t-beam"></span><span class="t-earth">Gobi, Mongolia <small>+ albedo → Harrat lava fields, Saudi Arabia</small></span><b class="t-score">98.8</b></div>
+          <div class="twin step stg" style="--i:4" data-step="1" data-anim="rise"><span class="t-mars">Athabasca Valles <small>young lava plains</small></span><span class="t-beam"></span><span class="t-earth">Gilf Kebir plateau, Sudan</span><b class="t-score">99.4</b></div>
+        </div>
+        <p class="note">Top match per site with default weights. Scores are ranking values, not a % of similarity.</p>
+      </section>
+
+      <!-- ============================== 11 INNOVATION ============================== -->
+      <section class="slide" data-label="Innovation" data-transition="glitch">
+        <p class="kicker intro">10 // INNOVATION &amp; ORIGINALITY</p>
+        <h2 class="headline intro" style="--d:.15s">Why it's <span class="hl-mars">new</span></h2>
+        <div class="tiles">
+          <div class="tile step stg" style="--i:0" data-step="1" data-anim="rise"><span class="tile-n">01</span><h4>One code, two planets</h4><p>The exact same terrain fingerprint runs on Mars and Earth elevation data.</p></div>
+          <div class="tile step stg" style="--i:1" data-step="1" data-anim="rise"><span class="tile-n">02</span><h4>The whole planet, not a shortlist</h4><p><b data-count="17735">0</b> locations in 27 regions and 25 countries are searched every time.</p></div>
+          <div class="tile step stg" style="--i:2" data-step="1" data-anim="rise"><span class="tile-n">03</span><h4>Mission-tuned</h4><p>Sliders and presets for slopes, rough ground, traverses, wind and albedo.</p></div>
+          <div class="tile step stg" style="--i:3" data-step="1" data-anim="rise"><span class="tile-n">04</span><h4>Radically honest</h4><p>Every match shows what matches, what differs and what cannot be compared.</p></div>
+        </div>
+      </section>
+
+      <!-- ============================== 12 PROGRESS ============================== -->
+      <section class="slide" data-label="Mission log" data-transition="cube">
+        <p class="kicker intro">11 // OUR PROGRESS</p>
+        <h2 class="headline intro" style="--d:.15s">Mission <span class="hl-earth">log</span></h2>
+        <div class="counters">
+          <div class="ctr step stg" style="--i:0" data-step="1" data-anim="count-up"><b data-count="25467">0</b><span>Earth cells screened</span></div>
+          <div class="ctr step stg" style="--i:1" data-step="1" data-anim="count-up"><b data-count="17735">0</b><span>eligible Earth twins</span></div>
+          <div class="ctr step stg" style="--i:2" data-step="1" data-anim="count-up"><b data-count="27">0</b><span>desert &amp; polar regions</span></div>
+          <div class="ctr step stg" style="--i:3" data-step="1" data-anim="count-up"><b data-count="5">0</b><span>Mars sites, fully profiled</span></div>
+        </div>
+        <div class="timeline step" data-step="2" data-anim="timeline">
+          <span>Data contract</span><span>Mars terrain</span><span>Earth search</span><span>Web app</span><span>Wind &amp; thermal</span><span>Launch</span>
+        </div>
+      </section>
+
+            <!-- ============================== 13 FUTURE ============================== -->
+      <section class="slide" data-label="Future" data-transition="warp">
+        <p class="kicker intro">12 // WHERE WE GO NEXT</p>
+        <h2 class="headline intro" style="--d:.15s">The <span class="hl-earth">roadmap</span></h2>
+        <p class="limits-strip intro" style="--d:.35s"><b>Known limits today:</b> ~455 m terrain (no single rocks) · no soil or traction data · modelled wind · site access not checked</p>
+        <div class="roadmap">
+          <svg class="rm-path" viewBox="0 0 1700 420" preserveAspectRatio="none" aria-hidden="true"><path id="rmPath" d="M40 360 C300 360 300 120 560 160 S900 380 1140 240 S1500 60 1660 70" /></svg>
+          <div class="rocket" aria-hidden="true">🚀</div>
+          <div class="ms step stg" data-step="1" data-anim="pop" style="--i:0;left:2%;top:58%"><h4>Any point on Mars</h4><p>Global Mars grid, not just 5 sites</p></div>
+          <div class="ms step stg" data-step="1" data-anim="pop" style="--i:1;left:22%;top:2%"><h4>Metre-scale terrain</h4><p>HiRISE &amp; CTX stereo for landing zones</p></div>
+          <div class="ms step stg" data-step="1" data-anim="pop" style="--i:2;left:38%;top:62%"><h4>Rocks &amp; soils</h4><p>Cross-calibrated thermal inertia</p></div>
+          <div class="ms step stg" data-step="1" data-anim="pop" style="--i:3;left:56%;top:12%"><h4>Mission modes</h4><p>Rover · astronaut EVA · helicopter</p></div>
+          <div class="ms step stg" data-step="1" data-anim="pop" style="--i:4;left:68%;top:64%"><h4>Field-validated</h4><p>Verify top matches with analog researchers</p></div>
+          <div class="ms ms-moon step stg" data-step="1" data-anim="pop" style="--i:5;left:82%;top:-2%"><h4>The Moon next</h4><p>Artemis analogs with the same engine</p></div>
+        </div>
+      </section>
+
+      <!-- ============================== 14 CLOSING ============================== -->
+      <section class="slide" data-label="Thank you" data-transition="iris">
+        <img class="planet close-mars intro" style="--d:.1s" src="img/mars.jpg" alt="" />
+        <img class="planet close-earth intro" style="--d:.3s" src="img/earth.png" alt="" />
+        <div class="close-block">
+          <p class="statement step stg" style="--i:0" data-step="1" data-anim="rise">Every journey to Mars begins on Earth.</p>
+          <h1 class="mega glow-text step stg" style="--i:1" data-step="1" data-anim="rise">NEW HORIZON</h1>
+          <p class="tagline step stg" style="--i:2" data-step="1" data-anim="rise">Find Mars — <span class="hl-earth">on Earth.</span></p>
+          <p class="crew-line step stg" style="--i:0" data-step="2" data-anim="rise">Albert Ivanitzov · Boris Hristov · Boyan Georgiev · Kristiyan Miltiyadov · Momchil Indzhov</p>
+          <p class="thanks step stg" style="--i:1" data-step="2" data-anim="rise">THANK YOU</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- HUD -->
+  <div id="hud">
+    <div class="hud-tl"><span class="hud-star">✦</span> NEW HORIZON <span class="hud-sep">//</span> <span id="hud-label">MISSION BRIEFING</span></div>
+    <div class="hud-tr"><span id="hud-count">01 / 14</span></div>
+    <div class="hud-bl" id="hud-hint">CLICK · → · SPACE to advance &nbsp;|&nbsp; ← back &nbsp;|&nbsp; F fullscreen &nbsp;|&nbsp; H hide HUD</div>
+    <div class="hud-br" id="hud-steps"></div>
+    <div id="progress"><i></i></div>
+  </div>
+
+  <script src="deck.js"></script>
+</body>
+</html>
