@@ -5,14 +5,14 @@
     "window_size_m": 10000,
     "analysis_resolution_m": 460,
     "steep_threshold_deg": 15,
-    "roughness_smoothing_m": 3000
+    "roughness_smoothing_m": 1000
   },
   "feature_keys": ["median_slope_deg", "steep_fraction", "relief_m", "roughness_m"],
   "normalization_scales": {
-    "median_slope_deg": 30,
-    "steep_fraction": 1,
-    "relief_m": 2000,
-    "roughness_m": 200
+    "median_slope_deg": 3,
+    "steep_fraction": 0.1,
+    "relief_m": 250,
+    "roughness_m": 25
   },
   "default_weights": {
     "median_slope_deg": 0.25,
@@ -30,5 +30,5 @@
     "default_results": 10,
     "min_separation_km": 50
   },
-  "notes": "Normalization scales and weights are engineering defaults, not scientifically calibrated. Albedo and geology excluded from quantitative matching in v1."
+  "notes": "Normalization scales = rounded standard deviation of each feature across the 17,735 eligible Earth cells; weights are engineering defaults, not scientifically calibrated. Albedo and geology excluded from quantitative matching in v1."
 }
