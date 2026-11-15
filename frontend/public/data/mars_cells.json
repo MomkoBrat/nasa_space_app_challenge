@@ -16,7 +16,8 @@
         "median_slope_deg": 0.4551,
         "steep_fraction": 0.0,
         "relief_m": 56.0,
-        "roughness_m": 4.1783
+        "roughness_m": 4.1783,
+        "mean_wind_speed_ms": 1.9278
       },
       "quality": {
         "coverage_fraction": 1.0,
@@ -82,7 +83,7 @@
           "wind": "processed_regional_context"
         },
         "scored": false,
-        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+        "note": "Context only, not scored. Exception: mean wind speed is also in `features` (scored only when its slider is above 0)."
       },
       "limitations": [
         "Regional and detailed MOLA terrain have approximately 460 m pixel resolution; the detailed footprint is not 30 m terrain.",
@@ -111,7 +112,8 @@
         "median_slope_deg": 1.1411,
         "steep_fraction": 0.0,
         "relief_m": 179.1642,
-        "roughness_m": 16.0915
+        "roughness_m": 16.0915,
+        "mean_wind_speed_ms": 5.2546
       },
       "quality": {
         "coverage_fraction": 1.0,
@@ -179,7 +181,7 @@
           "wind": "processed_regional_context"
         },
         "scored": false,
-        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+        "note": "Context only, not scored. Exception: mean wind speed is also in `features` (scored only when its slider is above 0)."
       },
       "limitations": [
         "Geology is based on a coarse 1:20,000,000 global map, unlike Jezero's local geologic map.",
@@ -206,7 +208,8 @@
         "median_slope_deg": 5.3173,
         "steep_fraction": 0.0145,
         "relief_m": 532.8628,
-        "roughness_m": 45.8452
+        "roughness_m": 45.8452,
+        "mean_wind_speed_ms": 4.7243
       },
       "quality": {
         "coverage_fraction": 1.0,
@@ -276,7 +279,7 @@
           "wind": "processed_regional_context"
         },
         "scored": false,
-        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+        "note": "Context only, not scored. Exception: mean wind speed is also in `features` (scored only when its slider is above 0)."
       },
       "limitations": [],
       "image_url": null,
@@ -297,7 +300,8 @@
         "median_slope_deg": 1.3663,
         "steep_fraction": 0.0,
         "relief_m": 187.0,
-        "roughness_m": 8.5277
+        "roughness_m": 8.5277,
+        "mean_wind_speed_ms": 4.8645
       },
       "quality": {
         "coverage_fraction": 1.0,
@@ -366,7 +370,7 @@
           "wind": "processed_regional_context"
         },
         "scored": false,
-        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+        "note": "Context only, not scored. Exception: mean wind speed is also in `features` (scored only when its slider is above 0)."
       },
       "limitations": [
         "Regional and detailed MOLA terrain have approximately 460 m pixel resolution; detailed is not 30 m terrain.",
@@ -395,7 +399,8 @@
         "median_slope_deg": 0.2231,
         "steep_fraction": 0.0,
         "relief_m": 19.0,
-        "roughness_m": 3.4879
+        "roughness_m": 3.4879,
+        "mean_wind_speed_ms": 2.9486
       },
       "quality": {
         "coverage_fraction": 1.0,
@@ -464,7 +469,7 @@
           "wind": "processed_regional_context"
         },
         "scored": false,
-        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+        "note": "Context only, not scored. Exception: mean wind speed is also in `features` (scored only when its slider is above 0)."
       },
       "limitations": [
         "Both 10 km and 5 km terrain footprints use native MOLA ~460 m resolution, insufficient to resolve Victoria Crater's ~800 m rim and walls. The downloaded HiRISE DTM was not used because it did not cover the full 5 km square.",

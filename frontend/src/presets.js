@@ -18,5 +18,7 @@ export const PRESETS = {
 
 export function presetWeights(presetKey, config) {
   const p = PRESETS[presetKey];
-  return { ...(p?.weights ?? config.default_weights) };
+  // Features a preset doesn't mention (e.g. wind speed) start at 0.
+  const zeros = Object.fromEntries(config.feature_keys.map((k) => [k, 0]));
+  return { ...zeros, ...(p?.weights ?? config.default_weights) };
 }
