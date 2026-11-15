@@ -20,10 +20,10 @@ export default function LandingPage({ onBegin }) {
         <div className="landing-nebula" aria-hidden="true" />
 
         <nav className="landing-navigation" aria-label="Landing page navigation">
-          <div className="landing-brand">
+          <a className="landing-brand" href="#/" aria-label="Mars-to-Earth Analog Finder home">
             <span className="landing-brand-mark" aria-hidden="true">✦</span>
             <span>NASA SPACE APPS <span className="landing-brand-split">/</span> ANALOG FINDER</span>
-          </div>
+          </a>
           <span className="landing-nav-detail">PLANETARY EXPLORATION · 2026</span>
         </nav>
 

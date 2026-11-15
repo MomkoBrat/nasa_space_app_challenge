@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { divIcon, latLngBounds } from 'leaflet';
 import { MapContainer, Marker, TileLayer, Tooltip, useMap } from 'react-leaflet';
 
@@ -8,6 +8,51 @@ const GIBS_URL =
   'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpeg';
 const GIBS_ATTRIBUTION =
   'Imagery: <a href="https://earthdata.nasa.gov/gibs">NASA EOSDIS GIBS</a>, Blue Marble · Borders: <a href="https://www.naturalearthdata.com/">Natural Earth</a>';
+
+// EPSG:3857 (the projection used by the NASA GIBS tiles) stops at ±85.0511°.
+// Constrain panning to a single copy of Earth, rather than wrapping endlessly.
+const EARTH_BOUNDS = latLngBounds(
+  [-85.05112878, -180],
+  [85.05112878, 180],
+);
+// Web Mercator world tiles are 256 px wide at zoom 0. Match the world width
+// to the available panel width, avoiding blank bands on either side.
+const worldWidthZoom = (width) => Math.log2(Math.max(256, width) / 256);
+
+// Keep the full world at least as wide as the visible panel. At the
+// furthest zoom out, turn dragging off; zooming in restores bounded panning.
+function BoundPanToZoom({ minimumZoom }) {
+  const map = useMap();
+  const previousMinimum = useRef(minimumZoom);
+
+  useEffect(() => {
+    map.invalidateSize({ animate: false });
+    const oldMin = previousMinimum.current;
+    const wasZoomedOut = map.getZoom() <= oldMin + 0.01;
+    map.setMinZoom(minimumZoom);
+    if (wasZoomedOut) {
+      map.setView([0, 0], minimumZoom, { animate: false });
+    } else if (map.getZoom() < minimumZoom) {
+      map.setZoom(minimumZoom, { animate: false });
+    }
+    previousMinimum.current = minimumZoom;
+  }, [map, minimumZoom]);
+
+  useEffect(() => {
+    const updateDragging = () => {
+      if (map.getZoom() <= map.getMinZoom() + 0.01) {
+        map.dragging.disable();
+      } else {
+        map.dragging.enable();
+      }
+    };
+    updateDragging();
+    map.on('zoomend', updateDragging);
+    return () => map.off('zoomend', updateDragging);
+  }, [map, minimumZoom]);
+
+  return null;
+}
 
 // The parent App supplies the already-ranked Earth results.
 function numberedIcon(rank, isSelected) {
@@ -80,6 +125,20 @@ function pinZIndex(rank, isSelected) {
 
 export default function EarthMap({ results = [], selectedRank = null, onSelect }) {
   const [countries, setCountries] = useState([]);
+  const mapFrame = useRef(null);
+  const [frameWidth, setFrameWidth] = useState(0);
+
+  useEffect(() => {
+    const frame = mapFrame.current;
+    if (!frame) return undefined;
+    const updateSize = () => setFrameWidth(frame.clientWidth);
+    updateSize();
+    const observer = new ResizeObserver(updateSize);
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, []);
+
+  const minimumZoom = worldWidthZoom(frameWidth);
 
   useEffect(() => {
     let active = true;
@@ -103,15 +162,29 @@ export default function EarthMap({ results = [], selectedRank = null, onSelect }
   }, [results, countries]);
 
   return (
-    <div className="map earth-map">
-      <MapContainer
-        center={[15, 0]}
-        zoom={1}
-        minZoom={1}
+    <div className="map earth-map" ref={mapFrame}>
+      {frameWidth > 0 && <MapContainer
+        center={[0, 0]}
+        zoom={minimumZoom}
+        minZoom={minimumZoom}
+        zoomSnap={0}
+        zoomDelta={0.5}
+        maxBounds={EARTH_BOUNDS}
+        maxBoundsViscosity={1.0}
+        maxZoom={10}
+        worldCopyJump={false}
+        dragging={false}
         scrollWheelZoom={true}
         style={{ height: '100%', width: '100%' }}
       >
-        <TileLayer url={GIBS_URL} attribution={GIBS_ATTRIBUTION} maxNativeZoom={8} maxZoom={10} />
+        <TileLayer
+          url={GIBS_URL}
+          attribution={GIBS_ATTRIBUTION}
+          maxNativeZoom={8}
+          maxZoom={10}
+          noWrap={true}
+        />
+        <BoundPanToZoom minimumZoom={minimumZoom} />
         <FitResults results={results} />
         {results.map((result) => (
           <Marker
@@ -131,7 +204,7 @@ export default function EarthMap({ results = [], selectedRank = null, onSelect }
             </Tooltip>
           </Marker>
         ))}
-      </MapContainer>
+      </MapContainer>}
     </div>
   );
 }

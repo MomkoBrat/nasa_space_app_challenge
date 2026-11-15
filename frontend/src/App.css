@@ -439,3 +439,16 @@ input[type="range"] { accent-color: var(--accent-strong); }
   ::view-transition-new(mission-science-panels),
   ::view-transition-new(mission-data-status) { animation: none !important; }
 }
+
+/* The Earth viewport follows the proportions of the visible world map.
+   Leaflet's minimum zoom is matched to this frame's width in EarthMap.jsx. */
+.map.earth-map {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #071019;
+  overflow: hidden;
+}
+.map.earth-map .leaflet-container {
+  background: #071019;
+}

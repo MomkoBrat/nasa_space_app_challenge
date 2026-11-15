@@ -1,0 +1,167 @@
+.earth-globe-frame { min-width: 0; }
+.earth-globe-surface {
+  position: relative;
+  width: 100%;
+  height: 395px;
+  overflow: hidden;
+  border-radius: 17px;
+  border: 1px solid rgba(112, 148, 211, .23);
+  background:
+    radial-gradient(circle at 50% 52%, rgba(22, 47, 87, .38), transparent 49%),
+    radial-gradient(circle at 78% 12%, rgba(94, 52, 106, .18), transparent 55%),
+    #080816;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  isolation: isolate;
+}
+.earth-globe-surface:active { cursor: grabbing; }
+.earth-globe-planet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(90%, 365px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+  view-transition-name: mission-earth;
+}
+
+.earth-globe-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 13% 16%, #fff9 0 1px, transparent 1.6px),
+    radial-gradient(circle at 76% 18%, #fff7 0 1px, transparent 1.6px),
+    radial-gradient(circle at 85% 73%, #f8d4ec91 0 1px, transparent 1.6px),
+    radial-gradient(circle at 17% 73%, #b7cfff75 0 1px, transparent 1.6px),
+    radial-gradient(circle at 38% 83%, #fff7 0 1px, transparent 1.6px),
+    radial-gradient(circle at 60% 9%, #fff8 0 1px, transparent 1.6px);
+  opacity: 0.65;
+}
+.earth-globe-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(65, 135, 254, .2) 0 29%, rgba(48, 118, 248, .09) 39%, transparent 49%);
+}
+.earth-globe-image-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  opacity: .87;
+  filter: drop-shadow(0 0 28px #58a2f166);
+}
+.earth-globe-canvas { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; display: block; }
+.earth-globe-pin {
+  position: absolute;
+  width: 29px;
+  height: 29px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #3678ef;
+  border: 2px solid #e6f2ff;
+  color: #fff;
+  box-shadow: 0 0 0 3px #0a1736b3, 0 6px 16px #000b;
+  font: 750 13px/1 system-ui, sans-serif;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 120ms, box-shadow 120ms;
+}
+.earth-globe-pin:hover, .earth-globe-pin:focus-visible { background: #ed514e; outline: none; box-shadow: 0 0 0 4px #f46b5577, 0 6px 16px #000a; }
+.earth-globe-pin.is-selected { background: #f39867; box-shadow: 0 0 0 4px #f3986777, 0 5px 16px #000b; }
+.earth-globe-pin.is-selected:hover { background: #ed514e; }
+.earth-globe-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 15px);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: max-content;
+  max-width: 290px;
+  padding: 11px 14px;
+  background: rgba(20, 15, 30, .98);
+  border: 1px solid rgba(255, 168, 117, .34);
+  border-radius: 11px;
+  box-shadow: 0 12px 35px #000b;
+  color: #faf0eb;
+  text-align: left;
+  font: 500 12px/1.45 system-ui, sans-serif;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.earth-globe-tooltip strong { font-weight: 750; font-size: 14px; color: #fff9f2; margin-bottom: 2px; }
+.earth-globe-zoom {
+  position: absolute;
+  z-index: 50;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ffffff36;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 9px 22px #0008;
+}
+.earth-globe-zoom button {
+  width: 35px;
+  height: 35px;
+  border: 0;
+  background: #211a2b;
+  color: #f9ebe6;
+  font-size: 23px;
+  font-weight: 550;
+  cursor: pointer;
+}
+.earth-globe-zoom button:first-child { border-bottom: 1px solid #ffffff24; }
+.earth-globe-zoom button:hover { background: #513346; }
+.earth-globe-instructions {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  color: #d7e4fa;
+  background: #050b19b9;
+  border: 1px solid #aac2ef30;
+  border-radius: 99px;
+  padding: 7px 14px;
+  white-space: nowrap;
+  pointer-events: none;
+  font-size: 11px;
+  letter-spacing: .035em;
+}
+.earth-globe-instructions span, .earth-globe-credit span { color: #ed9d80; padding: 0 .3rem; }
+.earth-globe-credit { margin: .6rem .1rem 0; color: #b5a7b6; font-size: .72rem; line-height: 1.4; }
+.earth-globe-credit a { color: #9bccff; text-decoration: none; }
+.earth-globe-credit a:hover { text-decoration: underline; }
+.earth-globe-error, .earth-globe-loading {
+  position: absolute;
+  z-index: 4;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: #f3e4e7;
+  max-width: 270px;
+  padding: 12px 18px;
+  text-align: center;
+  border-radius: 14px;
+  background: #21182abf;
+  font-size: 13px;
+}
+@media (max-width: 650px) {
+  .earth-globe-surface { height: 330px; }
+  .earth-globe-planet { width: min(91%, 303px); }
+  .earth-globe-pin { width: 27px; height: 27px; }
+  .earth-globe-tooltip { font-size: 11px; max-width: 210px; white-space: normal; }
+}
