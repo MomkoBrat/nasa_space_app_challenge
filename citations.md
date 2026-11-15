@@ -454,6 +454,8 @@ The quantitative comparison is based on median slope, local relief and roughness
 
 European Space Agency, & Airbus. (2022). *Copernicus DEM* [Data set]. European Space Agency. https://doi.org/10.5270/ESA-c5d3d65
 
+**Required notice:** © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.
+
 ---
 
 ### MODIS Vegetation Continuous Fields — MOD44B
