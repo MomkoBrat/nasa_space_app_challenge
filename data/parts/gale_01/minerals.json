@@ -1,0 +1,133 @@
+{
+  "location_id": "gale_01",
+  "category": "minerals",
+  "analysis": {
+    "scale": "detailed",
+    "width_m": 5000.0,
+    "height_m": 5000.0,
+    "center_projected_m": {
+      "x": 8146815.1945889965,
+      "y": -272041.2242832139
+    }
+  },
+  "data_status": "literature_supported",
+  "features": {
+    "dominant_mapped_class": null,
+    "mapped_classes": [],
+    "mapped_fraction": 0.0,
+    "reported_mineral_classes": [
+      {
+        "mineral_class": "pyroxene",
+        "spatial_scope": "5km_detailed",
+        "evidence_strength": "indicative",
+        "evidence": "MRO/CRISM mafic absorptions at the descent-stage crash site are compatible with olivine and/or pyroxene, but do not distinguish them; published rover soil diffraction supports a basaltic pyroxene component.",
+        "is_quantified": false
+      },
+      {
+        "mineral_class": "olivine",
+        "spatial_scope": "5km_detailed_possible_and_10km_regional_observed",
+        "evidence_strength": "indicative_local; clearer_in_nearby_dunes",
+        "evidence": "MRO/CRISM crash-site spectrum is consistent with possible olivine and/or pyroxene. An olivine-enriched barchan-dune CRISM sample lies outside the 5km window but inside the 10km window.",
+        "is_quantified": false
+      },
+      {
+        "mineral_class": "hydroxylated_silica",
+        "spatial_scope": "10km_regional_only",
+        "evidence_strength": "spectrally_interpreted",
+        "evidence": "MRO/CRISM 2.2-micrometre absorption in light-toned fractured material is interpreted as hydroxylated silica; published sample centre lies outside the 5km detailed window.",
+        "is_quantified": false
+      }
+    ],
+    "published_observations": [
+      {
+        "feature": "landing_site_scour_zone",
+        "latitude_deg": -4.593,
+        "longitude_east_deg": 137.445,
+        "within_5km_detailed_footprint": true,
+        "within_10km_regional_footprint": true,
+        "approx_distance_from_site_center_km": 0.285,
+        "interpretation": "Dust-cleared basaltic substrate; no unique orbital mineral identification at this exact sample.",
+        "instrument": "MRO CRISM",
+        "crism_observation": "FRS00028346"
+      },
+      {
+        "feature": "descent_stage_crash_site",
+        "latitude_deg": -4.589,
+        "longitude_east_deg": 137.417,
+        "within_5km_detailed_footprint": true,
+        "within_10km_regional_footprint": true,
+        "approx_distance_from_site_center_km": 1.464,
+        "interpretation": "Mafic absorptions consistent with olivine and/or pyroxene; spectral bands do not permit unique mineral identification.",
+        "instrument": "MRO CRISM",
+        "crism_observation": "FRS00028346"
+      },
+      {
+        "feature": "light_toned_fractured_material",
+        "latitude_deg": -4.58,
+        "longitude_east_deg": 137.507,
+        "within_5km_detailed_footprint": false,
+        "within_10km_regional_footprint": true,
+        "approx_distance_from_site_center_km": 3.911,
+        "interpretation": "2.2-micrometre absorption consistent with hydroxylated silica, interpreted from orbital spectral data.",
+        "instrument": "MRO CRISM",
+        "crism_observation": "FRS00028346"
+      },
+      {
+        "feature": "high_calcium_pyroxene_enriched_longitudinal_dunes",
+        "latitude_deg": -4.639,
+        "longitude_east_deg": 137.461,
+        "within_5km_detailed_footprint": false,
+        "within_10km_regional_footprint": true,
+        "approx_distance_from_site_center_km": 3.149,
+        "interpretation": "Relative high-calcium-pyroxene spectral enrichment in a dune sample, not a site-wide mineral fraction.",
+        "instrument": "MRO CRISM",
+        "crism_observation": "FRT0000C518"
+      },
+      {
+        "feature": "olivine_enriched_barchan_dunes",
+        "latitude_deg": -4.622,
+        "longitude_east_deg": 137.487,
+        "within_5km_detailed_footprint": false,
+        "within_10km_regional_footprint": true,
+        "approx_distance_from_site_center_km": 3.305,
+        "interpretation": "Relative olivine spectral enrichment in a barchan-dune sample, not a site-wide mineral fraction.",
+        "instrument": "MRO CRISM",
+        "crism_observation": "FRT0000C518"
+      }
+    ]
+  },
+  "quality": {
+    "coverage_fraction": 0.0,
+    "flags": [
+      "literature_based_mineralogy_not_spatial_mineral_class_mapping",
+      "mineral_class_area_is_not_mineral_abundance",
+      "no_quantitative_mineral_map_coverage",
+      "some_reported_observations_outside_5km_detailed_footprint",
+      "exclude_mineral_fraction_from_stage2_similarity_until_compatible_mapped_earth_data_exist"
+    ],
+    "intersecting_source_polygons": 0,
+    "stage2_quantitative_scoring_eligible": false
+  },
+  "source": {
+    "dataset": "Seelos et al. (2014), Mineralogy of the MSL Curiosity landing site in Gale crater as observed by MRO/CRISM",
+    "url": "https://doi.org/10.1002/2014GL060310",
+    "secondary_source": {
+      "dataset": "Sautter et al. (2014), Igneous mineralogy at Bradbury Rise: the first ChemCam campaign at Gale crater",
+      "url": "https://www.usgs.gov/publications/igneous-mineralogy-bradbury-rise-first-chemcam-campaign-gale-crater"
+    },
+    "instrument": "Mars Reconnaissance Orbiter CRISM; Curiosity surface measurements for context",
+    "type": "peer_reviewed_literature_mineral_observations",
+    "map_product_used": false,
+    "crism_observations": [
+      "FRS00028346",
+      "FRT0000C518"
+    ]
+  },
+  "methods": {
+    "area": "No mineral-class polygons or raster classification available; mapped_fraction=0 denotes unavailable mapped coverage, not mineral absence.",
+    "literature_extraction": "Named mineral classes are transcribed from published CRISM spectral interpretations near Bradbury Landing, with source sample locations and locality flags.",
+    "location_test": "Sample coordinate offsets tested against 5km and 10km projected square extents using Mars equirectangular projection with R=3396190m; distance approximated in this same projection.",
+    "caveat": "Qualitative mineral evidence does not imply unique mineral identification at all points, abundance, or area fraction. Some published source samples are outside the 5km detailed site.",
+    "stage2_scoring": "Do not treat literature-supported classes as mapped coverage fractions or score against Earth polygon-area mineral fractions."
+  }
+}

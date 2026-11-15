@@ -1,0 +1,584 @@
+{
+  "location_id": "gale_01",
+  "name": "Gale Crater - Bradbury Landing",
+  "center_geographic": {
+    "lat": -4.589499999999999,
+    "lon_east": 137.4417
+  },
+  "terrain": {
+    "id": "gale_01",
+    "name": "Gale Crater - Bradbury Landing",
+    "source_dem": "hrsc_km09_h1938_h1927_h1916-dtm-mosaic.tif",
+    "source_crs_wkt": "PROJCS[\"unnamed\",GEOGCS[\"unnamed ellipse\",DATUM[\"unknown\",SPHEROID[\"unnamed\",3396190,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "source_pixel_size_m": [
+      30.0,
+      30.0
+    ],
+    "center_projected_m": {
+      "x": 8146815.1945889965,
+      "y": -272041.2242832139
+    },
+    "center_geographic": {
+      "lat": -4.589499999999999,
+      "lon_east": 137.4417
+    },
+    "coordinate_source": "Bradbury Landing reference; projected through source DEM CRS",
+    "regional": {
+      "features": {
+        "median_slope_deg": 1.1410658366167437,
+        "steep_fraction": 0.0,
+        "relief_m": 179.16423339843732,
+        "roughness_m": 16.091488096439353
+      },
+      "additional_features": {
+        "mean_slope_deg": 1.8614060090867213,
+        "slope_p90_deg": 4.573048071938345,
+        "flat_fraction": 0.9111570247933884,
+        "elevation_std_m": 60.874690912962954,
+        "roughness_100m_m": 0.0005794641488199957,
+        "roughness_500m_m": 6.885645016194391
+      },
+      "quality": {
+        "valid_fraction_resampled": 1.0,
+        "valid_slope_fraction_resampled": 1.0,
+        "samples": 484
+      },
+      "region_km": 10.0,
+      "grid_width": 22,
+      "grid_height": 22,
+      "effective_pixel_size_m": [
+        454.091,
+        454.091
+      ]
+    },
+    "detailed": {
+      "features": {
+        "median_slope_deg": 1.3492890765271603,
+        "steep_fraction": 0.0,
+        "relief_m": 52.0,
+        "roughness_m": 9.23017726329892
+      },
+      "additional_features": {
+        "mean_slope_deg": 1.6343492880534398,
+        "slope_p90_deg": 3.2403591536879026,
+        "flat_fraction": 0.9828606260532826,
+        "elevation_std_m": 15.11398058116491,
+        "roughness_100m_m": 0.9013853435719925,
+        "roughness_500m_m": 5.977332701812338
+      },
+      "quality": {
+        "valid_fraction_resampled": 1.0,
+        "valid_slope_fraction_resampled": 1.0,
+        "samples": 27889
+      },
+      "region_km": 5.0,
+      "grid_width": 167,
+      "grid_height": 167,
+      "effective_pixel_size_m": [
+        30.0,
+        30.0
+      ]
+    },
+    "methods": {
+      "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+      "steep_fraction": "fraction of slope samples greater than 15 degrees",
+      "relief": "elevation percentile 95 minus percentile 5, in metres",
+      "roughness_m": "standard deviation of elevation minus valid-pixel-weighted Gaussian-smoothed elevation; sigma=1000 m (verify with Earth team)",
+      "resampling": "GDAL average from source DEM to analysis grid",
+      "nodata": "masked; slope samples adjoining voids excluded"
+    }
+  },
+  "modules": {
+    "geology": {
+      "location_id": "gale_01",
+      "category": "geology",
+      "analysis": {
+        "scale": "detailed",
+        "width_m": 5000.0,
+        "height_m": 5000.0,
+        "center_projected_m": {
+          "x": 8146815.1945889965,
+          "y": -272041.2242832139
+        }
+      },
+      "data_status": "processed",
+      "features": {
+        "dominant_unit": "Amazonian and Hesperian impact unit",
+        "mapped_units": [
+          {
+            "unit_code": "AHi",
+            "name": "Amazonian and Hesperian impact unit",
+            "fraction_of_region": 0.803618
+          },
+          {
+            "unit_code": "Htu",
+            "name": "Hesperian transition undivided unit",
+            "fraction_of_region": 0.196569
+          }
+        ],
+        "mapped_fraction": 0.999904
+      },
+      "quality": {
+        "coverage_fraction": 0.999904,
+        "flags": [
+          "global_geologic_map_coarse_1_to_20_million",
+          "not_equivalent_to_local_jezero_geology_map"
+        ]
+      },
+      "source": {
+        "dataset": "USGS SIM 3292 Global Geologic Map of Mars (Tanaka et al., 2014)",
+        "url": "https://doi.org/10.3133/sim3292",
+        "feature_service": "https://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/Mars_Geology_feature_layer/FeatureServer/0",
+        "map_scale": "1:20,000,000",
+        "type": "broad_geologic_unit_interpretation"
+      },
+      "methods": {
+        "area": "Mars geological polygons clipped to detailed site footprint in projected metres",
+        "caveat": "Global geology has insufficient resolution to resolve local Bradbury Landing units."
+      }
+    },
+    "minerals": {
+      "location_id": "gale_01",
+      "category": "minerals",
+      "analysis": {
+        "scale": "detailed",
+        "width_m": 5000.0,
+        "height_m": 5000.0,
+        "center_projected_m": {
+          "x": 8146815.1945889965,
+          "y": -272041.2242832139
+        }
+      },
+      "data_status": "literature_supported",
+      "features": {
+        "dominant_mapped_class": null,
+        "mapped_classes": [],
+        "mapped_fraction": 0.0,
+        "reported_mineral_classes": [
+          {
+            "mineral_class": "pyroxene",
+            "spatial_scope": "5km_detailed",
+            "evidence_strength": "indicative",
+            "evidence": "MRO/CRISM mafic absorptions at the descent-stage crash site are compatible with olivine and/or pyroxene, but do not distinguish them; published rover soil diffraction supports a basaltic pyroxene component.",
+            "is_quantified": false
+          },
+          {
+            "mineral_class": "olivine",
+            "spatial_scope": "5km_detailed_possible_and_10km_regional_observed",
+            "evidence_strength": "indicative_local; clearer_in_nearby_dunes",
+            "evidence": "MRO/CRISM crash-site spectrum is consistent with possible olivine and/or pyroxene. An olivine-enriched barchan-dune CRISM sample lies outside the 5km window but inside the 10km window.",
+            "is_quantified": false
+          },
+          {
+            "mineral_class": "hydroxylated_silica",
+            "spatial_scope": "10km_regional_only",
+            "evidence_strength": "spectrally_interpreted",
+            "evidence": "MRO/CRISM 2.2-micrometre absorption in light-toned fractured material is interpreted as hydroxylated silica; published sample centre lies outside the 5km detailed window.",
+            "is_quantified": false
+          }
+        ],
+        "published_observations": [
+          {
+            "feature": "landing_site_scour_zone",
+            "latitude_deg": -4.593,
+            "longitude_east_deg": 137.445,
+            "within_5km_detailed_footprint": true,
+            "within_10km_regional_footprint": true,
+            "approx_distance_from_site_center_km": 0.285,
+            "interpretation": "Dust-cleared basaltic substrate; no unique orbital mineral identification at this exact sample.",
+            "instrument": "MRO CRISM",
+            "crism_observation": "FRS00028346"
+          },
+          {
+            "feature": "descent_stage_crash_site",
+            "latitude_deg": -4.589,
+            "longitude_east_deg": 137.417,
+            "within_5km_detailed_footprint": true,
+            "within_10km_regional_footprint": true,
+            "approx_distance_from_site_center_km": 1.464,
+            "interpretation": "Mafic absorptions consistent with olivine and/or pyroxene; spectral bands do not permit unique mineral identification.",
+            "instrument": "MRO CRISM",
+            "crism_observation": "FRS00028346"
+          },
+          {
+            "feature": "light_toned_fractured_material",
+            "latitude_deg": -4.58,
+            "longitude_east_deg": 137.507,
+            "within_5km_detailed_footprint": false,
+            "within_10km_regional_footprint": true,
+            "approx_distance_from_site_center_km": 3.911,
+            "interpretation": "2.2-micrometre absorption consistent with hydroxylated silica, interpreted from orbital spectral data.",
+            "instrument": "MRO CRISM",
+            "crism_observation": "FRS00028346"
+          },
+          {
+            "feature": "high_calcium_pyroxene_enriched_longitudinal_dunes",
+            "latitude_deg": -4.639,
+            "longitude_east_deg": 137.461,
+            "within_5km_detailed_footprint": false,
+            "within_10km_regional_footprint": true,
+            "approx_distance_from_site_center_km": 3.149,
+            "interpretation": "Relative high-calcium-pyroxene spectral enrichment in a dune sample, not a site-wide mineral fraction.",
+            "instrument": "MRO CRISM",
+            "crism_observation": "FRT0000C518"
+          },
+          {
+            "feature": "olivine_enriched_barchan_dunes",
+            "latitude_deg": -4.622,
+            "longitude_east_deg": 137.487,
+            "within_5km_detailed_footprint": false,
+            "within_10km_regional_footprint": true,
+            "approx_distance_from_site_center_km": 3.305,
+            "interpretation": "Relative olivine spectral enrichment in a barchan-dune sample, not a site-wide mineral fraction.",
+            "instrument": "MRO CRISM",
+            "crism_observation": "FRT0000C518"
+          }
+        ]
+      },
+      "quality": {
+        "coverage_fraction": 0.0,
+        "flags": [
+          "literature_based_mineralogy_not_spatial_mineral_class_mapping",
+          "mineral_class_area_is_not_mineral_abundance",
+          "no_quantitative_mineral_map_coverage",
+          "some_reported_observations_outside_5km_detailed_footprint",
+          "exclude_mineral_fraction_from_stage2_similarity_until_compatible_mapped_earth_data_exist"
+        ],
+        "intersecting_source_polygons": 0,
+        "stage2_quantitative_scoring_eligible": false
+      },
+      "source": {
+        "dataset": "Seelos et al. (2014), Mineralogy of the MSL Curiosity landing site in Gale crater as observed by MRO/CRISM",
+        "url": "https://doi.org/10.1002/2014GL060310",
+        "secondary_source": {
+          "dataset": "Sautter et al. (2014), Igneous mineralogy at Bradbury Rise: the first ChemCam campaign at Gale crater",
+          "url": "https://www.usgs.gov/publications/igneous-mineralogy-bradbury-rise-first-chemcam-campaign-gale-crater"
+        },
+        "instrument": "Mars Reconnaissance Orbiter CRISM; Curiosity surface measurements for context",
+        "type": "peer_reviewed_literature_mineral_observations",
+        "map_product_used": false,
+        "crism_observations": [
+          "FRS00028346",
+          "FRT0000C518"
+        ]
+      },
+      "methods": {
+        "area": "No mineral-class polygons or raster classification available; mapped_fraction=0 denotes unavailable mapped coverage, not mineral absence.",
+        "literature_extraction": "Named mineral classes are transcribed from published CRISM spectral interpretations near Bradbury Landing, with source sample locations and locality flags.",
+        "location_test": "Sample coordinate offsets tested against 5km and 10km projected square extents using Mars equirectangular projection with R=3396190m; distance approximated in this same projection.",
+        "caveat": "Qualitative mineral evidence does not imply unique mineral identification at all points, abundance, or area fraction. Some published source samples are outside the 5km detailed site.",
+        "stage2_scoring": "Do not treat literature-supported classes as mapped coverage fractions or score against Earth polygon-area mineral fractions."
+      }
+    },
+    "thermal": {
+      "location_id": "gale_01",
+      "category": "thermal",
+      "data_status": "processed_regional_context",
+      "features": {
+        "median_ti": 238.0,
+        "mean_ti": 252.75,
+        "p10_ti": 204.5,
+        "p90_ti": 312.8,
+        "min_ti": 191.0,
+        "max_ti": 344.0
+      },
+      "analysis": {
+        "center_geographic": {
+          "lat": -4.589499999999999,
+          "lon_east": 137.4417
+        },
+        "source_center_geographic": {
+          "lat": -5.4,
+          "lon_east": 137.8
+        },
+        "source_center_distance_km": 52.495,
+        "source_resolution_m": 2963.6,
+        "measurement_type": "offsite_satellite_reference"
+      },
+      "quality": {
+        "detailed_valid_fraction": 1.0,
+        "flags": [
+          "coarse_resolution",
+          "not_used_in_default_terrain_similarity",
+          "requires_validated_earth_thermal_equivalent",
+          "satellite_center_outside_site_footprint",
+          "reprocess_at_bradbury_landing"
+        ]
+      },
+      "source": {
+        "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+        "original_source_id": "gale_crater",
+        "source_file": "global_ti_day_2007.img",
+        "source_mask_file": "global_ti_msk_day_2007.img",
+        "unit": "thermal inertia, J m^-2 K^-1 s^-0.5 (tiu); raw int16 used as-is",
+        "original_role": "quantitative_feature",
+        "input_json": "data/ti/gale_crater_ti.json",
+        "role": "conditional_quantitative_context"
+      },
+      "scoring_eligible": false,
+      "regional": {
+        "region_km": 10.0,
+        "grid_width": 4,
+        "grid_height": 4,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 198.0,
+          "mean_ti": 215.73333333333332,
+          "p10_ti": 144.4,
+          "p90_ti": 312.0,
+          "min_ti": 115.0,
+          "max_ti": 365.0
+        },
+        "quality": {
+          "samples": 16,
+          "samples_valid": 15,
+          "valid_fraction": 0.938,
+          "status": "ok"
+        },
+        "role": "quantitative_feature",
+        "data_status": "processed"
+      },
+      "detailed": {
+        "region_km": 5.0,
+        "grid_width": 3,
+        "grid_height": 3,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 238.0,
+          "mean_ti": 252.75,
+          "p10_ti": 204.5,
+          "p90_ti": 312.8,
+          "min_ti": 191.0,
+          "max_ti": 344.0
+        },
+        "quality": {
+          "samples": 4,
+          "samples_valid": 4,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "quantitative_feature",
+        "data_status": "processed"
+      },
+      "context": {
+        "region_km": 50.0,
+        "grid_width": 18,
+        "grid_height": 18,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 249.0,
+          "mean_ti": 246.765625,
+          "p10_ti": 165.0,
+          "p90_ti": 333.5000000000001,
+          "min_ti": 81.0,
+          "max_ti": 426.0
+        },
+        "quality": {
+          "samples": 324,
+          "samples_valid": 320,
+          "valid_fraction": 0.988,
+          "status": "ok"
+        },
+        "role": "quantitative_feature",
+        "data_status": "processed"
+      }
+    },
+    "albedo": {
+      "location_id": "gale_01",
+      "category": "albedo",
+      "data_status": "processed_regional_context",
+      "features": {
+        "median_albedo": 0.2843160629272461,
+        "mean_albedo": 0.28591716289520264,
+        "p10_albedo": 0.20816078782081604,
+        "p90_albedo": 0.3631725013256073,
+        "min_albedo": 0.18318957090377808,
+        "max_albedo": 0.37273550033569336
+      },
+      "analysis": {
+        "center_geographic": {
+          "lat": -4.589499999999999,
+          "lon_east": 137.4417
+        },
+        "source_center_geographic": {
+          "lat": -5.4,
+          "lon_east": 137.8
+        },
+        "source_center_distance_km": 52.495,
+        "source_resolution_m": 1481.8,
+        "measurement_type": "offsite_satellite_reference"
+      },
+      "quality": {
+        "detailed_valid_fraction": 1.0,
+        "flags": [
+          "coarse_resolution",
+          "not_used_in_default_terrain_similarity",
+          "nir_albedo_not_directly_comparable_to_earth_albedo",
+          "satellite_center_outside_site_footprint",
+          "reprocess_at_bradbury_landing"
+        ]
+      },
+      "source": {
+        "dataset": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+        "original_source_id": "gale_crater",
+        "source_file": "ALBEDO_R1080_EQU_MAP.tiff",
+        "source_mask_file": null,
+        "unit": "albedo (dimensionless, I/F / cos(i) at 1.08 um, Lambertian); decoded as raw * 1.4522365285e-05 + 0.52414565669 per the PDS label",
+        "original_role": "contextual_only",
+        "input_json": "data/albedo/gale_crater_albedo.json",
+        "role": "contextual_only"
+      },
+      "scoring_eligible": false,
+      "regional": {
+        "region_km": 10.0,
+        "grid_width": 8,
+        "grid_height": 8,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.2674919068813324,
+          "mean_albedo": 0.2813500761985779,
+          "p10_albedo": 0.21297059953212738,
+          "p90_albedo": 0.3560855984687805,
+          "min_albedo": 0.18318957090377808,
+          "max_albedo": 0.37273550033569336
+        },
+        "quality": {
+          "samples": 64,
+          "samples_valid": 64,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "contextual_only",
+        "data_status": "processed"
+      },
+      "detailed": {
+        "region_km": 5.0,
+        "grid_width": 4,
+        "grid_height": 4,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.2843160629272461,
+          "mean_albedo": 0.28591716289520264,
+          "p10_albedo": 0.20816078782081604,
+          "p90_albedo": 0.3631725013256073,
+          "min_albedo": 0.18318957090377808,
+          "max_albedo": 0.37273550033569336
+        },
+        "quality": {
+          "samples": 16,
+          "samples_valid": 16,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "contextual_only",
+        "data_status": "processed"
+      },
+      "context": {
+        "region_km": 50.0,
+        "grid_width": 35,
+        "grid_height": 35,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.2505878806114197,
+          "mean_albedo": 0.2633111774921417,
+          "p10_albedo": 0.17742419242858887,
+          "p90_albedo": 0.351358562707901,
+          "min_albedo": 0.14216390252113342,
+          "max_albedo": 0.37273550033569336
+        },
+        "quality": {
+          "samples": 1156,
+          "samples_valid": 1131,
+          "valid_fraction": 0.978,
+          "status": "ok"
+        },
+        "role": "contextual_only",
+        "data_status": "processed"
+      }
+    },
+    "wind": {
+      "location_id": "gale_01",
+      "category": "wind",
+      "data_status": "processed_regional_context",
+      "features": {
+        "mean_wind_speed_ms": 5.254616064078344,
+        "p95_wind_speed_ms": 10.25035989419427,
+        "wind_speed_std_ms": 2.5696372319802765,
+        "prevailing_wind_direction_deg": 221.46348990207662,
+        "mean_surface_pressure_pa": 575.6347213109334
+      },
+      "analysis": {
+        "requested_center": {
+          "lat": -4.589499999999999,
+          "lon_east": 137.4417
+        },
+        "source_reference_center": {
+          "lat": -5.4,
+          "lon_east": 137.8
+        },
+        "distance_from_site_km": 52.495,
+        "measurement_type": "regional_modeled_atmospheric_context"
+      },
+      "quality": {
+        "sample_count": 1440,
+        "valid_wind_samples": 1440,
+        "valid_pressure_samples": 1440,
+        "flags": [
+          "model_not_direct_observation",
+          "source_reference_differs_from_site",
+          "source_model_grid_point_not_confirmed",
+          "sampled_periods_not_full_martian_year",
+          "not_used_in_any_similarity_score"
+        ]
+      },
+      "source": {
+        "dataset": "MACDA v2.0",
+        "source_location_id": "gale_crater",
+        "data_type": "modeled atmospheric reanalysis",
+        "coordinate_quality": "approximate_reference",
+        "sampled_period_count": 4,
+        "mars_years_sampled": [
+          25
+        ],
+        "wind_height_note": "Lowest model sigma level; not necessarily 10 m above ground",
+        "sampling_note": "Combined statistics across 4 downloaded MACDA periods; only sampled portions of the Martian year are covered, not a full-year average.",
+        "input_json": "data/atmosphere/gale_crater.json"
+      },
+      "scoring_eligible": false
+    }
+  },
+  "missing_modules": [],
+  "invalid_modules": [],
+  "similarity_readiness": {
+    "stage_1_terrain": true,
+    "stage_2_surface_material": false,
+    "stage_2_geology": false,
+    "stage_2_minerals": false,
+    "note": "Stage 2 requires equivalent Earth features and scientifically defensible class mappings. Literature mineral observations are not polygon area fractions."
+  },
+  "scientific_limitations": [
+    "Geology is based on a coarse 1:20,000,000 global map, unlike Jezero's local geologic map.",
+    "Minerals come from qualitative literature observations; no measured 5 km mineral area fractions exist.",
+    "Wind and pressure are regional MACDA modeled context, not local in-situ measurements.",
+    "OMEGA NIR albedo is not directly comparable to Earth broadband albedo.",
+    "Thermal inertia and albedo values are real Gale-region measurements centered roughly 52 km from Bradbury Landing. These should be displayed with their source locations and not scored as local 5 km surface similarity without recalculation."
+  ]
+}
