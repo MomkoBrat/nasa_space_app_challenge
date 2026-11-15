@@ -1,0 +1,13 @@
+.surface-context { margin-top: 1rem; }
+.surface-context-scroll { overflow-x: auto; margin-top: .75rem; }
+.surface-context-table { width: 100%; border-collapse: collapse; font-size: .85rem; min-width: 560px; }
+.surface-context-table th,
+.surface-context-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: .45rem .6rem;
+  border-bottom: 1px solid rgba(240, 162, 145, .12);
+}
+.surface-context-table thead th { color: var(--muted); font-weight: 600; font-size: .78rem; }
+.surface-context-table tbody th { font-weight: 600; white-space: nowrap; }
+.surface-context-note { color: var(--muted); font-size: .78rem; }

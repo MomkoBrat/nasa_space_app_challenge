@@ -7,6 +7,7 @@ import SiteInfo from './components/SiteInfo.jsx';
 import ResultsList from './components/ResultsList.jsx';
 import ComparisonCharts from './components/ComparisonCharts.jsx';
 import LimitationsPanel from './components/LimitationsPanel.jsx';
+import SurfaceContext from './components/SurfaceContext.jsx';
 import { rankEarthCells } from './lib/similarity.js';
 import { canRecommend } from './lib/siteRules.js';
 
@@ -163,6 +164,10 @@ export default function App({ initialData = null }) {
                 <ComparisonCharts site={selectedSite} result={selectedResult} />
                 <LimitationsPanel site={selectedSite} result={selectedResult} />
               </div>
+              <SurfaceContext
+                site={selectedSite}
+                earthCell={selectedResult ? earthCells.find((c) => c.id === selectedResult.id) : null}
+              />
             </section>
           </main>
         </>

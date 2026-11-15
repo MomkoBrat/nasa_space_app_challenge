@@ -14,6 +14,7 @@ const NOT_ASSESSED = [
   ['Wheel traction', 'Cannot be inferred from terrain elevation alone.'],
   ['Gravity', 'Earth and Mars gravity differ; effects on rover operation are not modeled.'],
   ['Atmosphere', 'Only mean wind speed can be compared (optional slider, modeled data). Pressure, temperature and dust are not compared; Mars air pressure is about 150 times lower.'],
+  ['Small-scale rockiness', 'Rock size and surface material are not compared: Earth apparent and Mars thermal inertia are different quantities (see Surface & climate context).'],
   ['Radiation', 'Radiation environment is not evaluated by the terrain matching.'],
 ];
 
