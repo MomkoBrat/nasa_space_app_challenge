@@ -2,9 +2,11 @@
  * STEP 1 — Earth candidate cells + bare-land filter (Google Earth Engine Code Editor).
  *
  * How to run: open https://code.earthengine.google.com (project nasa-514808), paste this
- * whole file, click Run, then Tasks tab → RUN the "earth_candidates" export.
- * Output: Google Drive folder "nasa_space_apps" → earth_candidates.csv
- * Save it as data/earth_candidates.csv; step 2 (terrain, Python) reads it.
+ * whole file, set BATCH (below the regions), click Run, then Tasks tab → RUN the
+ * "earth_candidates_b<BATCH>" export. Repeat for each batch.
+ * Output: Google Drive folder "nasa_space_apps" → earth_candidates_b1.csv … _b5
+ * Save them as data/earth_candidates_b1.csv … then run `python prep/merge_candidates.py`,
+ * which adds them to data/earth_candidates.csv; step 2 (terrain, Python) reads that file.
  *
  * Cells: 10 × 10 km on the ground (same window as Mars regional features). Each cell is a
  * lat/lon rectangle whose width in degrees is widened by 1/cos(lat) so it stays ~10 km.
@@ -24,6 +26,7 @@ var MAX_EXCLUDED_LANDCOVER = 0.10;
 var REDUCE_SCALE_M = 250; // MOD44B native resolution; MCD12Q1 (500 m) and DEM are sampled at it
 
 // Arid Mars-analog regions: [west, south, east, north] in degrees, lon east-positive.
+// v1 regions — DO NOT CHANGE: their cell ids (region_NNNN) are reused by earth_terrain.py.
 var REGIONS = {
   atacama:   [-70.5, -26.0, -68.5, -20.0],
   utah:      [-112.0, 37.0, -109.0, 39.5],
@@ -35,7 +38,48 @@ var REGIONS = {
   gobi:      [102.0, 42.0, 105.0, 44.0],
   arabia:    [51.0, 20.0, 53.0, 22.0],
   australia: [136.0, -27.0, 138.5, -24.5],
+
+  // v2 additions: more terrain types (volcanic, rugged, high-altitude, polar desert) and known
+  // analog field sites. Boxes do not overlap v1 boxes; extensions of v1 areas get new names.
+  puna:         [-68.5, -26.5, -66.0, -19.5],  // Argentine Puna + Bolivian Altiplano, salt flats
+  qaidam:       [89.0, 36.0, 97.0, 39.0],      // Qaidam Basin (China): yardangs, playas
+  lut:          [57.5, 29.0, 59.5, 32.0],      // Dasht-e Lut (Iran): yardangs, extreme aridity
+  taklamakan:   [78.0, 37.5, 88.0, 40.5],      // dunes and gravel margins
+  afar:         [40.0, 11.0, 42.5, 14.5],      // Danakil / Afar (Ethiopia): volcanic, salt
+  tibesti:      [16.0, 19.5, 19.5, 22.5],      // volcanic mountains (Chad)
+  hoggar:       [4.5, 22.0, 7.0, 24.5],        // volcanic massif (Algeria)
+  gilf_kebir:   [24.5, 21.5, 27.5, 24.0],      // sandstone plateau / Uweinat (Egypt, Libya)
+  sinai_negev:  [33.5, 28.5, 36.0, 31.0],      // canyons, sandstone, Wadi Rum
+  harrat:       [39.0, 22.5, 41.0, 26.0],      // basaltic lava fields (Saudi Arabia)
+  anti_atlas:   [-6.5, 29.5, -3.5, 31.5],      // rugged desert (Morocco)
+  badain_jaran: [100.0, 39.0, 104.0, 42.0],    // tall dunes, lakes (China)
+  gobi_west:    [96.0, 42.0, 102.0, 44.0],     // extends v1 gobi westwards
+  changtang:    [79.5, 32.5, 82.0, 35.0],      // extends v1 ladakh eastwards (W Tibet)
+  mojave_north: [-118.0, 37.0, -116.0, 38.5],  // extends v1 mojave northwards (Death Valley N)
+  pilbara:      [117.0, -23.5, 121.0, -20.5],  // ancient rocks (Australia); may fail veg filter
+  devon_island: [-94.0, 74.5, -86.0, 76.0],    // Haughton crater area, polar desert (Canada)
+  svalbard:     [10.5, 78.0, 18.0, 80.0],      // polar desert analog site (Norway)
+  dry_valleys:  [160.0, -78.0, 164.5, -76.5],  // Antarctica; MODIS may label it snow/ice -> test
 };
+
+// The full set (~25k cells) is too big for one export (it failed and retried), so regions are
+// exported in batches of ~6k cells — the size of the v1 export that worked.
+// Run the script once per batch: set BATCH, click Run, then RUN the export in the Tasks tab.
+//   v1 = original 10 regions (already in data/earth_candidates.csv; only re-run if needed)
+var BATCHES = {
+  v1: ['atacama', 'utah', 'mojave', 'iceland', 'ladakh', 'namib', 'sahara', 'gobi', 'arabia', 'australia'],
+  // 3-batch split (~6k cells each) kept timing out after ~15 min -> 5 batches of ~3.7k cells.
+  1: ['taklamakan', 'lut', 'mojave_north'],                                   // 3,731 cells
+  2: ['qaidam', 'changtang', 'hoggar'],                                       // 3,604 cells
+  3: ['puna', 'tibesti', 'anti_atlas'],                                       // 3,742 cells
+  4: ['pilbara', 'badain_jaran', 'gilf_kebir', 'svalbard', 'dry_valleys'],    // 3,771 cells
+  5: ['gobi_west', 'afar', 'sinai_negev', 'harrat', 'devon_island'],          // 3,843 cells
+};
+var BATCH = 1; // <-- change to 2, 3, 4, then 5
+// If a batch still fails, export one region at a time instead: set BATCH to a region name,
+// e.g. var BATCH = 'qaidam'; (the export is then called earth_candidates_bqaidam).
+var RUN_REGIONS = BATCHES[BATCH] || (REGIONS[BATCH] ? [BATCH] : null);
+if (!RUN_REGIONS) { throw new Error('Unknown BATCH: ' + BATCH); }
 
 // ---------------------------------------------------------------- cell grid (client-side)
 var KM_PER_DEG_LAT = 110.574;
@@ -44,9 +88,10 @@ var halfLat = CELL_KM / 2 / KM_PER_DEG_LAT;
 
 function pad(n) { return ('0000' + n).slice(-4); }
 
+// Ids are numbered per region (region_NNNN), so they do not depend on the batch.
 var features = [];
 var counts = {};
-Object.keys(REGIONS).forEach(function (name) {
+RUN_REGIONS.forEach(function (name) {
   var b = REGIONS[name];
   var n = 0;
   for (var lat = b[1] + halfLat; lat + halfLat <= b[3]; lat += 2 * halfLat) {
@@ -69,7 +114,7 @@ Object.keys(REGIONS).forEach(function (name) {
   counts[name] = n;
 });
 var cells = ee.FeatureCollection(features);
-print('Cells per region (before filtering):', counts, 'total', features.length);
+print('BATCH ' + BATCH + ' — cells per region (before filtering):', counts, 'total', features.length);
 
 // ---------------------------------------------------------------- input layers
 // MOD44B: 0–100 %, values > 100 are fill (e.g. water) → masked, then counted as vegetated (0).
@@ -92,8 +137,9 @@ var lc = lcCollection.select('LC_Type1').mosaic();
 print('MCD12Q1 years used:', lcCollection.aggregate_array('system:time_start')
   .map(function (t) { return ee.Date(t).format('YYYY'); }));
 // Coverage check: share of valid land-cover pixels at a few test points (should all be 1).
-print('LC valid at Atacama / Utah / Iceland / Sahara:', ee.List([
+print('LC valid at Atacama / Utah / Iceland / Sahara / Devon Is. / Afar / Qaidam / Dry Valleys:', ee.List([
   [-69.5, -23.5], [-110.7, 38.5], [-17.5, 64.7], [22.5, 24.5],
+  [-89.7, 75.4], [41.0, 13.5], [93.0, 37.5], [161.5, -77.5],
 ].map(function (p) {
   return lc.mask().reduceRegion(ee.Reducer.first(), ee.Geometry.Point(p), 500).get('LC_Type1');
 })));
@@ -116,7 +162,7 @@ var reduced = stack.reduceRegions({
   collection: cells,
   reducer: ee.Reducer.mean(),
   scale: REDUCE_SCALE_M,
-  tileScale: 4,
+  tileScale: 4, // same as the v1 export that succeeded
 });
 
 // A missing value (no data at all in the cell) falls back to the value that makes the cell
@@ -151,9 +197,13 @@ var result = reduced.map(function (f) {
   });
 });
 
+// Quick test: computes 5 cells right away. If something is wrong, the error appears here
+// in red in the Console (export errors are often not shown in the Tasks list).
+print('TEST — first 5 cells of this batch:', result.limit(5));
+
 Export.table.toDrive({
   collection: result,
-  description: 'earth_candidates',
+  description: 'earth_candidates_b' + BATCH, // e.g. earth_candidates_b1 -> data/earth_candidates_b1.csv
   folder: 'nasa_space_apps',
   fileFormat: 'CSV',
   selectors: [
@@ -169,4 +219,5 @@ Map.setCenter(-110.5, 38.3, 7);
 Map.addLayer(nonveg, { min: 0, max: 1, palette: ['006400', 'ffffbf', 'd7191c'] }, 'Non-vegetated fraction', false);
 Map.addLayer(excluded.selfMask(), { palette: ['0000ff'] }, 'Excluded land cover (blue)', false);
 Map.addLayer(bareLand, { palette: ['ff8c00'] }, 'Bare land passing filter (orange)', true, 0.6);
-Map.addLayer(cells.style({ color: '000000', fillColor: '00000000', width: 1 }), {}, 'Cell outlines');
+// Off by default: drawing thousands of outlines is slow. Tick it under Layers to see the grid.
+Map.addLayer(cells.style({ color: '000000', fillColor: '00000000', width: 1 }), {}, 'Cell outlines', false);
