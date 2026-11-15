@@ -1,0 +1,83 @@
+{
+  "id": "gale_01",
+  "name": "Gale Crater - Bradbury Landing",
+  "source_dem": "hrsc_km09_h1938_h1927_h1916-dtm-mosaic.tif",
+  "source_crs_wkt": "PROJCS[\"unnamed\",GEOGCS[\"unnamed ellipse\",DATUM[\"unknown\",SPHEROID[\"unnamed\",3396190,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "source_pixel_size_m": [
+    30.0,
+    30.0
+  ],
+  "center_projected_m": {
+    "x": 8146815.1945889965,
+    "y": -272041.2242832139
+  },
+  "center_geographic": {
+    "lat": -4.589499999999999,
+    "lon_east": 137.4417
+  },
+  "coordinate_source": "Bradbury Landing reference; projected through source DEM CRS",
+  "regional": {
+    "features": {
+      "median_slope_deg": 1.1410658366167437,
+      "steep_fraction": 0.0,
+      "relief_m": 179.16423339843732,
+      "roughness_m": 16.091488096439353
+    },
+    "additional_features": {
+      "mean_slope_deg": 1.8614060090867213,
+      "slope_p90_deg": 4.573048071938345,
+      "flat_fraction": 0.9111570247933884,
+      "elevation_std_m": 60.874690912962954,
+      "roughness_100m_m": 0.0005794641488199957,
+      "roughness_500m_m": 6.885645016194391
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 484
+    },
+    "region_km": 10.0,
+    "grid_width": 22,
+    "grid_height": 22,
+    "effective_pixel_size_m": [
+      454.091,
+      454.091
+    ]
+  },
+  "detailed": {
+    "features": {
+      "median_slope_deg": 1.3492890765271603,
+      "steep_fraction": 0.0,
+      "relief_m": 52.0,
+      "roughness_m": 9.23017726329892
+    },
+    "additional_features": {
+      "mean_slope_deg": 1.6343492880534398,
+      "slope_p90_deg": 3.2403591536879026,
+      "flat_fraction": 0.9828606260532826,
+      "elevation_std_m": 15.11398058116491,
+      "roughness_100m_m": 0.9013853435719925,
+      "roughness_500m_m": 5.977332701812338
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 27889
+    },
+    "region_km": 5.0,
+    "grid_width": 167,
+    "grid_height": 167,
+    "effective_pixel_size_m": [
+      30.0,
+      30.0
+    ]
+  },
+  "methods": {
+    "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+    "steep_fraction": "fraction of slope samples greater than 15 degrees",
+    "relief": "elevation percentile 95 minus percentile 5, in metres",
+    "roughness_m": "standard deviation of elevation minus valid-pixel-weighted Gaussian-smoothed elevation; sigma=1000 m (verify with Earth team)",
+    "resampling": "GDAL average from source DEM to analysis grid",
+    "nodata": "masked; slope samples adjoining voids excluded"
+  }
+}
