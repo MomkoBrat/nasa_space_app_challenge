@@ -1,7 +1,8 @@
 """Build frontend/public/data/mars_cells.json (DATA_CONTRACT §3 shape) from data/combined/*.json.
 
-Scored features: the 4 regional terrain features (10 x 10 km, 22 x 22 grid, same method as Earth).
-Everything else (thermal inertia, albedo, wind, pressure, geology, minerals) is copied into
+Scored features: the 4 regional terrain features (10 x 10 km, 22 x 22 grid, same method as Earth)
+plus mean wind speed (MACDA; optional slider, default weight 0).
+Everything else (thermal inertia, albedo, wind extras, pressure, geology, minerals) is copied into
 `context` for display only — it is NOT used in the similarity score until Earth has matching data.
 
 Usage: python prep/mars_to_json.py
@@ -15,6 +16,7 @@ from pathlib import Path
 COMBINED = sorted(glob.glob("data/combined/*.json"))
 OUTPUT = Path("frontend/public/data/mars_cells.json")
 FEATURES = ["median_slope_deg", "steep_fraction", "relief_m", "roughness_m"]
+WIND = "mean_wind_speed_ms"  # 5th scored feature (optional slider, default weight 0)
 
 # Descriptive filter categories (contract §3) — not a statement of geological certainty.
 SITE_INFO = {
@@ -75,7 +77,8 @@ def module_context(m):
         "minerals": sorted(set(minerals)),
         "module_status": {k: v.get("data_status") for k, v in m.items()},
         "scored": False,
-        "note": "Context only; not used in the similarity score (no matching Earth values yet).",
+        "note": "Context only, not scored. Exception: mean wind speed is also in `features` "
+                "(scored only when its slider is above 0).",
     }
 
 
@@ -84,6 +87,7 @@ def build_site(path):
     sid = d["location_id"]
     reg = d["terrain"]["regional"]
     feats = {k: reg["features"][k] for k in FEATURES}
+    feats[WIND] = d["modules"]["wind"]["features"]["mean_wind_speed_ms"]
     if not all(finite(v) for v in feats.values()):
         raise ValueError(f"{sid}: non-finite terrain feature {feats}")
     c = centre(d)

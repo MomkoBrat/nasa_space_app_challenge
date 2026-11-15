@@ -16,9 +16,11 @@ from pathlib import Path
 
 CANDIDATES = Path("data/earth_candidates.csv")
 TERRAIN = Path("data/earth_terrain.csv")
+ATMOSPHERE = Path("data/earth_locations_atmosphere.csv")  # MERRA-2 2025 (Kristiyan)
 OUTPUT = Path("frontend/public/data/earth_cells.json")
 FEATURES = ["median_slope_deg", "steep_fraction", "relief_m", "roughness_m"]
-DECIMALS = {"median_slope_deg": 3, "steep_fraction": 4, "relief_m": 1, "roughness_m": 2}
+WIND = "mean_wind_speed_ms"  # 5th scored feature (optional slider, default weight 0)
+DECIMALS = {"median_slope_deg": 3, "steep_fraction": 4, "relief_m": 1, "roughness_m": 2, WIND: 2}
 
 SOURCES = [
     {"dataset": "Copernicus DEM GLO-30 (ESA / Airbus), AWS Open Data copernicus-dem-30m",
@@ -30,6 +32,9 @@ SOURCES = [
     {"dataset": "MODIS MCD12Q1 v061 Land Cover (LC_Type1, IGBP), mosaic of 2020-2025, newest on top",
      "native_resolution_m": 500, "url": "https://doi.org/10.5067/MODIS/MCD12Q1.061",
      "used_for": "eligibility: excluded land cover, barren fraction"},
+    {"dataset": "NASA MERRA-2 M2TMNXFLX (SPEED) and M2TMNXSLV (U10M, V10M, PS), monthly means 2025",
+     "native_resolution_m": 55000, "url": "https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/",
+     "used_for": "mean wind speed (scored, optional); wind direction and surface pressure (context)"},
 ]
 
 
@@ -42,11 +47,18 @@ def main():
         candidates = {r["id"]: r for r in csv.DictReader(f) if is_true(r["eligible"])}
     with open(TERRAIN, newline="", encoding="utf-8") as f:
         terrain = [r for r in csv.DictReader(f) if r["status"] == "ok"]
+    with open(ATMOSPHERE, newline="", encoding="utf-8-sig") as f:
+        atmos = {r["id"]: r for r in csv.DictReader(f)}
 
     cells, skipped = [], 0
     for t in terrain:
         c = candidates.get(t["id"])
+        a = atmos.get(t["id"])
+        if a is None or a[WIND] == "":
+            skipped += 1
+            continue
         features = {k: float(t[k]) for k in FEATURES}
+        features[WIND] = float(a[WIND])
         if c is None or not all(math.isfinite(v) for v in features.values()):
             skipped += 1
             continue
@@ -62,6 +74,11 @@ def main():
                 "barren_fraction": barren,
                 # Majority IGBP class 16 => "barren"; otherwise sparse vegetation passed the filter.
                 "landcover": "barren" if barren >= 0.5 else "sparsely_vegetated",
+            },
+            "context": {
+                "prevailing_wind_direction_deg": round(float(a["prevailing_wind_direction_deg"]), 1)
+                if a["prevailing_wind_direction_deg"] else None,
+                "surface_pressure_pa": round(float(a["mean_surface_pressure_pa"]), 0),
             },
             "quality": {
                 "coverage_fraction": float(t["valid_fraction"]),
@@ -79,7 +96,8 @@ def main():
             "analysis_resolution_m": 454.5,
             "grid": "22 x 22, average-resampled in a local Transverse Mercator projection per cell",
             "method": "terrain_features() from prep/mars_prep.py (same code as Mars); "
-                      "steep threshold 15 deg; roughness sigma 1000 m",
+                      "steep threshold 15 deg; roughness sigma 1000 m. Mean wind speed: MERRA-2 "
+                      "SPEED, nearest grid point, day-weighted 2025 annual mean (lowest model layer).",
         },
         "eligibility": {
             "min_nonvegetated_fraction": 0.70,

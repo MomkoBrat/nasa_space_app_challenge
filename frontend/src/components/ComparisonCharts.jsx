@@ -18,6 +18,8 @@ const TERRAIN_FEATURES = [
   'relief_m',
   'roughness_m',
 ];
+// Wind speed is shown as a text line, not a bar: its normalized values (3–6) would squash the terrain bars.
+const WIND_KEY = 'mean_wind_speed_ms';
 
 function RawValuesTooltip({ active, payload, config }) {
   if (!active || !payload?.length) return null;
@@ -164,6 +166,12 @@ export default function ComparisonCharts({ site, result }) {
         </div>
       )}
 
+      {config && Number.isFinite(site.features?.[WIND_KEY]) && Number.isFinite(result.features?.[WIND_KEY]) && (
+        <p className="comparison-note">
+          {featureLabel(WIND_KEY, config).label}: Mars {formatFeature(WIND_KEY, site.features[WIND_KEY], config)}
+          {' · '}Earth {formatFeature(WIND_KEY, result.features[WIND_KEY], config)} (modeled data, not plotted)
+        </p>
+      )}
       {missingFeatures.length > 0 && (
         <p className="comparison-note" role="status">
           Not plotted because measurements or valid scales are missing: {missingFeatures.join(', ')}.

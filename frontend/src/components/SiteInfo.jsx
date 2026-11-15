@@ -1,7 +1,7 @@
 import { featureLabel, formatFeature } from '../lib/featureLabels.js';
 import { canRecommend } from '../lib/siteRules.js';
 
-const FEATURE_KEYS = ['median_slope_deg', 'steep_fraction', 'relief_m', 'roughness_m'];
+const FEATURE_KEYS = ['median_slope_deg', 'steep_fraction', 'relief_m', 'roughness_m', 'mean_wind_speed_ms'];
 
 export default function SiteInfo({ site }) {
   if (!site) {
