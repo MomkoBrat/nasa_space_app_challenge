@@ -14,12 +14,12 @@ import './ComparisonCharts.css';
 
 const TERRAIN_FEATURES = [
   'median_slope_deg',
-  'steep_fraction',
   'relief_m',
   'roughness_m',
 ];
 // Wind speed is shown as a text line, not a bar: its normalized values (3–6) would squash the terrain bars.
 const WIND_KEY = 'mean_wind_speed_ms';
+const ALBEDO_KEY = 'albedo'; // also a text line: different wavelengths on the two planets
 
 function RawValuesTooltip({ active, payload, config }) {
   if (!active || !payload?.length) return null;
@@ -170,6 +170,12 @@ export default function ComparisonCharts({ site, result }) {
         <p className="comparison-note">
           {featureLabel(WIND_KEY, config).label}: Mars {formatFeature(WIND_KEY, site.features[WIND_KEY], config)}
           {' · '}Earth {formatFeature(WIND_KEY, result.features[WIND_KEY], config)} (modeled data, not plotted)
+        </p>
+      )}
+      {config && Number.isFinite(site.features?.[ALBEDO_KEY]) && Number.isFinite(result.features?.[ALBEDO_KEY]) && (
+        <p className="comparison-note">
+          {featureLabel(ALBEDO_KEY, config).label}: Mars {formatFeature(ALBEDO_KEY, site.features[ALBEDO_KEY], config)} (1.08 µm)
+          {' · '}Earth {formatFeature(ALBEDO_KEY, result.features[ALBEDO_KEY], config)} (broadband) (not plotted)
         </p>
       )}
       {missingFeatures.length > 0 && (

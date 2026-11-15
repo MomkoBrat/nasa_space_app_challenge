@@ -17,7 +17,8 @@
         "steep_fraction": 0.0,
         "relief_m": 56.0,
         "roughness_m": 4.1783,
-        "mean_wind_speed_ms": 1.9278
+        "mean_wind_speed_ms": 1.9278,
+        "albedo": 0.39
       },
       "quality": {
         "coverage_fraction": 1.0,
@@ -114,7 +115,8 @@
         "steep_fraction": 0.0,
         "relief_m": 179.1642,
         "roughness_m": 16.0915,
-        "mean_wind_speed_ms": 5.2546
+        "mean_wind_speed_ms": 5.2546,
+        "albedo": 0.2675
       },
       "quality": {
         "coverage_fraction": 1.0,
@@ -211,7 +213,8 @@
         "steep_fraction": 0.0145,
         "relief_m": 532.8628,
         "roughness_m": 45.8452,
-        "mean_wind_speed_ms": 4.7243
+        "mean_wind_speed_ms": 4.7243,
+        "albedo": 0.2109
       },
       "quality": {
         "coverage_fraction": 1.0,
@@ -304,7 +307,8 @@
         "steep_fraction": 0.0,
         "relief_m": 187.0,
         "roughness_m": 8.5277,
-        "mean_wind_speed_ms": 4.8645
+        "mean_wind_speed_ms": 4.8645,
+        "albedo": 0.1173
       },
       "quality": {
         "coverage_fraction": 1.0,
@@ -404,7 +408,8 @@
         "steep_fraction": 0.0,
         "relief_m": 19.0,
         "roughness_m": 3.4879,
-        "mean_wind_speed_ms": 2.9486
+        "mean_wind_speed_ms": 2.9486,
+        "albedo": 0.2064
       },
       "quality": {
         "coverage_fraction": 1.0,

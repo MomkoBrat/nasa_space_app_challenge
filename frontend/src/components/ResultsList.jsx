@@ -16,8 +16,7 @@ export default function ResultsList({ results = null, selectedRank = null, onSel
     return (
       <div className="earth-results-empty" role="status">
         <h3>No Earth matches available</h3>
-        <p>Polar sites are shown for context only and do not receive Earth recommendations.</p>
-        <p>Other sites may also have no results when matching data is unavailable.</p>
+        <p>No Earth location has matching data for this site.</p>
       </div>
     );
   }

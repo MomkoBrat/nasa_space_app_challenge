@@ -4,15 +4,15 @@ export const PRESETS = {
   default: { label: 'Balanced', weights: null },
   slope: {
     label: 'Slope & incline',
-    weights: { median_slope_deg: 0.4, steep_fraction: 0.4, relief_m: 0.1, roughness_m: 0.1 },
+    weights: { median_slope_deg: 0.6, relief_m: 0.2, roughness_m: 0.2 },
   },
   rough: {
     label: 'Rough terrain',
-    weights: { median_slope_deg: 0.15, steep_fraction: 0.15, relief_m: 0.2, roughness_m: 0.5 },
+    weights: { median_slope_deg: 0.2, relief_m: 0.2, roughness_m: 0.6 },
   },
   traverse: {
     label: 'Traverse planning',
-    weights: { median_slope_deg: 0.2, steep_fraction: 0.3, relief_m: 0.4, roughness_m: 0.1 },
+    weights: { median_slope_deg: 0.3, relief_m: 0.55, roughness_m: 0.15 },
   },
 };
 

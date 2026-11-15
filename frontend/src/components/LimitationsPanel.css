@@ -12,3 +12,7 @@
 .limitations-group strong { color: #f8e9ed; }
 .limitations-footer { padding-top: .75rem; border-top: 1px solid rgba(226, 161, 157, .17); }
 .limitations-mock { font-size: .83rem; color: var(--warn); }
+
+/* Compact "Unknown / not assessed" list */
+.limitations-group-compact ul { padding-left: 1.1rem; }
+.limitations-group-compact li { margin: .2rem 0; font-size: .8rem; line-height: 1.4; }

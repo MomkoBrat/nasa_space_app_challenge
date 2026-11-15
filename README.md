@@ -12,8 +12,8 @@ Pick a Mars site, and the app compares it with **17,735 candidate desert, high-p
 A short introduction with a "Begin the Mission" button that opens the explorer.
 
 ### 2. Explore the terrain: Mars and Earth maps
-- **Mars map:** a global elevation map (NASA Mars Trek, MOLA colour shaded relief) with the 5 Mars study sites as pins, coloured by type (crater, landing site, volcanic, other).
-- **Site panel:** the selected site's name, coordinates, type and the measured values used for matching: median slope, steep terrain, local relief, roughness and wind speed.
+- **Mars map:** a global colour map of Mars (Viking MDIM 2.1 colour mosaic via NASA Mars Trek) with the 5 Mars study sites as pins, coloured by type (crater, landing site, volcanic, other).
+- **Site panel:** the selected site's name, coordinates, type and the measured values used for matching: median slope, local relief, roughness, wind speed and albedo.
 - **Earth map:** a NASA Blue Marble map showing the top Earth matches for the selected Mars site.
 
 ### 3. Feature weights: sliders and presets
@@ -22,10 +22,10 @@ Users decide which terrain properties matter most for their mission:
 | Slider | What it measures |
 |---|---|
 | Median slope | Typical slope of the ground (°) |
-| Steep terrain | Share of the area steeper than 15° |
 | Local relief | Height difference between low and high ground (m) |
 | Roughness | Bumpiness of the terrain after removing large hills (m) |
 | Wind speed | Mean near-surface wind speed (m/s); **off by default** |
+| Albedo (approx.) | How much sunlight the ground reflects (0–1); **off by default**, approximate because Mars and Earth are measured at different wavelengths |
 
 Presets: **Balanced**, **Slope & incline**, **Rough terrain** and **Traverse planning**. The ranking updates instantly when a slider moves.
 
@@ -34,10 +34,10 @@ Presets: **Balanced**, **Slope & incline**, **Rough terrain** and **Traverse pla
 - Each result shows its rank and match score. Selecting one highlights it on the Earth map and opens the comparison below.
 
 ### 5. Scientific analysis: understand the comparison
-- **Terrain comparison chart:** Mars and Earth values side by side for the four terrain features, scaled so they can be compared. Hover over a bar to see the original values and units. Wind speed is shown as a text line under the chart.
+- **Terrain comparison chart:** Mars and Earth values side by side for the three terrain features, scaled so they can be compared. Hover over a bar to see the original values and units. Wind speed and albedo are shown as text lines under the chart.
 - **Scientific limitations panel:**
   - which features match most closely and which differ most;
-  - what the app does **not** assess: soil strength, wheel traction, gravity, atmosphere, small-scale rockiness, radiation.
+  - what the app does **not** assess: soil strength and traction, gravity, atmosphere, small-scale rockiness, radiation.
 - **Surface & climate context table:** extra measurements shown side by side but **not used in the score**, each with a note on why:
   - thermal inertia and a rockiness class;
   - albedo (surface brightness);
@@ -59,9 +59,10 @@ score    = 100 / (1 + distance)
 ```
 
 - **Weights** come from the sliders and are rescaled to add up to 1.
-- **Scales** put the features on a common footing. Each one is the typical spread of that feature across all Earth locations: slope 3°, steep terrain 0.1, relief 250 m, roughness 25 m, wind speed 1 m/s.
+- **Scales** put the features on a common footing. Each one is the typical spread of that feature across all Earth locations: slope 3°, relief 250 m, roughness 25 m, wind speed 1 m/s, albedo 0.1.
 - A **lower distance means a closer match.** The score is for display only: 100 means identical, 50 means one typical spread away. It is **not a "percentage Mars-like"**.
 - Earth locations with missing values are skipped, never filled with zero.
+- The share of steep terrain (> 15°) is still computed and stored, but it is not scored or shown: at ~455 m resolution it is 0 for almost every site.
 
 ---
 
@@ -108,7 +109,7 @@ Full references are in [citations.md](citations.md) and the method in [docs/meth
 - **Terrain only:** matches are based on terrain shape at ~455 m resolution. They say nothing about soil strength, traction or rock size.
 - **Not directly comparable between the planets:**
   - Thermal inertia: Mars TES measures physical thermal inertia; on Earth only an apparent index is available, which is also strongly affected by moisture.
-  - Albedo: the two planets are measured at different wavelengths.
+  - Albedo: the two planets are measured at different wavelengths, so the optional albedo slider is approximate.
   - Pressure: Mars air is about 150× thinner.
   - These are therefore shown, not scored.
 - **Wind comes from atmosphere models,** not measurements. Mars wind covers only parts of a Martian year.

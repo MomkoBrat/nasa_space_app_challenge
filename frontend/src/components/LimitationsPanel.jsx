@@ -4,18 +4,16 @@ import './LimitationsPanel.css';
 
 const TERRAIN_FEATURES = [
   'median_slope_deg',
-  'steep_fraction',
   'relief_m',
   'roughness_m',
 ];
 
 const NOT_ASSESSED = [
-  ['Soil strength', 'Not measured by the regional elevation model.'],
-  ['Wheel traction', 'Cannot be inferred from terrain elevation alone.'],
-  ['Gravity', 'Earth and Mars gravity differ; effects on rover operation are not modeled.'],
-  ['Atmosphere', 'Only mean wind speed can be compared (optional slider, modeled data). Pressure, temperature and dust are not compared; Mars air pressure is about 150 times lower.'],
-  ['Small-scale rockiness', 'Rock size and surface material are not compared: Earth apparent and Mars thermal inertia are different quantities (see Surface & climate context).'],
-  ['Radiation', 'Radiation environment is not evaluated by the terrain matching.'],
+  ['Soil strength & traction', 'not measurable from elevation data.'],
+  ['Gravity', "Mars gravity is 38 % of Earth's; not modeled."],
+  ['Atmosphere', 'only wind speed is compared; Mars air is ~150× thinner.'],
+  ['Small-scale rockiness', 'thermal inertia is not comparable between planets.'],
+  ['Radiation', 'not evaluated.'],
 ];
 
 /**
@@ -82,7 +80,7 @@ export default function LimitationsPanel({ site, result }) {
         <>
           <p className="limitations-intro">
             {site.name} vs Earth Analog №{result.rank ?? '—'}.
-            This is a terrain-based candidate match, not a rover-safety certification.
+            This is a candidate match, not a rover-safety certification.
           </p>
 
           <div className="limitations-group">
@@ -125,11 +123,8 @@ export default function LimitationsPanel({ site, result }) {
         </>
       )}
 
-      <div className="limitations-group">
+      <div className="limitations-group limitations-group-compact">
         <h3 className="limitations-heading limitations-heading-unknown">Unknown / not assessed</h3>
-        <p className="limitations-caption">
-          These conditions are not evaluated by the terrain-matching model; some are known to differ between planets.
-        </p>
         <ul>
           {NOT_ASSESSED.map(([name, description]) => (
             <li key={name}><strong>{name}:</strong> {description}</li>
