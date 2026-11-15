@@ -1,0 +1,147 @@
+{
+  "location_id": "nili_patera_01",
+  "category": "minerals",
+  "analysis": {
+    "scale": "detailed",
+    "width_m": 5000.0,
+    "height_m": 5000.0,
+    "center_projected_m": {
+      "x": 3935300.692421062,
+      "y": 527544.8079574254
+    },
+    "center_geographic": {
+      "lat": 8.9,
+      "lon_east": 67.2
+    },
+    "regional_window_km": 10.0,
+    "planet_radius_km": 3396.19
+  },
+  "data_status": "literature_supported",
+  "features": {
+    "dominant_mapped_class": null,
+    "mapped_classes": [],
+    "mapped_fraction": 0.0,
+    "reported_mineral_classes": [
+      {
+        "mineral_class": "olivine",
+        "spatial_scope": "nili_patera_caldera_not_verified_in_5km_footprint",
+        "evidence_strength": "published_orbital_spectral_interpretation",
+        "evidence": "CRISM maps identify an olivine-rich smooth volcanic unit along the western caldera ring-fault area; the published spatial extent has not been intersected with the selected site footprint.",
+        "references": [
+          "https://doi.org/10.1002/2015JE004795",
+          "https://doi.org/10.1029/2020JE006383"
+        ],
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": false
+      },
+      {
+        "mineral_class": "pyroxene",
+        "spatial_scope": "nili_patera_caldera_not_verified_in_5km_footprint",
+        "evidence_strength": "published_orbital_spectral_interpretation",
+        "evidence": "CRISM olivine/low-calcium-pyroxene/high-calcium-pyroxene parameter maps show pyroxene-bearing basaltic units and dunes in Nili Patera; exact area at this chosen location not established.",
+        "references": [
+          "https://doi.org/10.1002/2015JE004795",
+          "https://doi.org/10.1029/2020JE006383"
+        ],
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": false
+      },
+      {
+        "mineral_class": "feldspar",
+        "spatial_scope": "nili_patera_caldera_not_verified_in_5km_footprint",
+        "evidence_strength": "published_orbital_spectral_interpretation",
+        "evidence": "CRISM near-infrared signatures identify a feldspathic rock unit in the caldera; its exact lithology is debated and the reported 104-145 km2 caldera-wide extent is NOT a fraction of this site.",
+        "references": [
+          "https://doi.org/10.1029/2020JE006383"
+        ],
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": false
+      },
+      {
+        "mineral_class": "hydrated_silica",
+        "spatial_scope": "nearby_caldera_locality_outside_nominal_10km_square",
+        "evidence_strength": "published_orbital_spectral_interpretation",
+        "evidence": "CRISM identified localized hydrated silica deposits on the flanks of a volcanic cone. A published approximate locality at 8.92 N, 67.29 E is about 5.4 km from this reference center and just outside the nominal 10 km square footprint.",
+        "references": [
+          "https://doi.org/10.1038/ngeo990",
+          "https://www.geophys.washington.edu/content/people/student_publications_files/r-smith--matthew/Smith_washington_0250E_10411.pdf"
+        ],
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": false
+      }
+    ],
+    "published_observations": [
+      {
+        "feature": "hydrated_silica_crism_locality_approximate",
+        "latitude_deg": 8.92,
+        "longitude_east_deg": 67.29,
+        "coordinate_precision": "approximate_representative_location_from_literature_compilation_not_a_polygon_or_sample_point",
+        "within_5km_detailed_footprint": false,
+        "within_10km_regional_footprint": false,
+        "approx_distance_from_site_center_km": 5.402,
+        "approx_east_offset_km": 5.27,
+        "approx_north_offset_km": 1.185,
+        "interpretation": "Hydrated silica reported in Nili Patera by CRISM; approximate compiled location lies just east of nominal 10 km square (5 km half-width). Does not establish an absence of silica in the footprint.",
+        "instrument": "MRO CRISM",
+        "source_url": "https://www.geophys.washington.edu/content/people/student_publications_files/r-smith--matthew/Smith_washington_0250E_10411.pdf"
+      }
+    ]
+  },
+  "quality": {
+    "coverage_fraction": 0.0,
+    "flags": [
+      "literature_based_mineralogy_not_spatial_mineral_class_mapping",
+      "mineral_class_area_is_not_mineral_abundance",
+      "no_quantitative_mineral_map_coverage",
+      "caldera_wide_observations_not_proven_in_selected_5km_footprint",
+      "hydrated_silica_reported_nearby_not_inside_nominal_10km_square",
+      "exclude_from_stage2_quantitative_similarity_until_compatible_map_available"
+    ],
+    "intersecting_source_polygons": 0,
+    "stage2_quantitative_scoring_eligible": false
+  },
+  "source": {
+    "dataset": "Published MRO/CRISM mineral observations for Nili Patera",
+    "url": "https://doi.org/10.1002/2015JE004795",
+    "references": [
+      {
+        "authors": "Fawdon et al.",
+        "year": 2015,
+        "title": "The geological history of Nili Patera, Mars",
+        "url": "https://doi.org/10.1002/2015JE004795",
+        "role": "CRISM-constrained volcanic and mineralogical units across the caldera"
+      },
+      {
+        "authors": "Eggers et al.",
+        "year": 2021,
+        "title": "Compositional Mapping of the Nili Patera Feldspathic Unit: Extent and Implications for Formation",
+        "url": "https://doi.org/10.1029/2020JE006383",
+        "role": "CRISM-based feldspathic, pyroxene-rich and olivine-bearing exposures across the caldera"
+      },
+      {
+        "authors": "Skok et al.",
+        "year": 2010,
+        "title": "Silica deposits in the Nili Patera caldera on the Syrtis Major volcanic complex on Mars",
+        "url": "https://doi.org/10.1038/ngeo990",
+        "role": "Localized hydrated silica deposits on the flanks of a volcanic cone"
+      },
+      {
+        "authors": "Smith",
+        "year": 2012,
+        "title": "Hydrated silica locations compilation (PhD dissertation, Table 1.1)",
+        "url": "https://www.geophys.washington.edu/content/people/student_publications_files/r-smith--matthew/Smith_washington_0250E_10411.pdf",
+        "role": "Approximate published geographic locality for Nili Patera hydrated silica (8.92 N, 67.29 E)"
+      }
+    ],
+    "type": "peer_reviewed_literature_mineral_observations",
+    "instrument": "Mars Reconnaissance Orbiter CRISM; supporting THEMIS and CTX geological context",
+    "map_product_used": false
+  },
+  "methods": {
+    "area": "No georeferenced mineral-class polygons were clipped to the actual 5 km site. mapped_fraction=0 denotes no mapped area coverage, not absence of minerals.",
+    "literature_extraction": "Mineral classes summarized from published orbital spectral studies for the Nili Patera caldera, with interpretations and citations; they are not site-specific abundance detections.",
+    "location_test": "The approximate 8.92 N, 67.29 E silica locality was compared to the 5 km and 10 km projected square analysis footprints using spherical Mars R=3396190 m; approximate location precision limits boundary interpretations.",
+    "caveat": "Do not interpret published caldera-wide mineral occurrences as identified inside this 5 km footprint or as concentrations, percentages by mass, or polygon area fractions.",
+    "stage2_scoring": "Context only. Do not calculate Earth–Mars mineral-similarity scores from this literature profile."
+  }
+}
