@@ -2,114 +2,479 @@
   "schema_version": "1.0",
   "sites": [
     {
-      "id": "jezero",
-      "name": "Jezero Crater (MOCK)",
-      "group": "landing_site",
-      "lat": 18.44,
-      "lon": 77.45,
-      "description": "Perseverance landing site; ancient delta-bearing crater. MOCK record: all feature values are invented.",
-      "analysis": { "window_size_m": 10000, "analysis_resolution_m": 460 },
-      "features": { "median_slope_deg": 2.1, "steep_fraction": 0.03, "relief_m": 410, "roughness_m": 18 },
-      "quality": { "coverage_fraction": 0.99, "flags": [], "data_status": "mock" },
-      "sources": [{ "dataset": "MOCK", "native_resolution_m": null, "url": null }],
-      "image_url": null,
-      "detail_available": true
-    },
-    {
-      "id": "gale",
-      "name": "Gale Crater (MOCK)",
-      "group": "landing_site",
-      "lat": -5.4,
-      "lon": 137.8,
-      "description": "Curiosity landing site at the foot of Aeolis Mons. MOCK record: all feature values are invented.",
-      "analysis": { "window_size_m": 10000, "analysis_resolution_m": 460 },
-      "features": { "median_slope_deg": 4.8, "steep_fraction": 0.09, "relief_m": 650, "roughness_m": 35 },
-      "quality": { "coverage_fraction": 0.98, "flags": [], "data_status": "mock" },
-      "sources": [{ "dataset": "MOCK", "native_resolution_m": null, "url": null }],
+      "id": "athabasca_valles_01",
+      "name": "Athabasca Valles",
+      "group": "other",
+      "lat": 8.6,
+      "lon": 156.5,
+      "description": "Athabasca Valles, young flood channels with lava-covered plains.",
+      "analysis": {
+        "window_size_m": 10000.0,
+        "analysis_resolution_m": 457.9
+      },
+      "features": {
+        "median_slope_deg": 0.4551,
+        "steep_fraction": 0.0,
+        "relief_m": 56.0,
+        "roughness_m": 4.1783
+      },
+      "quality": {
+        "coverage_fraction": 1.0,
+        "flags": [],
+        "data_status": "processed"
+      },
+      "sources": [
+        {
+          "dataset": "megt44n090hb.img",
+          "native_resolution_m": 457.9,
+          "url": null,
+          "used_for": "terrain features (scored)"
+        },
+        {
+          "dataset": "USGS SIM 3292 Global Geologic Map of Mars (Tanaka et al., 2014)",
+          "native_resolution_m": null,
+          "url": "https://doi.org/10.3133/sim3292",
+          "used_for": "geology (context only)"
+        },
+        {
+          "dataset": "Published orbital spectral and geological studies of Athabasca Valles",
+          "native_resolution_m": null,
+          "url": "https://doi.org/10.1016/j.icarus.2009.09.011",
+          "used_for": "minerals (context only)"
+        },
+        {
+          "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+          "native_resolution_m": 2963.6,
+          "url": null,
+          "used_for": "thermal (context only)"
+        },
+        {
+          "dataset": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+          "native_resolution_m": 1481.8,
+          "url": null,
+          "used_for": "albedo (context only)"
+        },
+        {
+          "dataset": "MACDA v2.0",
+          "native_resolution_m": null,
+          "url": null,
+          "used_for": "wind (context only)"
+        }
+      ],
+      "context": {
+        "thermal_inertia_tiu": 163.5,
+        "albedo_1080nm": 0.39,
+        "wind_speed_ms": 1.93,
+        "wind_speed_p95_ms": 4.66,
+        "wind_speed_std_ms": 1.4,
+        "prevailing_wind_direction_deg": 72.6,
+        "surface_pressure_pa": 703.6,
+        "wind_source_distance_km": 91.0,
+        "geology_dominant_unit": "Late Amazonian volcanic unit",
+        "minerals": [
+          "pyroxene"
+        ],
+        "module_status": {
+          "geology": "processed",
+          "minerals": "literature_supported",
+          "thermal": "processed",
+          "albedo": "processed",
+          "wind": "processed_regional_context"
+        },
+        "scored": false,
+        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+      },
+      "limitations": [
+        "Regional and detailed MOLA terrain have approximately 460 m pixel resolution; the detailed footprint is not 30 m terrain.",
+        "Global USGS geological mapping (1:20,000,000) cannot resolve individual flood-lava flows and channel deposits within a 5 km site.",
+        "Mineral detections from Athabasca Valles literature are tentative and regional; no individual mineral is confirmed in the selected 5 km footprint, and no mineral-area fraction is mapped.",
+        "MGS/TES thermal inertia is coarse and needs a comparable Earth-side product before similarity scoring.",
+        "OMEGA near-infrared 1.08 micrometre albedo cannot be directly scored against Earth's broadband albedo.",
+        "MACDA wind and pressure are modeled atmospheric context, never part of Earth similarity scores.",
+        "Atmospheric reference coordinates are 91.01 km from Athabasca terrain center; they are not confirmed model cell coordinates."
+      ],
       "image_url": null,
       "detail_available": false
     },
     {
-      "id": "elysium_insight",
-      "name": "Elysium Planitia (MOCK)",
+      "id": "gale_01",
+      "name": "Gale Crater - Bradbury Landing",
       "group": "landing_site",
-      "lat": 4.5,
-      "lon": 135.62,
-      "description": "InSight landing region; very flat, smooth plains. MOCK record: all feature values are invented.",
-      "analysis": { "window_size_m": 10000, "analysis_resolution_m": 460 },
-      "features": { "median_slope_deg": 0.6, "steep_fraction": 0.0, "relief_m": 45, "roughness_m": 3 },
-      "quality": { "coverage_fraction": 1.0, "flags": [], "data_status": "mock" },
-      "sources": [{ "dataset": "MOCK", "native_resolution_m": null, "url": null }],
+      "lat": -4.5895,
+      "lon": 137.4417,
+      "description": "Bradbury Landing, where the Curiosity rover landed in Gale crater.",
+      "analysis": {
+        "window_size_m": 10000.0,
+        "analysis_resolution_m": 454.1
+      },
+      "features": {
+        "median_slope_deg": 1.1411,
+        "steep_fraction": 0.0,
+        "relief_m": 179.1642,
+        "roughness_m": 16.0915
+      },
+      "quality": {
+        "coverage_fraction": 1.0,
+        "flags": [],
+        "data_status": "processed"
+      },
+      "sources": [
+        {
+          "dataset": "hrsc_km09_h1938_h1927_h1916-dtm-mosaic.tif",
+          "native_resolution_m": 30.0,
+          "url": null,
+          "used_for": "terrain features (scored)"
+        },
+        {
+          "dataset": "USGS SIM 3292 Global Geologic Map of Mars (Tanaka et al., 2014)",
+          "native_resolution_m": null,
+          "url": "https://doi.org/10.3133/sim3292",
+          "used_for": "geology (context only)"
+        },
+        {
+          "dataset": "Seelos et al. (2014), Mineralogy of the MSL Curiosity landing site in Gale crater as observed by MRO/CRISM",
+          "native_resolution_m": null,
+          "url": "https://doi.org/10.1002/2014GL060310",
+          "used_for": "minerals (context only)"
+        },
+        {
+          "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+          "native_resolution_m": 2963.6,
+          "url": null,
+          "used_for": "thermal (context only)"
+        },
+        {
+          "dataset": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+          "native_resolution_m": 1481.8,
+          "url": null,
+          "used_for": "albedo (context only)"
+        },
+        {
+          "dataset": "MACDA v2.0",
+          "native_resolution_m": null,
+          "url": null,
+          "used_for": "wind (context only)"
+        }
+      ],
+      "context": {
+        "thermal_inertia_tiu": 198.0,
+        "albedo_1080nm": 0.2675,
+        "wind_speed_ms": 5.25,
+        "wind_speed_p95_ms": 10.25,
+        "wind_speed_std_ms": 2.57,
+        "prevailing_wind_direction_deg": 221.5,
+        "surface_pressure_pa": 575.6,
+        "wind_source_distance_km": 52.5,
+        "geology_dominant_unit": "Amazonian and Hesperian impact unit",
+        "minerals": [
+          "hydroxylated_silica",
+          "olivine",
+          "pyroxene"
+        ],
+        "module_status": {
+          "geology": "processed",
+          "minerals": "literature_supported",
+          "thermal": "processed_regional_context",
+          "albedo": "processed_regional_context",
+          "wind": "processed_regional_context"
+        },
+        "scored": false,
+        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+      },
+      "limitations": [
+        "Geology is based on a coarse 1:20,000,000 global map, unlike Jezero's local geologic map.",
+        "Minerals come from qualitative literature observations; no measured 5 km mineral area fractions exist.",
+        "Wind and pressure are regional MACDA modeled context, not local in-situ measurements.",
+        "OMEGA NIR albedo is not directly comparable to Earth broadband albedo.",
+        "Thermal inertia and albedo values are real Gale-region measurements centered roughly 52 km from Bradbury Landing. These should be displayed with their source locations and not scored as local 5 km surface similarity without recalculation."
+      ],
       "image_url": null,
       "detail_available": false
     },
     {
-      "id": "meridiani",
-      "name": "Meridiani Planum (MOCK)",
-      "group": "landing_site",
-      "lat": -1.95,
-      "lon": -5.53,
-      "description": "Opportunity landing region; flat hematite-bearing plains. MOCK record: all feature values are invented.",
-      "analysis": { "window_size_m": 10000, "analysis_resolution_m": 460 },
-      "features": { "median_slope_deg": 0.9, "steep_fraction": 0.0, "relief_m": 70, "roughness_m": 5 },
-      "quality": { "coverage_fraction": 0.99, "flags": [], "data_status": "mock" },
-      "sources": [{ "dataset": "MOCK", "native_resolution_m": null, "url": null }],
+      "id": "jezero_rim_01",
+      "name": "Jezero Western Rim",
+      "group": "crater",
+      "lat": 18.39233,
+      "lon": 77.26068,
+      "description": "Western rim of Jezero crater, explored by the Perseverance rover.",
+      "analysis": {
+        "window_size_m": 10000.0,
+        "analysis_resolution_m": 454.5
+      },
+      "features": {
+        "median_slope_deg": 5.3173,
+        "steep_fraction": 0.0145,
+        "relief_m": 532.8628,
+        "roughness_m": 45.8452
+      },
+      "quality": {
+        "coverage_fraction": 1.0,
+        "flags": [],
+        "data_status": "processed"
+      },
+      "sources": [
+        {
+          "dataset": "M20_JezeroCrater_CTXDEM_20m.tif",
+          "native_resolution_m": 20.0,
+          "url": null,
+          "used_for": "terrain features (scored)"
+        },
+        {
+          "dataset": "Sun and Stack (2020), USGS SIM 3464 geologic units",
+          "native_resolution_m": null,
+          "url": "https://doi.org/10.3133/sim3464",
+          "used_for": "geology (context only)"
+        },
+        {
+          "dataset": "Jezero Western Rim Mineral Maps (CRISM; Valantinas et al.)",
+          "native_resolution_m": null,
+          "url": "https://zenodo.org/records/22257754",
+          "used_for": "minerals (context only)"
+        },
+        {
+          "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+          "native_resolution_m": 2963.6,
+          "url": null,
+          "used_for": "thermal (context only)"
+        },
+        {
+          "dataset": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+          "native_resolution_m": 1481.8,
+          "url": null,
+          "used_for": "albedo (context only)"
+        },
+        {
+          "dataset": "MACDA v2.0",
+          "native_resolution_m": null,
+          "url": null,
+          "used_for": "wind (context only)"
+        }
+      ],
+      "context": {
+        "thermal_inertia_tiu": 244.5,
+        "albedo_1080nm": 0.2109,
+        "wind_speed_ms": 4.72,
+        "wind_speed_p95_ms": 10.12,
+        "wind_speed_std_ms": 2.67,
+        "prevailing_wind_direction_deg": 102.1,
+        "surface_pressure_pa": 618.1,
+        "wind_source_distance_km": 13.5,
+        "geology_dominant_unit": "Crater rim unit",
+        "minerals": [
+          "altered olivine (1.9 + 2.3)",
+          "bulk rim",
+          "olivine, weak",
+          "olivine-rich + carbonate (2.5)",
+          "pyroxene-rich (LCP)"
+        ],
+        "module_status": {
+          "geology": "processed",
+          "minerals": "processed",
+          "thermal": "processed",
+          "albedo": "processed",
+          "wind": "processed_regional_context"
+        },
+        "scored": false,
+        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+      },
+      "limitations": [],
       "image_url": null,
       "detail_available": false
     },
     {
-      "id": "gusev",
-      "name": "Gusev Crater (MOCK)",
-      "group": "landing_site",
-      "lat": -14.57,
-      "lon": 175.47,
-      "description": "Spirit landing site. MOCK record: all feature values are invented.",
-      "analysis": { "window_size_m": 10000, "analysis_resolution_m": 460 },
-      "features": { "median_slope_deg": 1.7, "steep_fraction": 0.02, "relief_m": 180, "roughness_m": 12 },
-      "quality": { "coverage_fraction": 0.97, "flags": [], "data_status": "mock" },
-      "sources": [{ "dataset": "MOCK", "native_resolution_m": null, "url": null }],
-      "image_url": null,
-      "detail_available": false
-    },
-    {
-      "id": "olympus_flank",
-      "name": "Olympus Mons flank (MOCK)",
+      "id": "nili_patera_01",
+      "name": "Nili Patera",
       "group": "volcanic",
-      "lat": 18.65,
-      "lon": -133.8,
-      "description": "Lower flank of the largest shield volcano. MOCK record: all feature values are invented.",
-      "analysis": { "window_size_m": 10000, "analysis_resolution_m": 460 },
-      "features": { "median_slope_deg": 6.5, "steep_fraction": 0.14, "relief_m": 900, "roughness_m": 48 },
-      "quality": { "coverage_fraction": 0.96, "flags": [], "data_status": "mock" },
-      "sources": [{ "dataset": "MOCK", "native_resolution_m": null, "url": null }],
+      "lat": 8.9,
+      "lon": 67.2,
+      "description": "Nili Patera caldera in Syrtis Major, known for active dune fields.",
+      "analysis": {
+        "window_size_m": 10000.0,
+        "analysis_resolution_m": 457.5
+      },
+      "features": {
+        "median_slope_deg": 1.3663,
+        "steep_fraction": 0.0,
+        "relief_m": 187.0,
+        "roughness_m": 8.5277
+      },
+      "quality": {
+        "coverage_fraction": 1.0,
+        "flags": [],
+        "data_status": "processed"
+      },
+      "sources": [
+        {
+          "dataset": "megt44n000hb.img",
+          "native_resolution_m": 457.5,
+          "url": null,
+          "used_for": "terrain features (scored)"
+        },
+        {
+          "dataset": "USGS SIM 3292 Global Geologic Map of Mars (Tanaka et al., 2014)",
+          "native_resolution_m": null,
+          "url": "https://doi.org/10.3133/sim3292",
+          "used_for": "geology (context only)"
+        },
+        {
+          "dataset": "Published MRO/CRISM mineral observations for Nili Patera",
+          "native_resolution_m": null,
+          "url": "https://doi.org/10.1002/2015JE004795",
+          "used_for": "minerals (context only)"
+        },
+        {
+          "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+          "native_resolution_m": 2963.6,
+          "url": null,
+          "used_for": "thermal (context only)"
+        },
+        {
+          "dataset": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+          "native_resolution_m": 1481.8,
+          "url": null,
+          "used_for": "albedo (context only)"
+        },
+        {
+          "dataset": "MACDA v2.0",
+          "native_resolution_m": null,
+          "url": null,
+          "used_for": "wind (context only)"
+        }
+      ],
+      "context": {
+        "thermal_inertia_tiu": 528.0,
+        "albedo_1080nm": 0.1173,
+        "wind_speed_ms": 4.86,
+        "wind_speed_p95_ms": 9.74,
+        "wind_speed_std_ms": 2.77,
+        "prevailing_wind_direction_deg": 144.8,
+        "surface_pressure_pa": 478.2,
+        "wind_source_distance_km": 8.3,
+        "geology_dominant_unit": "Early Hesperian volcanic unit",
+        "minerals": [
+          "feldspar",
+          "hydrated_silica",
+          "olivine",
+          "pyroxene"
+        ],
+        "module_status": {
+          "geology": "processed",
+          "minerals": "literature_supported",
+          "thermal": "processed",
+          "albedo": "processed",
+          "wind": "processed_regional_context"
+        },
+        "scored": false,
+        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+      },
+      "limitations": [
+        "Regional and detailed MOLA terrain have approximately 460 m pixel resolution; detailed is not 30 m terrain.",
+        "Global USGS geological mapping (1:20,000,000) cannot resolve local volcanic units within a 5 km site.",
+        "Mineral classes are literature-based occurrences across Nili Patera, not verified 5 km mapped mineral-area fractions.",
+        "MGS/TES thermal inertia is coarse and needs a comparable Earth-side product before similarity scoring.",
+        "OMEGA near-infrared 1.08 micrometre albedo cannot be directly scored against Earth's broadband albedo.",
+        "MACDA wind and pressure are modeled atmospheric context, never part of Earth similarity scores.",
+        "Atmospheric reference coordinates are 8.33 km from Nili terrain center; they are not confirmed model cell coordinates."
+      ],
       "image_url": null,
       "detail_available": false
     },
     {
-      "id": "candor_chasma",
-      "name": "Candor Chasma (MOCK)",
-      "group": "canyon",
-      "lat": -6.5,
-      "lon": -71.0,
-      "description": "Part of the Valles Marineris canyon system; steep walls. MOCK record: all feature values are invented.",
-      "analysis": { "window_size_m": 10000, "analysis_resolution_m": 460 },
-      "features": { "median_slope_deg": 14.2, "steep_fraction": 0.41, "relief_m": 1850, "roughness_m": 120 },
-      "quality": { "coverage_fraction": 0.93, "flags": [], "data_status": "mock" },
-      "sources": [{ "dataset": "MOCK", "native_resolution_m": null, "url": null }],
-      "image_url": null,
-      "detail_available": false
-    },
-    {
-      "id": "planum_australe",
-      "name": "Planum Australe (MOCK)",
-      "group": "polar",
-      "lat": -86.0,
-      "lon": 0.0,
-      "description": "South polar layered deposits. Shown for context only: no Earth recommendations for polar sites. MOCK record: all feature values are invented.",
-      "analysis": { "window_size_m": 10000, "analysis_resolution_m": 460 },
-      "features": { "median_slope_deg": 3.0, "steep_fraction": 0.05, "relief_m": 500, "roughness_m": 25 },
-      "quality": { "coverage_fraction": 0.9, "flags": [], "data_status": "mock" },
-      "sources": [{ "dataset": "MOCK", "native_resolution_m": null, "url": null }],
+      "id": "victoria_crater_01",
+      "name": "Victoria Crater",
+      "group": "crater",
+      "lat": -2.05,
+      "lon": -5.5,
+      "description": "Victoria crater in Meridiani Planum, explored by the Opportunity rover.",
+      "analysis": {
+        "window_size_m": 10000.0,
+        "analysis_resolution_m": 462.8
+      },
+      "features": {
+        "median_slope_deg": 0.2231,
+        "steep_fraction": 0.0,
+        "relief_m": 19.0,
+        "roughness_m": 3.4879
+      },
+      "quality": {
+        "coverage_fraction": 1.0,
+        "flags": [],
+        "data_status": "processed"
+      },
+      "sources": [
+        {
+          "dataset": "megt00n270hb.img",
+          "native_resolution_m": 462.8,
+          "url": null,
+          "used_for": "terrain features (scored)"
+        },
+        {
+          "dataset": "USGS SIM 3292 Global Geologic Map of Mars (Tanaka et al., 2014)",
+          "native_resolution_m": null,
+          "url": "https://doi.org/10.3133/sim3292",
+          "used_for": "geology (context only)"
+        },
+        {
+          "dataset": "Opportunity rover in-situ mineralogy and MRO CRISM observations of Victoria crater",
+          "native_resolution_m": null,
+          "url": "https://doi.org/10.1002/2014JE004686",
+          "used_for": "minerals (context only)"
+        },
+        {
+          "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+          "native_resolution_m": 2963.6,
+          "url": null,
+          "used_for": "thermal (context only)"
+        },
+        {
+          "dataset": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+          "native_resolution_m": 1481.8,
+          "url": null,
+          "used_for": "albedo (context only)"
+        },
+        {
+          "dataset": "MACDA v2.0",
+          "native_resolution_m": null,
+          "url": null,
+          "used_for": "wind (context only)"
+        }
+      ],
+      "context": {
+        "thermal_inertia_tiu": 161.5,
+        "albedo_1080nm": 0.2064,
+        "wind_speed_ms": 2.95,
+        "wind_speed_p95_ms": 6.69,
+        "wind_speed_std_ms": 2.0,
+        "prevailing_wind_direction_deg": 138.6,
+        "surface_pressure_pa": 621.0,
+        "wind_source_distance_km": 3.0,
+        "geology_dominant_unit": "Hesperian and Noachian highland undivided unit",
+        "minerals": [
+          "hematite",
+          "jarosite",
+          "kieserite",
+          "pyroxene"
+        ],
+        "module_status": {
+          "geology": "processed",
+          "minerals": "literature_supported",
+          "thermal": "processed",
+          "albedo": "processed",
+          "wind": "processed_regional_context"
+        },
+        "scored": false,
+        "note": "Context only; not used in the similarity score (no matching Earth values yet)."
+      },
+      "limitations": [
+        "Both 10 km and 5 km terrain footprints use native MOLA ~460 m resolution, insufficient to resolve Victoria Crater's ~800 m rim and walls. The downloaded HiRISE DTM was not used because it did not cover the full 5 km square.",
+        "Global USGS geological mapping (1:20,000,000) cannot resolve Victoria Crater's local Burns formation strata and rim deposits within the 5 km footprint.",
+        "Opportunity's in-situ Victoria Crater mineral detections and CRISM interpretations are point/outcrop-scale, not quantitative mineral-area maps for the whole 5 km square.",
+        "MGS/TES thermal inertia is coarse and needs a comparable Earth-side product before similarity scoring.",
+        "OMEGA near-infrared 1.08 micrometre albedo cannot be directly scored against Earth's broadband albedo.",
+        "MACDA wind and pressure are modeled atmospheric context, never part of Earth similarity scores.",
+        "Atmospheric reference coordinates are 2.96 km from Victoria terrain center; they are not confirmed model cell coordinates."
+      ],
       "image_url": null,
       "detail_available": false
     }
