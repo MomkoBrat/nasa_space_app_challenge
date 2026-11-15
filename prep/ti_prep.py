@@ -15,9 +15,13 @@ Scientific role (project plan, section 6):
   to be compared only when a defensible cross-dataset comparison exists.
 
 Install: python -m pip install numpy matplotlib
-Example:
+Examples:
+  # single site (unchanged behaviour)
   python prep/ti_prep.py --id jezero_rim_01 --name "Jezero Western Rim" \
       --lat 18.392333 --lon 77.260676 --output data/jezero_rim_01_ti.json
+
+  # batch: one JSON per site in the SITES table below
+  python prep/ti_prep.py --batch --output-dir data/ti
 
 Writes a JSON whose layout matches albedo_prep.py and mars_prep.py
 (regional / detailed / context / quality / methods) so downstream tooling
@@ -43,6 +47,47 @@ MIN_VALID_FRACTION = 0.5      # flag windows below this (shared convention)
 _DEFAULT_DIR = Path(__file__).resolve().parent.parent / "prep" / "rawFiles"
 DEFAULT_TI = _DEFAULT_DIR / "global_ti_day_2007.img"
 DEFAULT_MASK = _DEFAULT_DIR / "global_ti_msk_day_2007.img"
+
+# --- Batch targets -------------------------------------------------------
+# Coordinates are planetocentric lat (deg) and east-positive lon (deg).
+# Names/comments record the terrain motivation from the project brief.
+SITES = [
+    {
+        "id": "jezero_crater",
+        "name": "Jezero Crater",
+        "terrain": "rocky/sedimentary terrain",
+        "lat": 18.855,
+        "lon": 77.519,
+    },
+    {
+        "id": "gale_crater",
+        "name": "Gale Crater",
+        "terrain": "layered and mountainous terrain",
+        "lat": -5.400,
+        "lon": 137.800,
+    },
+    {
+        "id": "nili_patera",
+        "name": "Nili Patera",
+        "terrain": "sand dunes",
+        "lat": 8.900,
+        "lon": 67.200,
+    },
+    {
+        "id": "athabasca_valles",
+        "name": "Athabasca Valles",
+        "terrain": "volcanic lava terrain",
+        "lat": 8.600,
+        "lon": 156.500,
+    },
+    {
+        "id": "victoria_crater",
+        "name": "Victoria Crater",
+        "terrain": "crater slopes and impact terrain",
+        "lat": -2.050,
+        "lon": -5.500,
+    },
+]
 
 
 def load_maps(ti_path=DEFAULT_TI, mask_path=DEFAULT_MASK):
@@ -176,53 +221,23 @@ def save_check_plot(ti, mask, path):
     plt.close(fig)
 
 
-def main():
-    p = argparse.ArgumentParser(
-        description="Extract TES dayside thermal inertia context for a Mars site",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    p.add_argument("--ti", default=DEFAULT_TI,
-                   help="TES dayside thermal inertia .img (default: prep/rawFiles/global_ti_day_2007.img)")
-    p.add_argument("--mask", default=DEFAULT_MASK,
-                   help="TES mask .img (default: prep/rawFiles/global_ti_msk_day_2007.img)")
-    p.add_argument("--id", required=True, help="Site identifier, e.g. jezero_rim_01")
-    p.add_argument("--name", required=True, help="Site name")
-    p.add_argument("--lat", type=float, required=True, help="Planetocentric latitude (deg)")
-    p.add_argument("--lon", type=float, required=True, help="East-positive longitude (deg)")
-    p.add_argument("--output", required=True, help="JSON output path")
-    p.add_argument("--detail-km", type=float, default=5.0,
-                   help="Detailed window size in km (default 5, matches albedo_prep)")
-    p.add_argument("--regional-km", type=float, default=10.0,
-                   help="Regional window size in km (default 10, matches albedo_prep)")
-    p.add_argument("--context-km", type=float, default=50.0,
-                   help="Extra-wide context window in km (default 50; -1 to skip)")
-    p.add_argument("--no-mask", action="store_true",
-                   help="keep interpolated pixels (mask == 0)")
-    p.add_argument("--plot", help="save a check plot of the whole map to this PNG")
-    args = p.parse_args()
-
-    ti, mask = load_maps(args.ti, args.mask)
-    if args.no_mask:
-        # Use a mask of all-ones so mask==1 passes everywhere; only ti>0 gates validity.
-        mask = np.ones_like(mask, dtype=np.uint8)
-
-    if args.plot:
-        save_check_plot(ti, mask, args.plot)
-        print("saved", args.plot)
-
-    regional = window_context(ti, mask, args.lat, args.lon, args.regional_km)
-    detailed = window_context(ti, mask, args.lat, args.lon, args.detail_km)
+def build_result(ti, mask, site_id, site_name, lat, lon,
+                 detail_km, regional_km, context_km,
+                 ti_path, mask_path):
+    """Build the per-site result dict (shared by single and batch modes)."""
+    regional = window_context(ti, mask, lat, lon, regional_km)
+    detailed = window_context(ti, mask, lat, lon, detail_km)
 
     px_m = 2 * math.pi * RADIUS_KM * 1000.0 / (360.0 * RES)
     result = {
-        "id": args.id,
-        "name": args.name,
+        "id": site_id,
+        "name": site_name,
         "source": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
-        "source_file": Path(args.ti).name,
-        "source_mask_file": Path(args.mask).name,
+        "source_file": Path(ti_path).name,
+        "source_mask_file": Path(mask_path).name,
         "source_resolution_m": round(px_m, 1),
         "source_grid": {"rows": NROWS, "cols": NCOLS, "ppd": RES},
-        "center_geographic": {"lat": args.lat, "lon_east": args.lon},
+        "center_geographic": {"lat": lat, "lon_east": lon},
         "regional": regional,
         "detailed": detailed,
         "methods": {
@@ -242,20 +257,118 @@ def main():
         ),
     }
 
-    if args.context_km > 0:
-        result["context"] = window_context(ti, mask, args.lat, args.lon, args.context_km)
+    if context_km > 0:
+        result["context"] = window_context(ti, mask, lat, lon, context_km)
 
-    output = Path(args.output)
+    return result
+
+
+def write_json(result, output):
+    output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2, allow_nan=False), encoding="utf-8")
+    return output
+
+
+def run_single(args, ti, mask):
+    result = build_result(
+        ti, mask, args.id, args.name, args.lat, args.lon,
+        args.detail_km, args.regional_km, args.context_km,
+        args.ti, args.mask,
+    )
+    output = write_json(result, args.output)
 
     print(f"Regional ({args.regional_km:g} km) TI features:",
-          json.dumps(regional["features"], indent=2))
+          json.dumps(result["regional"]["features"], indent=2))
     print(f"Detailed ({args.detail_km:g} km) TI features:",
-          json.dumps(detailed["features"], indent=2))
-    print(f"Regional valid fraction: {regional['quality']['valid_fraction']} "
-          f"({regional['quality']['status']})")
+          json.dumps(result["detailed"]["features"], indent=2))
+    print(f"Regional valid fraction: {result['regional']['quality']['valid_fraction']} "
+          f"({result['regional']['quality']['status']})")
     print(f"Saved: {output}")
+
+
+def run_batch(args, ti, mask):
+    out_dir = Path(args.output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    written = []
+    for site in SITES:
+        result = build_result(
+            ti, mask, site["id"], site["name"], site["lat"], site["lon"],
+            args.detail_km, args.regional_km, args.context_km,
+            args.ti, args.mask,
+        )
+        # Record the terrain motivation so the JSON is self-describing.
+        result["terrain"] = site["terrain"]
+        result["site_index"] = SITES.index(site) + 1
+
+        output = out_dir / f"{site['id']}_ti.json"
+        write_json(result, output)
+        written.append((site["id"], output, result["regional"]["quality"]))
+        print(f"[{site['id']}] saved {output} "
+              f"(status={result['regional']['quality']['status']}, "
+              f"valid_fraction={result['regional']['quality']['valid_fraction']})")
+
+    print(f"\nWrote {len(written)} JSON files to {out_dir}")
+    return written
+
+
+def main():
+    p = argparse.ArgumentParser(
+        description="Extract TES dayside thermal inertia context for Mars sites",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    p.add_argument("--ti", default=DEFAULT_TI,
+                   help="TES dayside thermal inertia .img (default: prep/rawFiles/global_ti_day_2007.img)")
+    p.add_argument("--mask", default=DEFAULT_MASK,
+                   help="TES mask .img (default: prep/rawFiles/global_ti_msk_day_2007.img)")
+
+    # Batch mode
+    p.add_argument("--batch", action="store_true",
+                   help="process the built-in SITES list and write one JSON per site")
+    p.add_argument("--output-dir", default="data/ti",
+                   help="directory for batch JSON outputs (default: data/ti)")
+
+    # Single-site mode
+    p.add_argument("--id", help="Site identifier, e.g. jezero_rim_01")
+    p.add_argument("--name", help="Site name")
+    p.add_argument("--lat", type=float, help="Planetocentric latitude (deg)")
+    p.add_argument("--lon", type=float, help="East-positive longitude (deg)")
+    p.add_argument("--output", help="JSON output path (single-site mode)")
+
+    p.add_argument("--detail-km", type=float, default=5.0,
+                   help="Detailed window size in km (default 5, matches albedo_prep)")
+    p.add_argument("--regional-km", type=float, default=10.0,
+                   help="Regional window size in km (default 10, matches albedo_prep)")
+    p.add_argument("--context-km", type=float, default=50.0,
+                   help="Extra-wide context window in km (default 50; -1 to skip)")
+    p.add_argument("--no-mask", action="store_true",
+                   help="keep interpolated pixels (mask == 0)")
+    p.add_argument("--plot", help="save a check plot of the whole map to this PNG")
+    args = p.parse_args()
+
+    # Validate mode
+    if args.batch:
+        if args.id or args.name or args.lat is not None or args.lon is not None or args.output:
+            p.error("--batch cannot be combined with --id/--name/--lat/--lon/--output")
+    else:
+        missing = [f for f in ("id", "name", "lat", "lon", "output")
+                   if getattr(args, f) is None]
+        if missing:
+            p.error("single-site mode requires: " + ", ".join("--" + m for m in missing))
+
+    ti, mask = load_maps(args.ti, args.mask)
+    if args.no_mask:
+        mask = np.ones_like(mask, dtype=np.uint8)
+
+    if args.plot:
+        save_check_plot(ti, mask, args.plot)
+        print("saved", args.plot)
+
+    if args.batch:
+        run_batch(args, ti, mask)
+    else:
+        run_single(args, ti, mask)
 
 
 if __name__ == "__main__":

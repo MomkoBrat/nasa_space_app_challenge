@@ -1,0 +1,98 @@
+{
+  "id": "nili_patera",
+  "name": "Nili Patera",
+  "source": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+  "source_file": "ALBEDO_R1080_EQU_MAP.tiff",
+  "source_resolution_m": 1481.8,
+  "source_grid": {
+    "rows": 7200,
+    "cols": 14400,
+    "ppd": 40.0
+  },
+  "center_geographic": {
+    "lat": 8.9,
+    "lon_east": 67.2
+  },
+  "regional": {
+    "region_km": 10.0,
+    "grid_width": 8,
+    "grid_height": 8,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": 0.11727982759475708,
+      "mean_albedo": 0.12159410119056702,
+      "p10_albedo": 0.11417640000581741,
+      "p90_albedo": 0.13190530240535736,
+      "min_albedo": 0.11168146133422852,
+      "max_albedo": 0.1377491056919098
+    },
+    "quality": {
+      "samples": 64,
+      "samples_valid": 64,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "detailed": {
+    "region_km": 5.0,
+    "grid_width": 4,
+    "grid_height": 4,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": 0.11476019024848938,
+      "mean_albedo": 0.11814481019973755,
+      "p10_albedo": 0.11300298571586609,
+      "p90_albedo": 0.129877969622612,
+      "min_albedo": 0.11168146133422852,
+      "max_albedo": 0.13140282034873962
+    },
+    "quality": {
+      "samples": 16,
+      "samples_valid": 16,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "methods": {
+    "unit": "albedo (dimensionless, I/F / cos(i) at 1.08 um, Lambertian); decoded as raw * 1.4522365285e-05 + 0.52414565669 per the PDS label",
+    "validity": "finite (NoData -32768 excluded; real albedo near 0 is valid)",
+    "statistics": "median, mean, p10, p90, min, max over valid pixels",
+    "window": "square in km; latitude/longitude half-widths from KM_PER_DEG and cos(lat)"
+  },
+  "role": "contextual_only",
+  "note": "Albedo is CONTEXTUAL INFORMATION ONLY and is NOT used in the similarity score (project plan section 6).  Similar albedo does not mean similar composition.  OMEGA NIR is not the same spectral quantity as TES bolometric albedo or Earth MODIS.",
+  "context": {
+    "region_km": 50.0,
+    "grid_width": 35,
+    "grid_height": 35,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": 0.13395151495933533,
+      "mean_albedo": 0.13340018689632416,
+      "p10_albedo": 0.11588131636381149,
+      "p90_albedo": 0.14913755655288696,
+      "min_albedo": 0.10498663783073425,
+      "max_albedo": 0.1893470585346222
+    },
+    "quality": {
+      "samples": 1224,
+      "samples_valid": 1224,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "terrain": "sand dunes",
+  "site_index": 3
+}
