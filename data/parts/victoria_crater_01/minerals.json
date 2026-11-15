@@ -1,0 +1,205 @@
+{
+  "location_id": "victoria_crater_01",
+  "category": "minerals",
+  "analysis": {
+    "scale": "detailed",
+    "width_m": 5000.0,
+    "height_m": 5000.0,
+    "center_projected_m": {
+      "x": -325802.18648498063,
+      "y": -121513.12992277773
+    },
+    "center_geographic": {
+      "lat": -2.05,
+      "lon_east": 354.5
+    },
+    "regional_window_km": 10.0,
+    "planet_radius_km": 3396.19
+  },
+  "data_status": "literature_supported",
+  "features": {
+    "dominant_mapped_class": null,
+    "mapped_classes": [],
+    "mapped_fraction": 0.0,
+    "reported_mineral_classes": [
+      {
+        "mineral_class": "hematite",
+        "spatial_scope": "victoria_crater_northwestern_outcrops_within_nominal_5km_footprint",
+        "evidence_strength": "rover_in_situ_Mossbauer_mineral_identification",
+        "evidence": "Opportunity examined Burns formation outcrops on Victoria crater's northwestern side. Arvidson et al. (2015) report that their Mossbauer spectra indicate hematite among the Fe-bearing phases. Hematite-rich spherules/concretions occur in the crater's sulfate-rich sedimentary rocks.",
+        "references": [
+          "https://doi.org/10.1002/2014JE004686",
+          "https://doi.org/10.1126/science.1170355"
+        ],
+        "instrument": "Opportunity rover Mossbauer spectrometer; supporting rover imaging",
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": true,
+        "location_basis": "named_Victoria_crater_rover_outcrops_not_georeferenced_mineral_pixels"
+      },
+      {
+        "mineral_class": "jarosite",
+        "spatial_scope": "victoria_crater_northwestern_outcrops_within_nominal_5km_footprint",
+        "evidence_strength": "rover_in_situ_Mossbauer_mineral_identification",
+        "evidence": "Arvidson et al. (2015) explicitly identify jarosite among the Fe-rich phases indicated by Opportunity Mossbauer observations of Burns formation outcrops on Victoria crater's northwestern side. This is evidence of an acid-sulfate alteration mineral, but gives no 5 km abundance or area fraction.",
+        "references": [
+          "https://doi.org/10.1002/2014JE004686",
+          "https://doi.org/10.1029/2006JE002791"
+        ],
+        "instrument": "Opportunity rover Mossbauer spectrometer",
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": true,
+        "location_basis": "named_Victoria_crater_rover_outcrops_not_georeferenced_mineral_pixels"
+      },
+      {
+        "mineral_class": "pyroxene",
+        "spatial_scope": "victoria_crater_northwestern_outcrops_within_nominal_5km_footprint",
+        "evidence_strength": "minor_component_in_rover_Mossbauer_interpretation",
+        "evidence": "Arvidson et al. (2015) list minor pyroxene among the iron-bearing phases indicated by Opportunity Mossbauer measurements of Victoria crater northwestern Burns formation outcrops. The cited data do not specify its area fraction or a site-wide concentration.",
+        "references": [
+          "https://doi.org/10.1002/2014JE004686"
+        ],
+        "instrument": "Opportunity rover Mossbauer spectrometer",
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": true,
+        "location_basis": "named_Victoria_crater_rover_outcrops_not_georeferenced_mineral_pixels"
+      },
+      {
+        "mineral_class": "kieserite",
+        "mineral_subclass": "magnesium_sulfate_monohydrate",
+        "spatial_scope": "victoria_crater_southeastern_rim_and_walls_within_nominal_5km_footprint",
+        "evidence_strength": "inferred_CRISM_hydrated_sulfate_spectral_signature_not_rover_confirmed",
+        "evidence": "Arvidson et al. (2015) interpret CRISM FRT0001C7D2 observations of wind-scoured bedrock on Victoria crater's southeastern rim/wall (near Explorer crater) as kieserite-bearing material. A ~2.129 micrometre absorption is consistent with kieserite, but features are shallow/noisy; the rover did not examine this southeastern exposure in situ.",
+        "references": [
+          "https://doi.org/10.1002/2014JE004686"
+        ],
+        "instrument": "MRO CRISM, along-track oversampled FRT0001C7D2",
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": false,
+        "evidence_location_within_5km_footprint": true,
+        "location_basis": "named_Victoria_crater_southeastern_wall_not_georeferenced_mineral_pixels"
+      }
+    ],
+    "reported_lithology_classes": [
+      {
+        "lithology_class": "sulfate_rich_sedimentary_sandstone",
+        "spatial_scope": "victoria_crater_burns_formation_outcrops",
+        "evidence_strength": "rover_in_situ_geological_and_geochemical_observations",
+        "evidence": "Opportunity studied an approximately 8 m vertical section of sulfate-rich Burns formation sandstone on Victoria crater walls. Sulfate enrichment describes the rock material; it is not a mineral-specific mapped percent.",
+        "references": [
+          "https://doi.org/10.1126/science.1170355",
+          "https://doi.org/10.1002/2014JE004686"
+        ],
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": true
+      }
+    ],
+    "regional_context_minerals_not_site_confirmed": [
+      {
+        "mineral_class": "olivine",
+        "spatial_scope": "meridiani_planum_basaltic_sands_not_verified_in_selected_5km_footprint",
+        "evidence_strength": "regional_opportunity_and_orbital_observations",
+        "evidence": "Olivine occurs in basaltic soils across Meridiani Planum, but this cited regional evidence does not establish an olivine occurrence in the exact Victoria footprint. It should not be counted as a locally confirmed class.",
+        "references": [
+          "https://doi.org/10.1029/2006JE002728",
+          "https://doi.org/10.1029/2006JE002791"
+        ],
+        "is_quantified": false,
+        "confirmed_within_5km_footprint": false
+      }
+    ],
+    "published_observations": [
+      {
+        "feature": "victoria_northwestern_wall_mossbauer_Fe_phases",
+        "location_description": "Burns formation exposed in the northwestern wall and outcrops of Victoria crater, surveyed by Opportunity",
+        "coordinate_precision": "crater_and_side_known_no_sample_polygons_clipped",
+        "within_5km_detailed_footprint": true,
+        "within_10km_regional_footprint": true,
+        "interpretation": "Rover data indicate hematite, jarosite, minor pyroxene, and an unidentified Fe(III) phase; this is a point/outcrop-scale mineral observation, not an area map.",
+        "instrument": "Opportunity Mossbauer spectrometer",
+        "source_url": "https://doi.org/10.1002/2014JE004686"
+      },
+      {
+        "feature": "victoria_southeast_wall_kieserite_candidate",
+        "location_description": "Wind-scoured southeastern Victoria crater rim/wall near Explorer crater",
+        "coordinate_precision": "crater_wall_segment_known_not_georeferenced_for_polygon_intersection",
+        "within_5km_detailed_footprint": true,
+        "within_10km_regional_footprint": true,
+        "interpretation": "CRISM ~2.129 um absorption is interpreted as kieserite; a ~1.94 um feature suggests an additional unresolved hydrated phase. These are spectral inferences, not in-situ identifications or abundance maps.",
+        "instrument": "MRO CRISM FRT0001C7D2",
+        "source_url": "https://doi.org/10.1002/2014JE004686"
+      }
+    ],
+    "spectral_caveats": [
+      {
+        "class": "gypsum",
+        "interpretation": "Arvidson et al. (2015) report pervasive gypsum signature at Botany Bay in Endeavour crater, NOT at Victoria. Do not transfer that detection to Victoria.",
+        "classification": "not_accepted_as_victoria_detection",
+        "reference": "https://doi.org/10.1002/2014JE004686"
+      },
+      {
+        "class": "unidentified_hydrated_phase",
+        "interpretation": "An approximately 1.94 um absorption at southeastern Victoria indicates hydration but is insufficient to identify a unique mineral species.",
+        "classification": "spectral_hydration_evidence_no_species_identification",
+        "reference": "https://doi.org/10.1002/2014JE004686"
+      }
+    ]
+  },
+  "quality": {
+    "coverage_fraction": 0.0,
+    "flags": [
+      "literature_based_local_rover_and_orbital_observations_not_spatial_mineral_class_mapping",
+      "rover_minerals_detected_at_selected_crater_but_not_mapped_over_5km_area",
+      "CRISM_kieserite_is_inferred_not_in_situ_confirmed",
+      "mineral_class_area_is_not_mineral_abundance",
+      "no_quantitative_mineral_map_coverage",
+      "global_USGS_geology_coarse_vs_local_sulfate_outcrops",
+      "exclude_from_stage2_quantitative_similarity_until_compatible_map_available"
+    ],
+    "intersecting_source_polygons": 0,
+    "stage2_quantitative_scoring_eligible": false
+  },
+  "source": {
+    "dataset": "Opportunity rover in-situ mineralogy and MRO CRISM observations of Victoria crater",
+    "url": "https://doi.org/10.1002/2014JE004686",
+    "references": [
+      {
+        "authors": "Arvidson et al.",
+        "year": 2015,
+        "title": "Mars Reconnaissance Orbiter and Opportunity observations of the Burns formation: Crater hopping at Meridiani Planum",
+        "url": "https://doi.org/10.1002/2014JE004686",
+        "role": "Primary Victoria-specific rover Fe-mineral observations and CRISM kieserite inference on crater walls"
+      },
+      {
+        "authors": "Squyres et al.",
+        "year": 2009,
+        "title": "Exploration of Victoria Crater by the Mars Rover Opportunity",
+        "url": "https://doi.org/10.1126/science.1170355",
+        "role": "Opportunity exploration of sulfate-rich Victoria Crater stratigraphy and hematite concretions"
+      },
+      {
+        "authors": "Morris et al.",
+        "year": 2006,
+        "title": "Mossbauer mineralogy of rock, soil, and dust at Meridiani Planum, Mars: Opportunity's journey across sulfate-rich outcrop, basaltic sand and dust, and hematite lag deposits",
+        "url": "https://doi.org/10.1029/2006JE002791",
+        "role": "Regional Burns formation Mossbauer Fe mineral framework, not a separate Victoria site map"
+      },
+      {
+        "authors": "Arvidson et al.",
+        "year": 2006,
+        "title": "Nature and origin of the hematite-bearing plains of Terra Meridiani based on analyses of orbital and Mars Exploration rover data sets",
+        "url": "https://doi.org/10.1029/2006JE002728",
+        "role": "Regional Meridiani basaltic soils and olivine context only"
+      }
+    ],
+    "type": "peer_reviewed_rover_mineral_observations_and_orbital_spectral_interpretation",
+    "instrument": "MER Opportunity Mossbauer and APXS; MRO CRISM with HiRISE context",
+    "map_product_used": false
+  },
+  "methods": {
+    "area": "No georeferenced mineral polygons or mineral abundance rasters were intersected with the 5 km footprint. mapped_fraction=0 indicates no mineral map coverage, NOT absence of the minerals.",
+    "literature_extraction": "Mineral classes are taken from published Victoria-crater-specific Opportunity measurements and CRISM spectra. Rover-measured phases are distinguished from orbital mineral inferences and Meridiani-wide context.",
+    "location_test": "Victoria crater is at the fixed -2.05 N, 354.5 E analysis center; its ~0.8 km rim/walls and Opportunity investigation are within the nominal 5 km square. Localities are crater-associated, but no individual measurement coordinate or map polygon was overlaid on the square.",
+    "caveat": "Presence in individual crater outcrops does not imply uniform occurrence throughout the 5 km region. Do not infer mineral concentrations, area percentages, or generalized Mars-Earth similarity from these observations. Kieserite remains a spectral interpretation.",
+    "stage2_scoring": "Context only. Do not calculate Earth-Mars mineral-similarity scores from this qualitative profile; wait for compatible Earth and Mars spatial mineral maps."
+  }
+}
