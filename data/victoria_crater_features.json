@@ -1,0 +1,91 @@
+{
+  "id": "victoria_crater_01",
+  "name": "Victoria Crater",
+  "source_dem": "megt00n270hb.img",
+  "source_crs_wkt": "PROJCS[\"Mars_Victoria_Crater_local_EQC\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",-2.05],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "source_pixel_size_m": [
+    462.787,
+    463.084
+  ],
+  "center_projected_m": {
+    "x": -325802.18648498063,
+    "y": -121513.12992277773
+  },
+  "center_geographic": {
+    "lat": -2.05,
+    "lon_east": 354.5
+  },
+  "coordinate_source": "Shared TI/albedo center -2.05N, -5.5E (354.5E)",
+  "regional": {
+    "features": {
+      "median_slope_deg": 0.22314916613256108,
+      "steep_fraction": 0.0,
+      "relief_m": 19.0,
+      "roughness_m": 3.4879020658366917
+    },
+    "additional_features": {
+      "mean_slope_deg": 0.317975626441122,
+      "slope_p90_deg": 0.6188627714149161,
+      "flat_fraction": 1.0,
+      "elevation_std_m": 7.46523460473639,
+      "roughness_100m_m": 0.00017209196316142846,
+      "roughness_500m_m": 2.0959363135299665
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 462
+    },
+    "region_km": 10.0,
+    "grid_width": 22,
+    "grid_height": 21,
+    "effective_pixel_size_m": [
+      462.787,
+      463.084
+    ],
+    "source_dem": "megt00n270hb.img",
+    "quality_note": "MOLA ~460 m pixels cannot resolve Victoria Crater walls/rim (~800 m diameter)."
+  },
+  "detailed": {
+    "features": {
+      "median_slope_deg": 0.3332471279099392,
+      "steep_fraction": 0.0,
+      "relief_m": 18.09999999999991,
+      "roughness_m": 5.811158823422534
+    },
+    "additional_features": {
+      "mean_slope_deg": 0.5306137453157256,
+      "slope_p90_deg": 0.9988281853572878,
+      "flat_fraction": 1.0,
+      "elevation_std_m": 7.813317725799811,
+      "roughness_100m_m": 0.00033578280514649057,
+      "roughness_500m_m": 3.9416994140043795
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 110
+    },
+    "region_km": 5.0,
+    "grid_width": 10,
+    "grid_height": 11,
+    "effective_pixel_size_m": [
+      462.787,
+      463.084
+    ],
+    "source_dem": "megt00n270hb.img",
+    "quality_note": "MOLA ~460 m pixels cannot resolve Victoria Crater walls/rim (~800 m diameter)."
+  },
+  "methods": {
+    "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+    "steep_fraction": "fraction of slope samples greater than 15 degrees",
+    "relief": "elevation percentile 95 minus percentile 5, in metres",
+    "roughness_m": "SD of elevation minus valid-weighted Gaussian-smoothed elevation; sigma=1000 m, matching mars_prep.py",
+    "resampling": "10km and 5km: native MOLA (~460m) only",
+    "nodata": "HiRISE raster mask plus extreme missing values; MOLA -32768 masked",
+    "native_source_grid": "MOLA 0N-44S, 270E-360E, big-endian signed int16; 128 pixels/degree",
+    "resolution_limit": "Both windows are MOLA ~460m; Victoria crater walls/rim unresolved, NOT 30m terrain",
+    "source_dem_crs_wkt": null,
+    "site_metric_crs_note": "source_crs_wkt is the shared Mars site-analysis EQC CRS used for geometry, not the HiRISE source projection."
+  }
+}

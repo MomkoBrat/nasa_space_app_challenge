@@ -1,0 +1,657 @@
+{
+  "location_id": "victoria_crater_01",
+  "name": "Victoria Crater",
+  "center_geographic": {
+    "lat": -2.05,
+    "lon_east": 354.5
+  },
+  "terrain": {
+    "id": "victoria_crater_01",
+    "name": "Victoria Crater",
+    "source_dem": "megt00n270hb.img",
+    "source_crs_wkt": "PROJCS[\"Mars_Victoria_Crater_local_EQC\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",-2.05],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "source_pixel_size_m": [
+      462.787,
+      463.084
+    ],
+    "center_projected_m": {
+      "x": -325802.18648498063,
+      "y": -121513.12992277773
+    },
+    "center_geographic": {
+      "lat": -2.05,
+      "lon_east": 354.5
+    },
+    "coordinate_source": "Shared TI/albedo center -2.05N, -5.5E (354.5E)",
+    "regional": {
+      "features": {
+        "median_slope_deg": 0.22314916613256108,
+        "steep_fraction": 0.0,
+        "relief_m": 19.0,
+        "roughness_m": 3.4879020658366917
+      },
+      "additional_features": {
+        "mean_slope_deg": 0.317975626441122,
+        "slope_p90_deg": 0.6188627714149161,
+        "flat_fraction": 1.0,
+        "elevation_std_m": 7.46523460473639,
+        "roughness_100m_m": 0.00017209196316142846,
+        "roughness_500m_m": 2.0959363135299665
+      },
+      "quality": {
+        "valid_fraction_resampled": 1.0,
+        "valid_slope_fraction_resampled": 1.0,
+        "samples": 462
+      },
+      "region_km": 10.0,
+      "grid_width": 22,
+      "grid_height": 21,
+      "effective_pixel_size_m": [
+        462.787,
+        463.084
+      ],
+      "source_dem": "megt00n270hb.img",
+      "quality_note": "MOLA ~460 m pixels cannot resolve Victoria Crater walls/rim (~800 m diameter)."
+    },
+    "detailed": {
+      "features": {
+        "median_slope_deg": 0.3332471279099392,
+        "steep_fraction": 0.0,
+        "relief_m": 18.09999999999991,
+        "roughness_m": 5.811158823422534
+      },
+      "additional_features": {
+        "mean_slope_deg": 0.5306137453157256,
+        "slope_p90_deg": 0.9988281853572878,
+        "flat_fraction": 1.0,
+        "elevation_std_m": 7.813317725799811,
+        "roughness_100m_m": 0.00033578280514649057,
+        "roughness_500m_m": 3.9416994140043795
+      },
+      "quality": {
+        "valid_fraction_resampled": 1.0,
+        "valid_slope_fraction_resampled": 1.0,
+        "samples": 110
+      },
+      "region_km": 5.0,
+      "grid_width": 10,
+      "grid_height": 11,
+      "effective_pixel_size_m": [
+        462.787,
+        463.084
+      ],
+      "source_dem": "megt00n270hb.img",
+      "quality_note": "MOLA ~460 m pixels cannot resolve Victoria Crater walls/rim (~800 m diameter)."
+    },
+    "methods": {
+      "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+      "steep_fraction": "fraction of slope samples greater than 15 degrees",
+      "relief": "elevation percentile 95 minus percentile 5, in metres",
+      "roughness_m": "SD of elevation minus valid-weighted Gaussian-smoothed elevation; sigma=1000 m, matching mars_prep.py",
+      "resampling": "10km and 5km: native MOLA (~460m) only",
+      "nodata": "HiRISE raster mask plus extreme missing values; MOLA -32768 masked",
+      "native_source_grid": "MOLA 0N-44S, 270E-360E, big-endian signed int16; 128 pixels/degree",
+      "resolution_limit": "Both windows are MOLA ~460m; Victoria crater walls/rim unresolved, NOT 30m terrain",
+      "source_dem_crs_wkt": null,
+      "site_metric_crs_note": "source_crs_wkt is the shared Mars site-analysis EQC CRS used for geometry, not the HiRISE source projection."
+    }
+  },
+  "modules": {
+    "geology": {
+      "location_id": "victoria_crater_01",
+      "category": "geology",
+      "analysis": {
+        "scale": "detailed",
+        "width_m": 5000.0,
+        "height_m": 5000.0,
+        "center_projected_m": {
+          "x": -325802.18648498063,
+          "y": -121513.12992277773
+        }
+      },
+      "data_status": "processed",
+      "features": {
+        "dominant_unit": "Hesperian and Noachian highland undivided unit",
+        "mapped_units": [
+          {
+            "unit_code": "HNhu",
+            "name": "Hesperian and Noachian highland undivided unit",
+            "fraction_of_region": 1.0
+          }
+        ],
+        "mapped_fraction": 1.0
+      },
+      "quality": {
+        "coverage_fraction": 1.0,
+        "flags": [
+          "global_geologic_map_coarse_1_to_20_million",
+          "not_equivalent_to_local_geologic_mapping"
+        ]
+      },
+      "source": {
+        "dataset": "USGS SIM 3292 Global Geologic Map of Mars (Tanaka et al., 2014)",
+        "url": "https://doi.org/10.3133/sim3292",
+        "feature_service": "https://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/Mars_Geology_feature_layer/FeatureServer/0",
+        "map_scale": "1:20,000,000",
+        "type": "broad_geologic_unit_interpretation"
+      },
+      "methods": {
+        "area": "USGS Mars geological polygons transformed to the site metric CRS; clipped to the footprint; area fraction computed",
+        "caveat": "Global geology cannot resolve crater ejecta, exposed strata, and small-scale lithologic variations at 5km scale. Do not equate global USGS codes with detailed local Victoria Crater geological units."
+      }
+    },
+    "minerals": {
+      "location_id": "victoria_crater_01",
+      "category": "minerals",
+      "analysis": {
+        "scale": "detailed",
+        "width_m": 5000.0,
+        "height_m": 5000.0,
+        "center_projected_m": {
+          "x": -325802.18648498063,
+          "y": -121513.12992277773
+        },
+        "center_geographic": {
+          "lat": -2.05,
+          "lon_east": 354.5
+        },
+        "regional_window_km": 10.0,
+        "planet_radius_km": 3396.19
+      },
+      "data_status": "literature_supported",
+      "features": {
+        "dominant_mapped_class": null,
+        "mapped_classes": [],
+        "mapped_fraction": 0.0,
+        "reported_mineral_classes": [
+          {
+            "mineral_class": "hematite",
+            "spatial_scope": "victoria_crater_northwestern_outcrops_within_nominal_5km_footprint",
+            "evidence_strength": "rover_in_situ_Mossbauer_mineral_identification",
+            "evidence": "Opportunity examined Burns formation outcrops on Victoria crater's northwestern side. Arvidson et al. (2015) report that their Mossbauer spectra indicate hematite among the Fe-bearing phases. Hematite-rich spherules/concretions occur in the crater's sulfate-rich sedimentary rocks.",
+            "references": [
+              "https://doi.org/10.1002/2014JE004686",
+              "https://doi.org/10.1126/science.1170355"
+            ],
+            "instrument": "Opportunity rover Mossbauer spectrometer; supporting rover imaging",
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": true,
+            "location_basis": "named_Victoria_crater_rover_outcrops_not_georeferenced_mineral_pixels"
+          },
+          {
+            "mineral_class": "jarosite",
+            "spatial_scope": "victoria_crater_northwestern_outcrops_within_nominal_5km_footprint",
+            "evidence_strength": "rover_in_situ_Mossbauer_mineral_identification",
+            "evidence": "Arvidson et al. (2015) explicitly identify jarosite among the Fe-rich phases indicated by Opportunity Mossbauer observations of Burns formation outcrops on Victoria crater's northwestern side. This is evidence of an acid-sulfate alteration mineral, but gives no 5 km abundance or area fraction.",
+            "references": [
+              "https://doi.org/10.1002/2014JE004686",
+              "https://doi.org/10.1029/2006JE002791"
+            ],
+            "instrument": "Opportunity rover Mossbauer spectrometer",
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": true,
+            "location_basis": "named_Victoria_crater_rover_outcrops_not_georeferenced_mineral_pixels"
+          },
+          {
+            "mineral_class": "pyroxene",
+            "spatial_scope": "victoria_crater_northwestern_outcrops_within_nominal_5km_footprint",
+            "evidence_strength": "minor_component_in_rover_Mossbauer_interpretation",
+            "evidence": "Arvidson et al. (2015) list minor pyroxene among the iron-bearing phases indicated by Opportunity Mossbauer measurements of Victoria crater northwestern Burns formation outcrops. The cited data do not specify its area fraction or a site-wide concentration.",
+            "references": [
+              "https://doi.org/10.1002/2014JE004686"
+            ],
+            "instrument": "Opportunity rover Mossbauer spectrometer",
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": true,
+            "location_basis": "named_Victoria_crater_rover_outcrops_not_georeferenced_mineral_pixels"
+          },
+          {
+            "mineral_class": "kieserite",
+            "mineral_subclass": "magnesium_sulfate_monohydrate",
+            "spatial_scope": "victoria_crater_southeastern_rim_and_walls_within_nominal_5km_footprint",
+            "evidence_strength": "inferred_CRISM_hydrated_sulfate_spectral_signature_not_rover_confirmed",
+            "evidence": "Arvidson et al. (2015) interpret CRISM FRT0001C7D2 observations of wind-scoured bedrock on Victoria crater's southeastern rim/wall (near Explorer crater) as kieserite-bearing material. A ~2.129 micrometre absorption is consistent with kieserite, but features are shallow/noisy; the rover did not examine this southeastern exposure in situ.",
+            "references": [
+              "https://doi.org/10.1002/2014JE004686"
+            ],
+            "instrument": "MRO CRISM, along-track oversampled FRT0001C7D2",
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": false,
+            "evidence_location_within_5km_footprint": true,
+            "location_basis": "named_Victoria_crater_southeastern_wall_not_georeferenced_mineral_pixels"
+          }
+        ],
+        "reported_lithology_classes": [
+          {
+            "lithology_class": "sulfate_rich_sedimentary_sandstone",
+            "spatial_scope": "victoria_crater_burns_formation_outcrops",
+            "evidence_strength": "rover_in_situ_geological_and_geochemical_observations",
+            "evidence": "Opportunity studied an approximately 8 m vertical section of sulfate-rich Burns formation sandstone on Victoria crater walls. Sulfate enrichment describes the rock material; it is not a mineral-specific mapped percent.",
+            "references": [
+              "https://doi.org/10.1126/science.1170355",
+              "https://doi.org/10.1002/2014JE004686"
+            ],
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": true
+          }
+        ],
+        "regional_context_minerals_not_site_confirmed": [
+          {
+            "mineral_class": "olivine",
+            "spatial_scope": "meridiani_planum_basaltic_sands_not_verified_in_selected_5km_footprint",
+            "evidence_strength": "regional_opportunity_and_orbital_observations",
+            "evidence": "Olivine occurs in basaltic soils across Meridiani Planum, but this cited regional evidence does not establish an olivine occurrence in the exact Victoria footprint. It should not be counted as a locally confirmed class.",
+            "references": [
+              "https://doi.org/10.1029/2006JE002728",
+              "https://doi.org/10.1029/2006JE002791"
+            ],
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": false
+          }
+        ],
+        "published_observations": [
+          {
+            "feature": "victoria_northwestern_wall_mossbauer_Fe_phases",
+            "location_description": "Burns formation exposed in the northwestern wall and outcrops of Victoria crater, surveyed by Opportunity",
+            "coordinate_precision": "crater_and_side_known_no_sample_polygons_clipped",
+            "within_5km_detailed_footprint": true,
+            "within_10km_regional_footprint": true,
+            "interpretation": "Rover data indicate hematite, jarosite, minor pyroxene, and an unidentified Fe(III) phase; this is a point/outcrop-scale mineral observation, not an area map.",
+            "instrument": "Opportunity Mossbauer spectrometer",
+            "source_url": "https://doi.org/10.1002/2014JE004686"
+          },
+          {
+            "feature": "victoria_southeast_wall_kieserite_candidate",
+            "location_description": "Wind-scoured southeastern Victoria crater rim/wall near Explorer crater",
+            "coordinate_precision": "crater_wall_segment_known_not_georeferenced_for_polygon_intersection",
+            "within_5km_detailed_footprint": true,
+            "within_10km_regional_footprint": true,
+            "interpretation": "CRISM ~2.129 um absorption is interpreted as kieserite; a ~1.94 um feature suggests an additional unresolved hydrated phase. These are spectral inferences, not in-situ identifications or abundance maps.",
+            "instrument": "MRO CRISM FRT0001C7D2",
+            "source_url": "https://doi.org/10.1002/2014JE004686"
+          }
+        ],
+        "spectral_caveats": [
+          {
+            "class": "gypsum",
+            "interpretation": "Arvidson et al. (2015) report pervasive gypsum signature at Botany Bay in Endeavour crater, NOT at Victoria. Do not transfer that detection to Victoria.",
+            "classification": "not_accepted_as_victoria_detection",
+            "reference": "https://doi.org/10.1002/2014JE004686"
+          },
+          {
+            "class": "unidentified_hydrated_phase",
+            "interpretation": "An approximately 1.94 um absorption at southeastern Victoria indicates hydration but is insufficient to identify a unique mineral species.",
+            "classification": "spectral_hydration_evidence_no_species_identification",
+            "reference": "https://doi.org/10.1002/2014JE004686"
+          }
+        ]
+      },
+      "quality": {
+        "coverage_fraction": 0.0,
+        "flags": [
+          "literature_based_local_rover_and_orbital_observations_not_spatial_mineral_class_mapping",
+          "rover_minerals_detected_at_selected_crater_but_not_mapped_over_5km_area",
+          "CRISM_kieserite_is_inferred_not_in_situ_confirmed",
+          "mineral_class_area_is_not_mineral_abundance",
+          "no_quantitative_mineral_map_coverage",
+          "global_USGS_geology_coarse_vs_local_sulfate_outcrops",
+          "exclude_from_stage2_quantitative_similarity_until_compatible_map_available"
+        ],
+        "intersecting_source_polygons": 0,
+        "stage2_quantitative_scoring_eligible": false
+      },
+      "source": {
+        "dataset": "Opportunity rover in-situ mineralogy and MRO CRISM observations of Victoria crater",
+        "url": "https://doi.org/10.1002/2014JE004686",
+        "references": [
+          {
+            "authors": "Arvidson et al.",
+            "year": 2015,
+            "title": "Mars Reconnaissance Orbiter and Opportunity observations of the Burns formation: Crater hopping at Meridiani Planum",
+            "url": "https://doi.org/10.1002/2014JE004686",
+            "role": "Primary Victoria-specific rover Fe-mineral observations and CRISM kieserite inference on crater walls"
+          },
+          {
+            "authors": "Squyres et al.",
+            "year": 2009,
+            "title": "Exploration of Victoria Crater by the Mars Rover Opportunity",
+            "url": "https://doi.org/10.1126/science.1170355",
+            "role": "Opportunity exploration of sulfate-rich Victoria Crater stratigraphy and hematite concretions"
+          },
+          {
+            "authors": "Morris et al.",
+            "year": 2006,
+            "title": "Mossbauer mineralogy of rock, soil, and dust at Meridiani Planum, Mars: Opportunity's journey across sulfate-rich outcrop, basaltic sand and dust, and hematite lag deposits",
+            "url": "https://doi.org/10.1029/2006JE002791",
+            "role": "Regional Burns formation Mossbauer Fe mineral framework, not a separate Victoria site map"
+          },
+          {
+            "authors": "Arvidson et al.",
+            "year": 2006,
+            "title": "Nature and origin of the hematite-bearing plains of Terra Meridiani based on analyses of orbital and Mars Exploration rover data sets",
+            "url": "https://doi.org/10.1029/2006JE002728",
+            "role": "Regional Meridiani basaltic soils and olivine context only"
+          }
+        ],
+        "type": "peer_reviewed_rover_mineral_observations_and_orbital_spectral_interpretation",
+        "instrument": "MER Opportunity Mossbauer and APXS; MRO CRISM with HiRISE context",
+        "map_product_used": false
+      },
+      "methods": {
+        "area": "No georeferenced mineral polygons or mineral abundance rasters were intersected with the 5 km footprint. mapped_fraction=0 indicates no mineral map coverage, NOT absence of the minerals.",
+        "literature_extraction": "Mineral classes are taken from published Victoria-crater-specific Opportunity measurements and CRISM spectra. Rover-measured phases are distinguished from orbital mineral inferences and Meridiani-wide context.",
+        "location_test": "Victoria crater is at the fixed -2.05 N, 354.5 E analysis center; its ~0.8 km rim/walls and Opportunity investigation are within the nominal 5 km square. Localities are crater-associated, but no individual measurement coordinate or map polygon was overlaid on the square.",
+        "caveat": "Presence in individual crater outcrops does not imply uniform occurrence throughout the 5 km region. Do not infer mineral concentrations, area percentages, or generalized Mars-Earth similarity from these observations. Kieserite remains a spectral interpretation.",
+        "stage2_scoring": "Context only. Do not calculate Earth-Mars mineral-similarity scores from this qualitative profile; wait for compatible Earth and Mars spatial mineral maps."
+      }
+    },
+    "thermal": {
+      "location_id": "victoria_crater_01",
+      "category": "thermal",
+      "data_status": "processed",
+      "features": {
+        "median_ti": 161.5,
+        "mean_ti": 160.5,
+        "p10_ti": 154.4,
+        "p90_ti": 165.8,
+        "min_ti": 152.0,
+        "max_ti": 167.0
+      },
+      "analysis": {
+        "center_geographic": {
+          "lat": -2.05,
+          "lon_east": 354.5
+        },
+        "source_center_geographic": {
+          "lat": -2.05,
+          "lon_east": 354.5
+        },
+        "source_center_distance_km": 0.0,
+        "source_resolution_m": 2963.6,
+        "measurement_type": "coarse_satellite_context"
+      },
+      "quality": {
+        "detailed_valid_fraction": 1.0,
+        "flags": [
+          "coarse_resolution",
+          "not_used_in_default_terrain_similarity",
+          "requires_comparable_earth_thermal_data_for_stage2"
+        ]
+      },
+      "source": {
+        "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+        "original_source_id": "victoria_crater",
+        "source_file": "global_ti_day_2007.img",
+        "source_mask_file": "global_ti_msk_day_2007.img",
+        "unit": "thermal inertia, J m^-2 K^-1 s^-0.5 (tiu); raw int16 used as-is",
+        "original_role": "quantitative_feature",
+        "input_json": "data/ti/victoria_crater_ti.json",
+        "role": "conditional_quantitative_context"
+      },
+      "scoring_eligible": false,
+      "regional": {
+        "region_km": 10.0,
+        "grid_width": 4,
+        "grid_height": 4,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 161.5,
+          "mean_ti": 159.625,
+          "p10_ti": 147.5,
+          "p90_ti": 168.0,
+          "min_ti": 140.0,
+          "max_ti": 185.0
+        },
+        "quality": {
+          "samples": 16,
+          "samples_valid": 16,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "quantitative_feature",
+        "data_status": "processed"
+      },
+      "detailed": {
+        "region_km": 5.0,
+        "grid_width": 3,
+        "grid_height": 3,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 161.5,
+          "mean_ti": 160.5,
+          "p10_ti": 154.4,
+          "p90_ti": 165.8,
+          "min_ti": 152.0,
+          "max_ti": 167.0
+        },
+        "quality": {
+          "samples": 4,
+          "samples_valid": 4,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "quantitative_feature",
+        "data_status": "processed"
+      },
+      "context": {
+        "region_km": 50.0,
+        "grid_width": 18,
+        "grid_height": 18,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 141.0,
+          "mean_ti": 142.1826625386997,
+          "p10_ti": 112.0,
+          "p90_ti": 173.8,
+          "min_ti": 91.0,
+          "max_ti": 207.0
+        },
+        "quality": {
+          "samples": 324,
+          "samples_valid": 323,
+          "valid_fraction": 0.997,
+          "status": "ok"
+        },
+        "role": "quantitative_feature",
+        "data_status": "processed"
+      }
+    },
+    "albedo": {
+      "location_id": "victoria_crater_01",
+      "category": "albedo",
+      "data_status": "processed",
+      "features": {
+        "median_albedo": 0.20681747794151306,
+        "mean_albedo": 0.20615488290786743,
+        "p10_albedo": 0.19877207279205322,
+        "p90_albedo": 0.212343230843544,
+        "min_albedo": 0.1943572759628296,
+        "max_albedo": 0.21490642428398132
+      },
+      "analysis": {
+        "center_geographic": {
+          "lat": -2.05,
+          "lon_east": 354.5
+        },
+        "source_center_geographic": {
+          "lat": -2.05,
+          "lon_east": 354.5
+        },
+        "source_center_distance_km": 0.0,
+        "source_resolution_m": 1481.8,
+        "measurement_type": "coarse_satellite_context"
+      },
+      "quality": {
+        "detailed_valid_fraction": 1.0,
+        "flags": [
+          "coarse_resolution",
+          "not_used_in_default_terrain_similarity",
+          "nir_albedo_not_directly_equivalent_to_earth_broadband_albedo"
+        ]
+      },
+      "source": {
+        "dataset": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+        "original_source_id": "victoria_crater",
+        "source_file": "ALBEDO_R1080_EQU_MAP.tiff",
+        "source_mask_file": null,
+        "unit": "albedo (dimensionless, I/F / cos(i) at 1.08 um, Lambertian); decoded as raw * 1.4522365285e-05 + 0.52414565669 per the PDS label",
+        "original_role": "contextual_only",
+        "input_json": "data/albedo/victoria_crater_albedo.json",
+        "role": "contextual_only"
+      },
+      "scoring_eligible": false,
+      "regional": {
+        "region_km": 10.0,
+        "grid_width": 8,
+        "grid_height": 8,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.20643988251686096,
+          "mean_albedo": 0.2058088481426239,
+          "p10_albedo": 0.1972457766532898,
+          "p90_albedo": 0.21248699724674225,
+          "min_albedo": 0.19380542635917664,
+          "max_albedo": 0.21490642428398132
+        },
+        "quality": {
+          "samples": 64,
+          "samples_valid": 64,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "contextual_only",
+        "data_status": "processed"
+      },
+      "detailed": {
+        "region_km": 5.0,
+        "grid_width": 4,
+        "grid_height": 4,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.20681747794151306,
+          "mean_albedo": 0.20615488290786743,
+          "p10_albedo": 0.19877207279205322,
+          "p90_albedo": 0.212343230843544,
+          "min_albedo": 0.1943572759628296,
+          "max_albedo": 0.21490642428398132
+        },
+        "quality": {
+          "samples": 16,
+          "samples_valid": 16,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "contextual_only",
+        "data_status": "processed"
+      },
+      "context": {
+        "region_km": 50.0,
+        "grid_width": 35,
+        "grid_height": 35,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.21036092936992645,
+          "mean_albedo": 0.20966172218322754,
+          "p10_albedo": 0.18597787618637085,
+          "p90_albedo": 0.23352409899234772,
+          "min_albedo": 0.15230050683021545,
+          "max_albedo": 0.26695457100868225
+        },
+        "quality": {
+          "samples": 1156,
+          "samples_valid": 1156,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "contextual_only",
+        "data_status": "processed"
+      }
+    },
+    "wind": {
+      "location_id": "victoria_crater_01",
+      "category": "wind",
+      "data_status": "processed_regional_context",
+      "features": {
+        "mean_wind_speed_ms": 2.948592107990314,
+        "p95_wind_speed_ms": 6.688021421773132,
+        "wind_speed_std_ms": 2.0014888470736936,
+        "prevailing_wind_direction_deg": 138.64470598840805,
+        "mean_surface_pressure_pa": 621.0059151543511
+      },
+      "analysis": {
+        "requested_center": {
+          "lat": -2.05,
+          "lon_east": 354.5
+        },
+        "source_reference_center": {
+          "lat": -2.1,
+          "lon_east": 354.5
+        },
+        "distance_from_site_km": 2.964,
+        "measurement_type": "regional_modeled_atmospheric_context"
+      },
+      "quality": {
+        "sample_count": 1440,
+        "valid_wind_samples": 1440,
+        "valid_pressure_samples": 1440,
+        "flags": [
+          "model_not_direct_observation",
+          "source_model_grid_point_not_confirmed",
+          "sampled_periods_not_full_martian_year",
+          "not_used_in_any_similarity_score",
+          "source_reference_differs_from_site"
+        ]
+      },
+      "source": {
+        "dataset": "MACDA v2.0",
+        "source_location_id": "victoria_crater",
+        "data_type": "modeled atmospheric reanalysis",
+        "coordinate_quality": "approximate_reference",
+        "sampled_period_count": 4,
+        "mars_years_sampled": [
+          25
+        ],
+        "wind_height_note": "Lowest model sigma level; not necessarily 10 m above ground",
+        "sampling_note": "Combined statistics across 4 downloaded MACDA periods; only sampled portions of the Martian year are covered, not a full-year average.",
+        "input_json": "data/atmosphere/victoria_crater.json"
+      },
+      "scoring_eligible": false
+    }
+  },
+  "missing_modules": [],
+  "invalid_modules": [],
+  "similarity_readiness": {
+    "stage_1_terrain": true,
+    "stage_2_surface_material": false,
+    "stage_2_geology": false,
+    "stage_2_minerals": false,
+    "note": "Stage 2 requires comparable Earth satellite/material datasets and common classification schemes. Victoria has local rover mineral identifications, but no spatially mapped mineral class fractions."
+  },
+  "scientific_limitations": [
+    "Both 10 km and 5 km terrain footprints use native MOLA ~460 m resolution, insufficient to resolve Victoria Crater's ~800 m rim and walls. The downloaded HiRISE DTM was not used because it did not cover the full 5 km square.",
+    "Global USGS geological mapping (1:20,000,000) cannot resolve Victoria Crater's local Burns formation strata and rim deposits within the 5 km footprint.",
+    "Opportunity's in-situ Victoria Crater mineral detections and CRISM interpretations are point/outcrop-scale, not quantitative mineral-area maps for the whole 5 km square.",
+    "MGS/TES thermal inertia is coarse and needs a comparable Earth-side product before similarity scoring.",
+    "OMEGA near-infrared 1.08 micrometre albedo cannot be directly scored against Earth's broadband albedo.",
+    "MACDA wind and pressure are modeled atmospheric context, never part of Earth similarity scores.",
+    "Atmospheric reference coordinates are 2.96 km from Victoria terrain center; they are not confirmed model cell coordinates."
+  ]
+}
