@@ -137,11 +137,11 @@ export default function ComparisonCharts({ site, result }) {
         <div className="comparison-chart-container" role="img" aria-label="Normalized terrain features for Mars and the selected Earth analog">
           <ResponsiveContainer width="100%" height={320}>
             <BarChart data={chartData} layout="vertical" margin={{ top: 8, right: 18, left: 0, bottom: 12 }} barGap={2}>
-              <CartesianGrid stroke="#343946" strokeDasharray="3 3" horizontal={false} />
+              <CartesianGrid stroke="#504050" strokeDasharray="3 3" horizontal={false} />
               <XAxis
                 type="number"
-                stroke="#9ca3af"
-                tick={{ fill: '#b6bbc6', fontSize: 11 }}
+                stroke="#bdabbc"
+                tick={{ fill: '#cbb8c6', fontSize: 11 }}
                 tickFormatter={(value) => Number(value).toFixed(2)}
                 allowDecimals
               />
@@ -149,16 +149,16 @@ export default function ComparisonCharts({ site, result }) {
                 type="category"
                 dataKey="label"
                 width={105}
-                stroke="#9ca3af"
-                tick={{ fill: '#e5e7eb', fontSize: 11 }}
+                stroke="#bdabbc"
+                tick={{ fill: '#f7e9ed', fontSize: 11 }}
               />
               <Tooltip
                 cursor={{ fill: 'rgba(255,255,255,0.035)' }}
                 content={<RawValuesTooltip config={config} />}
               />
-              <Legend wrapperStyle={{ fontSize: 12, color: '#e5e7eb' }} />
-              <Bar dataKey="mars" name="Mars" fill="#f97316" radius={[0, 3, 3, 0]} maxBarSize={16} />
-              <Bar dataKey="earth" name="Earth" fill="#60a5fa" radius={[0, 3, 3, 0]} maxBarSize={16} />
+              <Legend wrapperStyle={{ fontSize: 12, color: '#f4e5ea' }} />
+              <Bar dataKey="mars" name="Mars" fill="#e89078" radius={[0, 3, 3, 0]} maxBarSize={16} />
+              <Bar dataKey="earth" name="Earth" fill="#79bad4" radius={[0, 3, 3, 0]} maxBarSize={16} />
             </BarChart>
           </ResponsiveContainer>
         </div>

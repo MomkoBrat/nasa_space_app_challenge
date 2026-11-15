@@ -1,109 +1,441 @@
 :root {
-  --bg: #0f1115;
-  --panel: #181b22;
-  --border: #2a2f3a;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --accent: #f97316;
-  --warn: #fbbf24;
+  --bg: #06040b;
+  --bg-deep: #090611;
+  --panel: rgba(23, 14, 25, 0.84);
+  --panel-strong: rgba(32, 18, 31, 0.94);
+  --border: rgba(205, 121, 78, 0.24);
+  --border-strong: rgba(240, 146, 94, 0.38);
+  --text: #f6ede7;
+  --muted: #c5b3bb;
+  --accent: #ff8f5b;
+  --accent-strong: #ff6b4a;
+  --accent-soft: #ffb08a;
+  --warn: #ffc56f;
+  --earth: #72b8ff;
+  --shadow: 0 18px 36px rgba(0, 0, 0, 0.34);
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   color: var(--text);
   background: var(--bg);
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); }
+html { background: var(--bg); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 14% 18%, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.4px),
+    radial-gradient(circle at 31% 64%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 52% 24%, rgba(255, 215, 200, 0.72) 0 1.2px, transparent 1.6px),
+    radial-gradient(circle at 74% 11%, rgba(255, 255, 255, 0.8) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 83% 73%, rgba(255, 255, 255, 0.85) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 93% 29%, rgba(255, 242, 232, 0.75) 0 1.1px, transparent 1.6px),
+    radial-gradient(circle at 8% 82%, rgba(255, 255, 255, 0.6) 0 0.9px, transparent 1.5px),
+    radial-gradient(circle at 66% 57%, rgba(255, 220, 198, 0.72) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 42% 90%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.5px),
+    linear-gradient(135deg, #05030a 0%, #0b0815 30%, #120816 56%, #080510 100%);
+  background-attachment: fixed;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  opacity: 0.9;
+  background:
+    radial-gradient(circle at 12% 24%, rgba(255, 113, 71, 0.13), transparent 0 20%),
+    radial-gradient(circle at 85% 18%, rgba(87, 78, 210, 0.16), transparent 0 24%),
+    radial-gradient(circle at 24% 86%, rgba(255, 134, 88, 0.09), transparent 0 18%),
+    radial-gradient(circle at 70% 72%, rgba(78, 137, 255, 0.08), transparent 0 18%),
+    radial-gradient(circle at 49% 44%, rgba(255, 121, 82, 0.06), transparent 0 32%);
+  filter: blur(12px);
+}
+
+body::after {
+  background:
+    radial-gradient(circle at 5% 14%, rgba(255, 255, 255, 0.95) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 16% 52%, rgba(255, 255, 255, 0.8) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 24% 8%, rgba(255, 225, 210, 0.85) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 35% 33%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 46% 62%, rgba(255, 243, 236, 0.86) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 58% 16%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 69% 46%, rgba(255, 230, 220, 0.85) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 77% 87%, rgba(255, 255, 255, 0.75) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 88% 38%, rgba(255, 255, 255, 0.78) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 96% 72%, rgba(255, 244, 239, 0.8) 0 1px, transparent 1.6px);
+  opacity: 0.55;
+}
+
 h1, h2 { margin: 0 0 0.5rem; }
 h2 { font-size: 1.05rem; }
 
-.app { max-width: 1400px; margin: 0 auto; padding: 1rem; }
-.app-header .subtitle { margin: 0; color: var(--muted); }
+.app {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.app-header {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  padding: 2.2rem 2.6rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(38, 17, 28, 0.9) 0%, rgba(29, 13, 30, 0.84) 40%, rgba(14, 11, 33, 0.82) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 20px 44px rgba(0, 0, 0, 0.36);
+}
+
+.app-header::before {
+  content: "PLANETARY FIELD LAB / ANALOG EXPLORATION";
+  display: inline-block;
+  margin-bottom: 0.9rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid rgba(255, 173, 120, 0.26);
+  border-radius: 999px;
+  color: var(--accent-soft);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.app-header::after {
+  content: "";
+  position: absolute;
+  right: 7%;
+  top: -16px;
+  width: 335px;
+  height: 335px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 220, 208, 0.38), transparent 0 18%),
+    radial-gradient(circle at 47% 40%, rgba(130, 69, 45, 0.26), transparent 0 10%),
+    radial-gradient(circle at 61% 58%, rgba(102, 52, 34, 0.3), transparent 0 14%),
+    radial-gradient(circle at 42% 72%, rgba(137, 73, 49, 0.25), transparent 0 12%),
+    radial-gradient(circle at 73% 31%, rgba(159, 84, 54, 0.18), transparent 0 9%),
+    radial-gradient(circle at 30% 62%, rgba(93, 47, 33, 0.18), transparent 0 10%),
+    radial-gradient(circle at 50% 52%, rgba(255, 122, 85, 0.14), transparent 0 62%),
+    radial-gradient(circle at 38% 34%, #c57d67 0%, #a15446 26%, #7a3b36 47%, #522334 67%, rgba(38, 13, 32, 0.96) 82%);
+  box-shadow:
+    -50px 30px 80px rgba(255, 114, 74, 0.08),
+    0 0 120px rgba(255, 133, 91, 0.12),
+    inset -35px -38px 60px rgba(18, 9, 16, 0.6),
+    inset 16px 16px 34px rgba(255, 214, 188, 0.12);
+  opacity: 0.95;
+}
+
+.app-header h1 {
+  position: relative;
+  z-index: 1;
+  max-width: 62%;
+  font-size: clamp(2.35rem, 5vw, 3.7rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #fff3ee;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+
+.app-header .subtitle {
+  position: relative;
+  z-index: 1;
+  margin: 0.65rem 0 0;
+  max-width: 60%;
+  color: #f0c9bc;
+  font-size: 1.08rem;
+}
+
 .app-status { padding: 2rem; text-align: center; }
 .app-status.error { color: #f87171; }
 
 .mock-banner {
-  margin: 0.75rem 0;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--warn);
-  border-radius: 6px;
+  margin: 0.95rem 0 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(255, 185, 104, 0.35);
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(83, 39, 14, 0.4), rgba(76, 37, 20, 0.2));
   color: var(--warn);
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: var(--shadow);
 }
 
 .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
 .column { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
-/* Comparison chart + limitations span both columns below the maps. */
 .comparison-row { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
 .comparison-row > * { min-width: 0; }
 @media (max-width: 900px) {
   .layout, .comparison-row { grid-template-columns: 1fr; }
+  .app-header { padding: 1.7rem 1.35rem 1.85rem; }
+  .app-header::after {
+    right: -60px;
+    top: -10px;
+    width: 240px;
+    height: 240px;
+    opacity: 0.8;
+  }
+  .app-header h1, .app-header .subtitle { max-width: 100%; }
+  .app-header .subtitle { padding-right: 7rem; }
 }
 
-.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+.panel {
+  background: linear-gradient(180deg, rgba(26, 16, 28, 0.92), rgba(15, 10, 25, 0.92));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.02);
+  backdrop-filter: blur(6px);
+}
 .warning { color: var(--warn); }
 
-/* Maps need a fixed height for Leaflet. */
-.map { height: 360px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
-/* Dark space outside the planet; the planet itself is drawn by MarsMap (fallback + MOLA tiles). */
-.mars-map .leaflet-container { background: #07080b; }
+.map {
+  height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 170, 120, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+.mars-map .leaflet-container { background: #05060a; }
 
-/* SiteInfo */
 .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
-.badge { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 999px; border: 1px solid var(--border); }
-.badge.verified { background: #14532d; border-color: #22c55e; }
-.badge.regional { background: #1e293b; }
-.badge.mock { background: #451a03; border-color: var(--warn); color: var(--warn); }
+.badge {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+.badge.verified { background: rgba(35, 83, 46, 0.48); border-color: #54d28a; }
+.badge.regional { background: rgba(27, 35, 58, 0.52); }
+.badge.mock { background: rgba(85, 43, 17, 0.55); border-color: var(--warn); color: var(--warn); }
 .badge.group { text-transform: capitalize; color: var(--muted); }
 .coords { color: var(--muted); font-size: 0.85rem; margin: 0.25rem 0; }
 .feature-table th { text-align: left; font-weight: 500; color: var(--muted); padding-right: 1rem; }
 
-/* WeightSliders */
 .presets { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
 .presets button {
-  background: #232834; color: var(--text); border: 1px solid var(--border);
-  border-radius: 6px; padding: 0.35rem 0.7rem; cursor: pointer;
+  background: rgba(44, 32, 47, 0.9);
+  color: var(--text);
+  border: 1px solid rgba(255, 165, 118, 0.12);
+  border-radius: 10px;
+  padding: 0.42rem 0.75rem;
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
 }
-.presets button:hover { border-color: var(--accent); }
-.slider-row { display: grid; grid-template-columns: 8rem 1fr 3rem; align-items: center; gap: 0.5rem; margin: 0.35rem 0; }
+.presets button:hover {
+  border-color: rgba(255, 149, 91, 0.5);
+  background: rgba(63, 40, 51, 0.98);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.22);
+}
+.slider-row { display: grid; grid-template-columns: 8rem 1fr 3rem; align-items: center; gap: 0.5rem; margin: 0.45rem 0; }
 .slider-share { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+input[type="range"] { accent-color: var(--accent-strong); }
 
-/* Temporary results table (until Person B's components land) */
-
-/* Ranked Earth pins. Numbers match the temporary results table. */
 .earth-numbered-pin-wrapper { background: none; border: none; }
 .earth-numbered-pin {
   display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px; border-radius: 50%;
-  background: #2563eb; color: #fff; border: 2px solid #fff;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #4c8dff; color: #fff; border: 2px solid rgba(255,255,255,0.95);
   font: 700 14px/1 system-ui, sans-serif;
-  box-shadow: 0 2px 7px rgb(0 0 0 / 45%);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255,255,255,0.06);
+  transition: transform 140ms ease, background 140ms ease, box-shadow 140ms ease;
 }
-/* Hover = red; the selected result (shown in the table/chart) = orange, slightly larger. */
-.earth-numbered-pin:hover {
-  background: #dc2626;
-}
+.earth-numbered-pin:hover { background: #ff5e55; transform: translateY(-1px) scale(1.03); }
 .earth-numbered-pin.selected {
   background: var(--accent);
-  transform: scale(1.2);
-  box-shadow: 0 0 0 3px rgb(249 115 22 / 45%), 0 2px 7px rgb(0 0 0 / 45%);
+  transform: scale(1.18);
+  box-shadow: 0 0 0 4px rgba(255, 143, 91, 0.24), 0 6px 18px rgba(0, 0, 0, 0.45);
 }
 
-/* Hover information for numbered Earth pins. */
 .leaflet-tooltip.earth-pin-tooltip {
-  background: #181b22;
-  border: 1px solid #444b58;
-  border-radius: 8px;
-  color: #e5e7eb;
-  padding: 0.6rem 0.8rem;
-  box-shadow: 0 4px 16px rgb(0 0 0 / 40%);
+  background: rgba(18, 14, 27, 0.96);
+  border: 1px solid rgba(255, 168, 117, 0.24);
+  border-radius: 12px;
+  color: #f7ede9;
+  padding: 0.7rem 0.85rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.34);
   line-height: 1.6;
   font-size: 0.85rem;
+  backdrop-filter: blur(6px);
 }
-.leaflet-tooltip-top.earth-pin-tooltip::before {
-  border-top-color: #181b22;
+.leaflet-tooltip-top.earth-pin-tooltip::before { border-top-color: rgba(18, 14, 27, 0.96); }
+.earth-pin-tooltip-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.2rem; color: #fff1ea; }
+
+.leaflet-control-zoom a {
+  background: rgba(25, 18, 31, 0.94) !important;
+  color: #f7e8df !important;
+  border-bottom-color: rgba(255, 169, 113, 0.16) !important;
 }
-.earth-pin-tooltip-title {
-  font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 0.2rem;
+.leaflet-control-zoom a:hover { background: rgba(49, 28, 35, 0.98) !important; color: #fff !important; }
+.leaflet-bar { border: 1px solid rgba(255, 170, 118, 0.22) !important; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26) !important; }
+
+@media (max-width: 640px) {
+  .app { padding: 0.75rem; }
+  .app-header h1 { font-size: 2rem; }
+  .mock-banner { font-size: 0.92rem; }
+}
+
+/* The actual NASA Mars disk replaces the decorative red CSS orb. */
+.app-header::after { content: none; }
+.explorer-mars-planet {
+  position: absolute;
+  z-index: 0;
+  right: 7%;
+  top: -16px;
+  width: 335px;
+  height: 335px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 50px rgba(244, 114, 82, .16));
+}
+.explorer-mars-planet img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.explorer-mars-planet::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 37% 29%, transparent 26%, rgba(11,5,18,.02) 50%, rgba(8,3,15,.48) 100%);
+  box-shadow: inset -23px -25px 36px rgba(18,5,17,.24);
+}
+.explorer-route-entering .explorer-mars-planet { opacity: 0; }
+.explorer-route-entering .app { animation: explorer-arrival 820ms ease-out both; }
+
+.mars-flight {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: visible;
+  filter: drop-shadow(0 0 40px rgba(255, 110, 76, .3));
+  transition:
+    left 1200ms cubic-bezier(.28,.05,.26,1),
+    top 1200ms cubic-bezier(.28,.05,.26,1),
+    width 1200ms cubic-bezier(.28,.05,.26,1),
+    height 1200ms cubic-bezier(.28,.05,.26,1),
+    filter 1200ms ease;
+}
+.mars-flight img { width: 100%; height: 100%; display: block; border-radius: 50%; object-fit: cover; }
+.mars-flight-moving { filter: drop-shadow(0 0 45px rgba(255, 127, 91, .13)); }
+@keyframes explorer-arrival { from { opacity: 0.2; filter: blur(3px); } to { opacity: 1; filter: blur(0); } }
+@media (max-width: 900px) {
+  .explorer-mars-planet { right: -60px; top: -10px; width: 240px; height: 240px; opacity: .85; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mars-flight { transition: none; }
+  .explorer-route-entering .app { animation: none; }
+}
+
+/* ----- Landing → explorer shared-element morph ----- */
+.explorer-mars-planet { view-transition-name: mission-mars; }
+.app-header h1 { view-transition-name: mission-heading; }
+.app-header .subtitle { view-transition-name: mission-description; }
+.mars-column { view-transition-name: mission-mars-controls; }
+.earth-column { view-transition-name: mission-earth-results; }
+.comparison-row { view-transition-name: mission-science-panels; }
+.mock-banner { view-transition-name: mission-data-status; }
+
+/* The surrounding page contracts and opens into the dashboard; panels appear
+   with depth and a gentle lift rather than abruptly popping into place. */
+::view-transition-old(root) {
+  animation: 600ms cubic-bezier(.4,0,.8,1) both mission-scene-fold;
+}
+::view-transition-new(root) {
+  animation: 1160ms cubic-bezier(.16,.85,.3,1) both mission-scene-unfold;
+}
+::view-transition-group(mission-mars) {
+  animation-duration: 1450ms;
+  animation-timing-function: cubic-bezier(.19,.7,.22,1);
+}
+::view-transition-old(mission-mars) {
+  animation: 700ms ease-in both mission-planet-old;
+}
+::view-transition-new(mission-mars) {
+  animation: 1050ms 240ms ease-out both mission-planet-new;
+}
+::view-transition-group(mission-heading),
+::view-transition-group(mission-description) {
+  animation-duration: 1120ms;
+  animation-timing-function: cubic-bezier(.2,.7,.25,1);
+}
+::view-transition-old(mission-heading),
+::view-transition-old(mission-description) {
+  animation: 570ms ease-in both mission-text-out;
+}
+::view-transition-new(mission-heading),
+::view-transition-new(mission-description) {
+  animation: 780ms 260ms ease-out both mission-text-in;
+}
+::view-transition-new(mission-mars-controls) {
+  animation: 960ms 250ms cubic-bezier(.18,.75,.22,1) both mission-panel-form;
+}
+::view-transition-new(mission-earth-results) {
+  animation: 1000ms 380ms cubic-bezier(.18,.75,.22,1) both mission-panel-form;
+}
+::view-transition-new(mission-science-panels) {
+  animation: 960ms 460ms cubic-bezier(.18,.75,.22,1) both mission-panel-form;
+}
+::view-transition-new(mission-data-status) {
+  animation: 860ms 230ms ease-out both mission-panel-form;
+}
+
+@keyframes mission-scene-fold {
+  from { opacity: 1; filter: blur(0); transform: scale(1); }
+  to { opacity: 0; filter: blur(15px); transform: scale(1.06); }
+}
+@keyframes mission-scene-unfold {
+  from { opacity: 0; filter: blur(14px); transform: scale(.955); }
+  to { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+@keyframes mission-planet-old {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes mission-planet-new {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes mission-text-out {
+  from { opacity: 1; filter: blur(0); }
+  to { opacity: 0; filter: blur(6px); }
+}
+@keyframes mission-text-in {
+  from { opacity: 0; filter: blur(6px); }
+  to { opacity: 1; filter: blur(0); }
+}
+@keyframes mission-panel-form {
+  from { opacity: 0; filter: blur(16px); transform: translateY(42px) scale(.94); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+}
+
+/* Legacy-browser flight fallback, used only where View Transitions aren't available. */
+.mars-flight { transition-duration: 1450ms; transition-timing-function: cubic-bezier(.19,.7,.22,1); }
+.explorer-route-entering .app { animation: mission-scene-unfold 1050ms ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root),
+  ::view-transition-old(mission-mars), ::view-transition-new(mission-mars),
+  ::view-transition-old(mission-heading), ::view-transition-new(mission-heading),
+  ::view-transition-old(mission-description), ::view-transition-new(mission-description),
+  ::view-transition-new(mission-mars-controls),
+  ::view-transition-new(mission-earth-results),
+  ::view-transition-new(mission-science-panels),
+  ::view-transition-new(mission-data-status) { animation: none !important; }
 }
