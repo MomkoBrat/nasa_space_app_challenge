@@ -23,17 +23,20 @@ function normalizeWeights(weights) {
   return Object.fromEntries(Object.entries(weights).map(([k, w]) => [k, w / total]));
 }
 
-export default function App() {
-  const [config, setConfig] = useState(null);
-  const [marsSites, setMarsSites] = useState([]);
-  const [earthCells, setEarthCells] = useState([]);
+export default function App({ initialData = null }) {
+  const [config, setConfig] = useState(initialData?.config ?? null);
+  const [marsSites, setMarsSites] = useState(initialData?.marsSites ?? []);
+  const [earthCells, setEarthCells] = useState(initialData?.earthCells ?? []);
   const [loadError, setLoadError] = useState(null);
 
   const [selectedSite, setSelectedSite] = useState(null);
-  const [weights, setWeights] = useState(null);
+  const [weights, setWeights] = useState(initialData?.config ? { ...initialData.config.default_weights } : null);
   const [selectedResult, setSelectedResult] = useState(null);
 
   useEffect(() => {
+    // Landing page preloads the three datasets so the FULL explorer can morph
+    // into place immediately. Direct links to #/explore still load normally.
+    if (initialData) return;
     Promise.all([
       loadJson('/data/mars_cells.json'),
       loadJson('/data/earth_cells.json'),
@@ -46,7 +49,7 @@ export default function App() {
         setWeights({ ...cfg.default_weights });
       })
       .catch((err) => setLoadError(err.message));
-  }, []);
+  }, [initialData]);
 
   // A new site invalidates the selected result.
   useEffect(() => setSelectedResult(null), [selectedSite]);
@@ -65,13 +68,6 @@ export default function App() {
     }).map((r, i) => ({ ...r, rank: i + 1 }));
   }, [selectedSite, earthCells, weights, config]);
 
-  if (loadError) {
-    return <div className="app-status error">Could not load data: {loadError}</div>;
-  }
-  if (!config) {
-    return <div className="app-status">Loading terrain data…</div>;
-  }
-
   const usingMock =
     marsSites.some((s) => s.quality?.data_status === 'mock') ||
     earthCells.some((c) => c.quality?.data_status === 'mock');
@@ -86,6 +82,12 @@ export default function App() {
         <p className="subtitle">Rover mobility &amp; surface testing — terrain-only matching</p>
       </header>
 
+      {loadError ? (
+        <div className="app-status error">Could not load data: {loadError}</div>
+      ) : !config ? (
+        <div className="app-status">Loading terrain data…</div>
+      ) : (
+        <>
       {usingMock && (
         <div className="mock-banner">
           MOCK DATA — values on this page are invented for development and are not NASA measurements.
@@ -120,6 +122,8 @@ export default function App() {
           <LimitationsPanel site={selectedSite} result={selectedResult} />
         </div>
       </main>
+        </>
+      )}
     </div>
   );
 }

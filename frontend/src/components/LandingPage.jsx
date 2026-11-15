@@ -20,10 +20,10 @@ export default function LandingPage({ onBegin }) {
         <div className="landing-nebula" aria-hidden="true" />
 
         <nav className="landing-navigation" aria-label="Landing page navigation">
-          <a className="landing-brand" href="#/" aria-label="Mars-to-Earth Analog Finder home">
+          <div className="landing-brand">
             <span className="landing-brand-mark" aria-hidden="true">✦</span>
             <span>NASA SPACE APPS <span className="landing-brand-split">/</span> ANALOG FINDER</span>
-          </a>
+          </div>
           <span className="landing-nav-detail">PLANETARY EXPLORATION · 2026</span>
         </nav>
 
@@ -46,13 +46,7 @@ export default function LandingPage({ onBegin }) {
           <a className="landing-cta" href="#/explore" onClick={beginMission}>
             <span>Begin the Mission</span>
             <span className="landing-cta-arrow" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4.5 16.5c-1.7 1.3-2 4.5-2 4.5s3.2-.3 4.5-2" />
-                <path d="m9 15-2.5 2.5-2.2-2.2 2.5-2.5" />
-                <path d="m15 9 2.5-2.5 2.2 2.2-2.5 2.5" />
-                <path d="M7.2 12.8 11.4 8.6c2.9-2.9 6.4-4.1 10.1-4.1 0 3.7-1.2 7.2-4.1 10.1l-4.2 4.2-6-6Z" />
-                <circle cx="15.5" cy="10.5" r="1.6" />
-              </svg>
+              <img className="landing-cta-rocket" src="/rocket-custom.png" alt="" />
             </span>
           </a>
           <p className="landing-cta-note">MARS TERRAIN <span>·</span> EARTH ANALOGS <span>·</span> SCIENTIFIC DISCOVERY</p>

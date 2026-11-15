@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import { flushSync } from 'react-dom';
 import 'leaflet/dist/leaflet.css';
 import './App.css';
 import './components/LandingPage.css';
@@ -7,78 +8,132 @@ import App from './App.jsx';
 import LandingPage from './components/LandingPage.jsx';
 import { MARS_IMAGE } from './planetImages.js';
 
-// Hash navigation works on static hosting without a router or server rewrites.
+// Simple hash navigation, supported on static hosts without router configuration.
 function routeFromHash() {
   return window.location.hash === '#/explore' ? 'explore' : 'home';
 }
 
-function toBox(rect) {
+function rectToBox(rect) {
   return { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
 }
 
 function Root() {
   const [route, setRoute] = useState(routeFromHash);
-  const [flight, setFlight] = useState(null);
-  const frameRef = useRef([]);
+  const [fallbackFlight, setFallbackFlight] = useState(null);
+  const navigating = useRef(false);
+  const cachedData = useRef(null);
+  const preloadPromise = useRef(null);
 
+  // Warm the lightweight scientific JSON while the landing page is visible.
+  // This ensures the explorer's maps and panels exist in the NEW snapshot,
+  // so they truly morph in instead of appearing after a loading screen.
   useEffect(() => {
-    const update = () => setRoute(routeFromHash());
-    window.addEventListener('hashchange', update);
-    return () => window.removeEventListener('hashchange', update);
+    if (routeFromHash() !== 'home') return;
+    preloadPromise.current = Promise.all([
+      fetch('/data/mars_cells.json').then((r) => { if (!r.ok) throw new Error('Mars data'); return r.json(); }),
+      fetch('/data/earth_cells.json').then((r) => { if (!r.ok) throw new Error('Earth data'); return r.json(); }),
+      fetch('/data/features.json').then((r) => { if (!r.ok) throw new Error('Feature configuration'); return r.json(); }),
+    ]).then(([mars, earth, config]) => {
+      cachedData.current = { marsSites: mars.sites, earthCells: earth.cells, config };
+    }).catch(() => {
+      // The explorer retains its own existing fetch-and-error handling.
+    });
   }, []);
 
-  // The rocket button changes pages but leaves a floating real-Mars image behind.
-  // Its animated endpoint is measured from the actual planet in the explorer header.
-  const beginMission = (planetElement) => {
-    if (flight) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !planetElement) {
-      window.location.hash = '#/explore';
-      setRoute('explore');
+  useEffect(() => {
+    const syncRoute = () => setRoute(routeFromHash());
+    window.addEventListener('hashchange', syncRoute);
+    window.addEventListener('popstate', syncRoute);
+    return () => {
+      window.removeEventListener('hashchange', syncRoute);
+      window.removeEventListener('popstate', syncRoute);
+    };
+  }, []);
+
+  const enterExplorer = () => {
+    window.history.pushState(null, '', '#/explore');
+    // View Transitions require a synchronous DOM update to capture the new state.
+    flushSync(() => setRoute('explore'));
+    window.scrollTo(0, 0);
+  };
+
+  const beginMission = async (marsElement) => {
+    if (navigating.current) return;
+    navigating.current = true;
+
+    // Ordinarily already resolved by the time the user clicks.
+    if (preloadPromise.current) await preloadPromise.current;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      enterExplorer();
+      navigating.current = false;
       return;
     }
-    setFlight({ phase: 'start', start: toBox(planetElement.getBoundingClientRect()) });
-    window.location.hash = '#/explore';
-    setRoute('explore');
-    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Modern browsers: capture the REAL Mars element on both pages, then
+    // physically interpolate its size and position as the interface morphs.
+    if (typeof document.startViewTransition === 'function') {
+      try {
+        const transition = document.startViewTransition(enterExplorer);
+        transition.finished.catch(() => {}).finally(() => {
+          navigating.current = false;
+        });
+        return;
+      } catch {
+        // Fall back to an animated image overlay if the browser declines it.
+      }
+    }
+
+    // Browser fallback: move an identical Mars image across the viewport.
+    if (marsElement) {
+      setFallbackFlight({ phase: 'start', start: rectToBox(marsElement.getBoundingClientRect()) });
+    }
+    enterExplorer();
+    if (!marsElement) navigating.current = false;
   };
 
   useEffect(() => {
-    if (!flight || flight.phase !== 'start' || route !== 'explore') return;
-
-    // The first frame mounts the explorer; the second frame starts the FLIP motion.
-    const frame1 = window.requestAnimationFrame(() => {
+    if (fallbackFlight?.phase !== 'start' || route !== 'explore') return undefined;
+    let nextFrame;
+    const frame = requestAnimationFrame(() => {
       const target = document.querySelector('.explorer-mars-planet');
       if (!target) {
-        setFlight(null);
+        setFallbackFlight(null);
+        navigating.current = false;
         return;
       }
-      const destination = toBox(target.getBoundingClientRect());
-      const frame2 = window.requestAnimationFrame(() => {
-        setFlight((current) => current?.phase === 'start'
+      const destination = rectToBox(target.getBoundingClientRect());
+      nextFrame = requestAnimationFrame(() => {
+        setFallbackFlight((current) => current?.phase === 'start'
           ? { ...current, phase: 'moving', destination }
           : current);
       });
-      frameRef.current.push(frame2);
     });
-    frameRef.current.push(frame1);
-    return () => frameRef.current.forEach((frame) => window.cancelAnimationFrame(frame));
-  }, [route, flight?.phase]);
+    return () => {
+      cancelAnimationFrame(frame);
+      if (nextFrame) cancelAnimationFrame(nextFrame);
+    };
+  }, [fallbackFlight?.phase, route]);
 
   useEffect(() => {
-    if (flight?.phase !== 'moving') return;
-    const timeout = window.setTimeout(() => setFlight(null), 1260);
+    if (fallbackFlight?.phase !== 'moving') return undefined;
+    const timeout = window.setTimeout(() => {
+      setFallbackFlight(null);
+      navigating.current = false;
+    }, 1510);
     return () => window.clearTimeout(timeout);
-  }, [flight?.phase]);
+  }, [fallbackFlight?.phase]);
 
-  const flying = flight?.phase === 'moving';
-  const flightBox = flying ? flight.destination : flight?.start;
+  const flying = fallbackFlight?.phase === 'moving';
+  const flightBox = flying ? fallbackFlight.destination : fallbackFlight?.start;
 
   return (
     <>
-      <div className={route === 'explore' && flight ? 'explorer-route-entering' : ''}>
-        {route === 'explore' ? <App /> : <LandingPage onBegin={beginMission} />}
+      <div className={route === 'explore' && fallbackFlight ? 'explorer-route-entering' : ''}>
+        {route === 'explore' ? <App initialData={cachedData.current} /> : <LandingPage onBegin={beginMission} />}
       </div>
-      {flight && flightBox && (
+      {fallbackFlight && flightBox && (
         <div
           className={`mars-flight ${flying ? 'mars-flight-moving' : ''}`}
           style={{

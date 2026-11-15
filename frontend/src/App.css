@@ -342,3 +342,100 @@ input[type="range"] { accent-color: var(--accent-strong); }
   .mars-flight { transition: none; }
   .explorer-route-entering .app { animation: none; }
 }
+
+/* ----- Landing → explorer shared-element morph ----- */
+.explorer-mars-planet { view-transition-name: mission-mars; }
+.app-header h1 { view-transition-name: mission-heading; }
+.app-header .subtitle { view-transition-name: mission-description; }
+.mars-column { view-transition-name: mission-mars-controls; }
+.earth-column { view-transition-name: mission-earth-results; }
+.comparison-row { view-transition-name: mission-science-panels; }
+.mock-banner { view-transition-name: mission-data-status; }
+
+/* The surrounding page contracts and opens into the dashboard; panels appear
+   with depth and a gentle lift rather than abruptly popping into place. */
+::view-transition-old(root) {
+  animation: 600ms cubic-bezier(.4,0,.8,1) both mission-scene-fold;
+}
+::view-transition-new(root) {
+  animation: 1160ms cubic-bezier(.16,.85,.3,1) both mission-scene-unfold;
+}
+::view-transition-group(mission-mars) {
+  animation-duration: 1450ms;
+  animation-timing-function: cubic-bezier(.19,.7,.22,1);
+}
+::view-transition-old(mission-mars) {
+  animation: 700ms ease-in both mission-planet-old;
+}
+::view-transition-new(mission-mars) {
+  animation: 1050ms 240ms ease-out both mission-planet-new;
+}
+::view-transition-group(mission-heading),
+::view-transition-group(mission-description) {
+  animation-duration: 1120ms;
+  animation-timing-function: cubic-bezier(.2,.7,.25,1);
+}
+::view-transition-old(mission-heading),
+::view-transition-old(mission-description) {
+  animation: 570ms ease-in both mission-text-out;
+}
+::view-transition-new(mission-heading),
+::view-transition-new(mission-description) {
+  animation: 780ms 260ms ease-out both mission-text-in;
+}
+::view-transition-new(mission-mars-controls) {
+  animation: 960ms 250ms cubic-bezier(.18,.75,.22,1) both mission-panel-form;
+}
+::view-transition-new(mission-earth-results) {
+  animation: 1000ms 380ms cubic-bezier(.18,.75,.22,1) both mission-panel-form;
+}
+::view-transition-new(mission-science-panels) {
+  animation: 960ms 460ms cubic-bezier(.18,.75,.22,1) both mission-panel-form;
+}
+::view-transition-new(mission-data-status) {
+  animation: 860ms 230ms ease-out both mission-panel-form;
+}
+
+@keyframes mission-scene-fold {
+  from { opacity: 1; filter: blur(0); transform: scale(1); }
+  to { opacity: 0; filter: blur(15px); transform: scale(1.06); }
+}
+@keyframes mission-scene-unfold {
+  from { opacity: 0; filter: blur(14px); transform: scale(.955); }
+  to { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+@keyframes mission-planet-old {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes mission-planet-new {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes mission-text-out {
+  from { opacity: 1; filter: blur(0); }
+  to { opacity: 0; filter: blur(6px); }
+}
+@keyframes mission-text-in {
+  from { opacity: 0; filter: blur(6px); }
+  to { opacity: 1; filter: blur(0); }
+}
+@keyframes mission-panel-form {
+  from { opacity: 0; filter: blur(16px); transform: translateY(42px) scale(.94); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+}
+
+/* Legacy-browser flight fallback, used only where View Transitions aren't available. */
+.mars-flight { transition-duration: 1450ms; transition-timing-function: cubic-bezier(.19,.7,.22,1); }
+.explorer-route-entering .app { animation: mission-scene-unfold 1050ms ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root),
+  ::view-transition-old(mission-mars), ::view-transition-new(mission-mars),
+  ::view-transition-old(mission-heading), ::view-transition-new(mission-heading),
+  ::view-transition-old(mission-description), ::view-transition-new(mission-description),
+  ::view-transition-new(mission-mars-controls),
+  ::view-transition-new(mission-earth-results),
+  ::view-transition-new(mission-science-panels),
+  ::view-transition-new(mission-data-status) { animation: none !important; }
+}
