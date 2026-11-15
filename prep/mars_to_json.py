@@ -16,7 +16,8 @@ from pathlib import Path
 COMBINED = sorted(glob.glob("data/combined/*.json"))
 OUTPUT = Path("frontend/public/data/mars_cells.json")
 FEATURES = ["median_slope_deg", "steep_fraction", "relief_m", "roughness_m"]
-WIND = "mean_wind_speed_ms"  # 5th scored feature (optional slider, default weight 0)
+WIND = "mean_wind_speed_ms"  # optional scored feature (slider, default weight 0)
+ALBEDO = "albedo"            # optional scored feature (slider, default weight 0); OMEGA 1.08 um
 
 # Descriptive filter categories (contract §3) — not a statement of geological certainty.
 SITE_INFO = {
@@ -103,6 +104,8 @@ def build_site(path):
     reg = d["terrain"]["regional"]
     feats = {k: reg["features"][k] for k in FEATURES}
     feats[WIND] = d["modules"]["wind"]["features"]["mean_wind_speed_ms"]
+    al = d["modules"]["albedo"]
+    feats[ALBEDO] = al.get("regional", {}).get("features", al["features"])["median_albedo"]
     if not all(finite(v) for v in feats.values()):
         raise ValueError(f"{sid}: non-finite terrain feature {feats}")
     c = centre(d)

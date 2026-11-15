@@ -15,13 +15,13 @@ import {
 // It matches Mars Trek's tiling: zoom 0 = 2×1 tiles covering −180…180, east-positive.
 const BOUNDS = [[-90, -180], [90, 180]];
 
-// NASA Mars Trek WMTS — MOLA colour shaded relief (~463 m/px, close to our 460 m
-// analysis scale). Verified: tile order z/row/col, zoom 0–7, CORS open.
-const MOLA_URL =
-  'https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/{z}/{y}/{x}.jpg';
-const MOLA_ATTRIBUTION =
-  'Elevation: MOLA (NASA/JPL/GSFC) via <a href="https://trek.nasa.gov/mars/">NASA Mars Trek</a>';
-const MOLA_MAX_NATIVE_ZOOM = 7;
+// NASA Mars Trek WMTS — Viking MDIM 2.1 colour mosaic (~232 m/px): Mars in natural-looking
+// colour. Same EQ tiling as before (z/row/col, zoom 0–7, CORS open; verified 2026-11-15).
+const MARS_TILES_URL =
+  'https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/default/default028mm/{z}/{y}/{x}.jpg';
+const MARS_TILES_ATTRIBUTION =
+  'Imagery: Viking MDIM 2.1 colour mosaic (NASA/JPL/USGS) via <a href="https://trek.nasa.gov/mars/">NASA Mars Trek</a>';
+const MARS_TILES_MAX_NATIVE_ZOOM = 7;
 
 const GROUP_COLORS = {
   landing_site: '#f59e0b',
@@ -65,7 +65,7 @@ export default function MarsMap({ sites, selectedId, onSelect }) {
         crs={L.CRS.EPSG4326}
         bounds={BOUNDS}
         zoomSnap={0.1}
-        maxZoom={MOLA_MAX_NATIVE_ZOOM + 1}
+        maxZoom={MARS_TILES_MAX_NATIVE_ZOOM + 1}
         maxBounds={BOUNDS}
         maxBoundsViscosity={1}
         worldCopyJump={false}
@@ -83,11 +83,11 @@ export default function MarsMap({ sites, selectedId, onSelect }) {
         </Pane>
 
         <TileLayer
-          url={MOLA_URL}
-          attribution={MOLA_ATTRIBUTION}
+          url={MARS_TILES_URL}
+          attribution={MARS_TILES_ATTRIBUTION}
           bounds={BOUNDS}
           noWrap
-          maxNativeZoom={MOLA_MAX_NATIVE_ZOOM}
+          maxNativeZoom={MARS_TILES_MAX_NATIVE_ZOOM}
         />
 
         {/* Grid above the imagery, below the site markers. */}

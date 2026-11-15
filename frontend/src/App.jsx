@@ -88,7 +88,7 @@ export default function App({ initialData = null }) {
         <div className="explorer-hero-copy">
           <p className="explorer-hero-eyebrow">DISCOVER TWO WORLDS. CONNECT THEIR TERRAIN.</p>
           <h1>Mars-to-Earth<br />Analog Finder</h1>
-          <p className="subtitle">Rover mobility &amp; surface testing — terrain-only matching</p>
+          <p className="subtitle">Rover mobility &amp; surface testing</p>
         </div>
         <div className="explorer-hero-bottom" aria-hidden="true">
           <span>REAL PLANETARY DATA <span>•</span> TERRAIN ANALYSIS</span>

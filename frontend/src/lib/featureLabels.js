@@ -6,6 +6,7 @@ const FALLBACK_LABELS = {
   relief_m: { label: 'Local relief', unit: 'm' },
   roughness_m: { label: 'Roughness', unit: 'm' },
   mean_wind_speed_ms: { label: 'Wind speed', unit: 'm/s' },
+  albedo: { label: 'Albedo (approx.)', unit: 'ratio' },
 };
 
 export function featureLabel(key, config) {
@@ -19,5 +20,6 @@ export function formatFeature(key, value, config) {
   if (unit === '%') return `${(value * 100).toFixed(1)} %`;
   if (unit === '°') return `${value.toFixed(1)}°`;
   if (unit === 'm/s') return `${value.toFixed(1)} m/s`;
+  if (unit === 'ratio') return value.toFixed(2);
   return `${Math.round(value)} ${unit}`;
 }

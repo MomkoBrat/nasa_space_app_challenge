@@ -1,7 +1,7 @@
 import { featureLabel, formatFeature } from '../lib/featureLabels.js';
 import { canRecommend } from '../lib/siteRules.js';
 
-const FEATURE_KEYS = ['median_slope_deg', 'steep_fraction', 'relief_m', 'roughness_m', 'mean_wind_speed_ms'];
+const FEATURE_KEYS = ['median_slope_deg', 'relief_m', 'roughness_m', 'mean_wind_speed_ms', 'albedo'];
 
 export default function SiteInfo({ site }) {
   if (!site) {
@@ -22,7 +22,7 @@ export default function SiteInfo({ site }) {
         {site.detail_available ? (
           <span className="badge verified">Verified (high-resolution)</span>
         ) : (
-          <span className="badge regional">Regional match{res ? ` (~${res} m data)` : ''}</span>
+          <span className="badge regional">Regional match{res ? ` (~${Math.round(res)} m data)` : ''}</span>
         )}
         {isMock && <span className="badge mock">MOCK data</span>}
         <span className="badge group">{site.group.replace('_', ' ')}</span>

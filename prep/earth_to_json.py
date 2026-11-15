@@ -24,8 +24,9 @@ GEOLOGY = Path("data/earth_geology_by_id.csv")            # GLiM lithology (Bori
 ATI_MIN_DT_K, ATI_MAX_ABS_LAT = 5.0, 60.0
 OUTPUT = Path("frontend/public/data/earth_cells.json")
 FEATURES = ["median_slope_deg", "steep_fraction", "relief_m", "roughness_m"]
-WIND = "mean_wind_speed_ms"  # 5th scored feature (optional slider, default weight 0)
-DECIMALS = {"median_slope_deg": 3, "steep_fraction": 4, "relief_m": 1, "roughness_m": 2, WIND: 2}
+WIND = "mean_wind_speed_ms"  # optional scored feature (slider, default weight 0)
+ALBEDO = "albedo"            # optional scored feature (slider, default weight 0); MODIS broadband
+DECIMALS = {"median_slope_deg": 3, "steep_fraction": 4, "relief_m": 1, "roughness_m": 2, WIND: 2, ALBEDO: 3}
 
 SOURCES = [
     {"dataset": "Copernicus DEM GLO-30 (ESA / Airbus), AWS Open Data copernicus-dem-30m",
@@ -94,6 +95,8 @@ def main():
             continue
         barren = float(c["barren_fraction"])
         th, g = thermal.get(t["id"]), geology.get(t["id"], {})
+        if th is not None and th["albedo_bsa_sw"] != "":
+            features[ALBEDO] = float(th["albedo_bsa_sw"])  # missing -> key absent (never 0)
         flags = []
         ati = None
         if th is None:

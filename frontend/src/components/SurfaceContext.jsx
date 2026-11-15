@@ -33,7 +33,7 @@ function rows(mars, earth) {
       label: 'Albedo',
       mars: Number.isFinite(m.albedo_1080nm) ? `${fmt(m.albedo_1080nm, 2)} (1.08 µm)` : 'n/a',
       earth: Number.isFinite(e.albedo_shortwave) ? `${fmt(e.albedo_shortwave, 2)} (broadband)` : 'n/a',
-      note: 'Partly — different wavelengths',
+      note: 'Approximately — optional slider; different wavelengths',
     },
     {
       label: 'Day–night surface temperature range',
