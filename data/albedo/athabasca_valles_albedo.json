@@ -1,0 +1,98 @@
+{
+  "id": "athabasca_valles",
+  "name": "Athabasca Valles",
+  "source": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+  "source_file": "ALBEDO_R1080_EQU_MAP.tiff",
+  "source_resolution_m": 1481.8,
+  "source_grid": {
+    "rows": 7200,
+    "cols": 14400,
+    "ppd": 40.0
+  },
+  "center_geographic": {
+    "lat": 8.6,
+    "lon_east": 156.5
+  },
+  "regional": {
+    "region_km": 10.0,
+    "grid_width": 8,
+    "grid_height": 8,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": 0.3899590075016022,
+      "mean_albedo": 0.38761818408966064,
+      "p10_albedo": 0.3797309100627899,
+      "p90_albedo": 0.3928939700126648,
+      "min_albedo": 0.3769034147262573,
+      "max_albedo": 0.3947513699531555
+    },
+    "quality": {
+      "samples": 64,
+      "samples_valid": 64,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "detailed": {
+    "region_km": 5.0,
+    "grid_width": 4,
+    "grid_height": 4,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": 0.3897339105606079,
+      "mean_albedo": 0.38856759667396545,
+      "p10_albedo": 0.3843969404697418,
+      "p90_albedo": 0.3903874158859253,
+      "min_albedo": 0.38274139165878296,
+      "max_albedo": 0.3908593952655792
+    },
+    "quality": {
+      "samples": 16,
+      "samples_valid": 16,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "methods": {
+    "unit": "albedo (dimensionless, I/F / cos(i) at 1.08 um, Lambertian); decoded as raw * 1.4522365285e-05 + 0.52414565669 per the PDS label",
+    "validity": "finite (NoData -32768 excluded; real albedo near 0 is valid)",
+    "statistics": "median, mean, p10, p90, min, max over valid pixels",
+    "window": "square in km; latitude/longitude half-widths from KM_PER_DEG and cos(lat)"
+  },
+  "role": "contextual_only",
+  "note": "Albedo is CONTEXTUAL INFORMATION ONLY and is NOT used in the similarity score (project plan section 6).  Similar albedo does not mean similar composition.  OMEGA NIR is not the same spectral quantity as TES bolometric albedo or Earth MODIS.",
+  "context": {
+    "region_km": 50.0,
+    "grid_width": 35,
+    "grid_height": 35,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": 0.38943618535995483,
+      "mean_albedo": 0.39108365774154663,
+      "p10_albedo": 0.37764841318130493,
+      "p90_albedo": 0.40741488337516785,
+      "min_albedo": 0.3614806532859802,
+      "max_albedo": 0.48691031336784363
+    },
+    "quality": {
+      "samples": 1224,
+      "samples_valid": 1224,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "terrain": "volcanic lava terrain",
+  "site_index": 4
+}

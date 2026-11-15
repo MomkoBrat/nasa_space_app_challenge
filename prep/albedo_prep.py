@@ -1,4 +1,4 @@
-"""Extract reproducible OMEGA NIR albedo context for a Mars site.
+"""Extract reproducible OMEGA NIR albedo context for Mars sites.
 
 Sibling to mars_prep.py.  Input is the OMEGA/MEx albedo map
 (ALBEDO_R1080_EQU_MAP.tiff) from the ESA PSA Mars Maps page:
@@ -21,12 +21,17 @@ Scientific role (project plan, section 6):
   bolometric albedo or Earth MODIS.
 
 Install: python -m pip install rasterio numpy matplotlib
-Example:
+Examples:
+  # single site (unchanged behaviour)
   python prep/albedo_prep.py --id jezero_01 --name "Jezero Crater" \
       --lat 18.4 --lon 77.5 --output data/jezero_albedo.json
 
+  # batch: one JSON per site in the SITES table below
+  python prep/albedo_prep.py --batch --output-dir data/albedo
+
 Writes a JSON whose layout matches mars_prep.py (regional / detailed /
-quality / methods) so downstream tooling reads both files the same way.
+context / quality / methods) so downstream tooling reads both files the
+same way.
 """
 
 import argparse
@@ -63,6 +68,49 @@ FEATURE_KEYS = (
     "median_albedo", "mean_albedo", "p10_albedo", "p90_albedo",
     "min_albedo", "max_albedo",
 )
+
+# --- Batch targets -------------------------------------------------------
+# Coordinates are planetocentric lat (deg) and east-positive lon (deg).
+# NOTE: Gale Crater is in the SOUTHERN hemisphere (lat = -5.4).  Do not
+# "correct" this to +5.4: NASA (Curiosity site ~4.5S), ESA (5.4S / 137.9E),
+# and HiRISE (~-4.72) all agree on a southern-hemisphere location.
+SITES = [
+    {
+        "id": "jezero_crater",
+        "name": "Jezero Crater",
+        "terrain": "rocky/sedimentary terrain",
+        "lat": 18.855,
+        "lon": 77.519,
+    },
+    {
+        "id": "gale_crater",
+        "name": "Gale Crater",
+        "terrain": "layered and mountainous terrain",
+        "lat": -5.400,
+        "lon": 137.800,
+    },
+    {
+        "id": "nili_patera",
+        "name": "Nili Patera",
+        "terrain": "sand dunes",
+        "lat": 8.900,
+        "lon": 67.200,
+    },
+    {
+        "id": "athabasca_valles",
+        "name": "Athabasca Valles",
+        "terrain": "volcanic lava terrain",
+        "lat": 8.600,
+        "lon": 156.500,
+    },
+    {
+        "id": "victoria_crater",
+        "name": "Victoria Crater",
+        "terrain": "crater slopes and impact terrain",
+        "lat": -2.050,
+        "lon": -5.500,
+    },
+]
 
 
 def load_albedo(tif_path=DEFAULT_TIF):
@@ -220,48 +268,21 @@ def save_check_plot(albedo, path):
     plt.close(fig)
 
 
-def main():
-    p = argparse.ArgumentParser(
-        description="Extract OMEGA NIR albedo context for a Mars site",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    p.add_argument("tif", nargs="?", default=DEFAULT_TIF,
-                   help="OMEGA albedo GeoTIFF (default: prep/rawFiles/ALBEDO_R1080_EQU_MAP.tiff)")
-    p.add_argument("--id", required=True, help="Site identifier, e.g. jezero_01")
-    p.add_argument("--name", required=True, help="Site name")
-    p.add_argument("--lat", type=float, required=True, help="Planetocentric latitude (deg)")
-    p.add_argument("--lon", type=float, required=True, help="East-positive longitude (deg)")
-    p.add_argument("--output", required=True, help="JSON output path")
-    p.add_argument("--detail-km", type=float, default=5.0,
-                   help="Detailed window size in km (default 5, matches mars_prep)")
-    p.add_argument("--regional-km", type=float, default=10.0,
-                   help="Regional window size in km (default 10, matches mars_prep)")
-    p.add_argument("--context-km", type=float, default=50.0,
-                   help="Extra-wide context window in km (default 50; -1 to skip)")
-    p.add_argument("--plot", help="save a check plot of the whole map to this PNG")
-    args = p.parse_args()
-
-    albedo = load_albedo(args.tif)
-    print(f"Global albedo: min={np.nanmin(albedo):.3f} "
-          f"max={np.nanmax(albedo):.3f} mean={np.nanmean(albedo):.3f} "
-          "(PDS label: 0.048 / 1.000 / 0.294)")
-
-    if args.plot:
-        save_check_plot(albedo, args.plot)
-        print("saved", args.plot)
-
-    regional = window_context(albedo, args.lat, args.lon, args.regional_km)
-    detailed = window_context(albedo, args.lat, args.lon, args.detail_km)
+def build_result(albedo, site_id, site_name, lat, lon,
+                 detail_km, regional_km, context_km, tif_path):
+    """Build the per-site result dict (shared by single and batch modes)."""
+    regional = window_context(albedo, lat, lon, regional_km)
+    detailed = window_context(albedo, lat, lon, detail_km)
 
     px_m = 2 * math.pi * RADIUS_KM * 1000.0 / (360.0 * RES)
     result = {
-        "id": args.id,
-        "name": args.name,
+        "id": site_id,
+        "name": site_name,
         "source": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
-        "source_file": Path(args.tif).name,
+        "source_file": Path(tif_path).name,
         "source_resolution_m": round(px_m, 1),
         "source_grid": {"rows": NROWS, "cols": NCOLS, "ppd": RES},
-        "center_geographic": {"lat": args.lat, "lon_east": args.lon},
+        "center_geographic": {"lat": lat, "lon_east": lon},
         "regional": regional,
         "detailed": detailed,
         "methods": {
@@ -281,20 +302,114 @@ def main():
         ),
     }
 
-    if args.context_km > 0:
-        result["context"] = window_context(albedo, args.lat, args.lon, args.context_km)
+    if context_km > 0:
+        result["context"] = window_context(albedo, lat, lon, context_km)
 
-    output = Path(args.output)
+    return result
+
+
+def write_json(result, output):
+    output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2, allow_nan=False), encoding="utf-8")
+    return output
+
+
+def run_single(args, albedo):
+    result = build_result(
+        albedo, args.id, args.name, args.lat, args.lon,
+        args.detail_km, args.regional_km, args.context_km, args.tif,
+    )
+    output = write_json(result, args.output)
 
     print(f"Regional ({args.regional_km:g} km) albedo features:",
-          json.dumps(regional["features"], indent=2))
+          json.dumps(result["regional"]["features"], indent=2))
     print(f"Detailed ({args.detail_km:g} km) albedo features:",
-          json.dumps(detailed["features"], indent=2))
-    print(f"Regional valid fraction: {regional['quality']['valid_fraction']} "
-          f"({regional['quality']['status']})")
+          json.dumps(result["detailed"]["features"], indent=2))
+    print(f"Regional valid fraction: {result['regional']['quality']['valid_fraction']} "
+          f"({result['regional']['quality']['status']})")
     print(f"Saved: {output}")
+
+
+def run_batch(args, albedo):
+    out_dir = Path(args.output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    written = []
+    for i, site in enumerate(SITES, start=1):
+        result = build_result(
+            albedo, site["id"], site["name"], site["lat"], site["lon"],
+            args.detail_km, args.regional_km, args.context_km, args.tif,
+        )
+        # Self-describing batch metadata.
+        result["terrain"] = site["terrain"]
+        result["site_index"] = i
+
+        output = out_dir / f"{site['id']}_albedo.json"
+        write_json(result, output)
+        q = result["regional"]["quality"]
+        written.append((site["id"], output, q))
+        print(f"[{site['id']}] saved {output} "
+              f"(status={q['status']}, valid_fraction={q['valid_fraction']}, "
+              f"median_albedo={result['regional']['features']['median_albedo']})")
+
+    print(f"\nWrote {len(written)} JSON files to {out_dir}")
+    return written
+
+
+def main():
+    p = argparse.ArgumentParser(
+        description="Extract OMEGA NIR albedo context for Mars sites",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    p.add_argument("tif", nargs="?", default=DEFAULT_TIF,
+                   help="OMEGA albedo GeoTIFF (default: prep/rawFiles/ALBEDO_R1080_EQU_MAP.tiff)")
+
+    # Batch mode
+    p.add_argument("--batch", action="store_true",
+                   help="process the built-in SITES list and write one JSON per site")
+    p.add_argument("--output-dir", default="data/albedo",
+                   help="directory for batch JSON outputs (default: data/albedo)")
+
+    # Single-site mode
+    p.add_argument("--id", help="Site identifier, e.g. jezero_01")
+    p.add_argument("--name", help="Site name")
+    p.add_argument("--lat", type=float, help="Planetocentric latitude (deg)")
+    p.add_argument("--lon", type=float, help="East-positive longitude (deg)")
+    p.add_argument("--output", help="JSON output path (single-site mode)")
+
+    p.add_argument("--detail-km", type=float, default=5.0,
+                   help="Detailed window size in km (default 5, matches mars_prep)")
+    p.add_argument("--regional-km", type=float, default=10.0,
+                   help="Regional window size in km (default 10, matches mars_prep)")
+    p.add_argument("--context-km", type=float, default=50.0,
+                   help="Extra-wide context window in km (default 50; -1 to skip)")
+    p.add_argument("--plot", help="save a check plot of the whole map to this PNG")
+    args = p.parse_args()
+
+    # Validate mode
+    if args.batch:
+        if args.id or args.name or args.lat is not None or args.lon is not None or args.output:
+            p.error("--batch cannot be combined with --id/--name/--lat/--lon/--output")
+    else:
+        missing = [f for f in ("id", "name", "lat", "lon", "output")
+                   if getattr(args, f) is None]
+        if missing:
+            p.error("single-site mode requires: " + ", ".join("--" + m for m in missing))
+
+    albedo = load_albedo(args.tif)
+    print(f"Global albedo: min={np.nanmin(albedo):.3f} "
+          f"max={np.nanmax(albedo):.3f} mean={np.nanmean(albedo):.3f} "
+          "(PDS label: 0.048 / 1.000 / 0.294)")
+
+    if args.plot:
+        save_check_plot(albedo, args.plot)
+        print("saved", args.plot)
+
+    if args.batch:
+        run_batch(args, albedo)
+    else:
+        run_single(args, albedo)
 
 
 if __name__ == "__main__":

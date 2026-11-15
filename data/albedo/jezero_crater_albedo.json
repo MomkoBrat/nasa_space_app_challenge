@@ -1,0 +1,98 @@
+{
+  "id": "jezero_crater",
+  "name": "Jezero Crater",
+  "source": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+  "source_file": "ALBEDO_R1080_EQU_MAP.tiff",
+  "source_resolution_m": 1481.8,
+  "source_grid": {
+    "rows": 7200,
+    "cols": 14400,
+    "ppd": 40.0
+  },
+  "center_geographic": {
+    "lat": 18.855,
+    "lon_east": 77.519
+  },
+  "regional": {
+    "region_km": 10.0,
+    "grid_width": 8,
+    "grid_height": 8,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": 0.22465093433856964,
+      "mean_albedo": 0.22354723513126373,
+      "p10_albedo": 0.21436329185962677,
+      "p90_albedo": 0.23211541771888733,
+      "min_albedo": 0.1922515332698822,
+      "max_albedo": 0.24367523193359375
+    },
+    "quality": {
+      "samples": 64,
+      "samples_valid": 64,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "detailed": {
+    "region_km": 5.0,
+    "grid_width": 5,
+    "grid_height": 4,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": 0.2209549844264984,
+      "mean_albedo": 0.22215163707733154,
+      "p10_albedo": 0.2133205682039261,
+      "p90_albedo": 0.23216915130615234,
+      "min_albedo": 0.20667225122451782,
+      "max_albedo": 0.24367523193359375
+    },
+    "quality": {
+      "samples": 20,
+      "samples_valid": 20,
+      "valid_fraction": 1.0,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "methods": {
+    "unit": "albedo (dimensionless, I/F / cos(i) at 1.08 um, Lambertian); decoded as raw * 1.4522365285e-05 + 0.52414565669 per the PDS label",
+    "validity": "finite (NoData -32768 excluded; real albedo near 0 is valid)",
+    "statistics": "median, mean, p10, p90, min, max over valid pixels",
+    "window": "square in km; latitude/longitude half-widths from KM_PER_DEG and cos(lat)"
+  },
+  "role": "contextual_only",
+  "note": "Albedo is CONTEXTUAL INFORMATION ONLY and is NOT used in the similarity score (project plan section 6).  Similar albedo does not mean similar composition.  OMEGA NIR is not the same spectral quantity as TES bolometric albedo or Earth MODIS.",
+  "context": {
+    "region_km": 50.0,
+    "grid_width": 37,
+    "grid_height": 35,
+    "effective_pixel_size_m": [
+      1481.8,
+      1481.8
+    ],
+    "features": {
+      "median_albedo": 0.20684650540351868,
+      "mean_albedo": 0.2082008570432663,
+      "p10_albedo": 0.17668357491493225,
+      "p90_albedo": 0.23973965644836426,
+      "min_albedo": 0.1381412148475647,
+      "max_albedo": 0.3001527190208435
+    },
+    "quality": {
+      "samples": 1295,
+      "samples_valid": 1231,
+      "valid_fraction": 0.951,
+      "status": "ok"
+    },
+    "role": "contextual_only"
+  },
+  "terrain": "rocky/sedimentary terrain",
+  "site_index": 1
+}
