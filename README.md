@@ -1,8 +1,10 @@
-# Mars-to-Earth Analog Finder
+# New Horizon — Mars-to-Earth Analog Finder
 
 **NASA Space Apps Challenge 2026.** A web app that finds places on Earth whose terrain best matches a chosen site on Mars, so that rovers, instruments and mission teams can practise in realistic conditions before going to Mars.
 
 Pick a Mars site, and the app compares it with **17,735 candidate desert, high-plateau and polar locations on Earth**. It ranks them by terrain similarity, shows the best matches on a map, and explains what matches, what differs and what cannot be compared.
+
+**🚀 Try it live: [newhorizonnasa.netlify.app](https://newhorizonnasa.netlify.app/)**
 
 ---
 
