@@ -74,7 +74,7 @@ export default function App({ initialData = null }) {
     <div className="app explorer-app">
       <header className="app-header explorer-hero">
         <nav className="explorer-hero-nav" aria-label="Explorer heading">
-          <span className="explorer-brand"><span className="explorer-brand-star" aria-hidden="true">✦</span> NASA SPACE APPS <span className="explorer-brand-divider">/</span> ANALOG FINDER</span>
+          <span className="explorer-brand"><span className="explorer-brand-star" aria-hidden="true">✦</span> NASA SPACE APPS <span className="explorer-brand-divider">/</span> NEW HORIZON</span>
           <span className="explorer-nav-note">PLANETARY FIELD LAB <span>•</span> 2026</span>
         </nav>
 
@@ -87,8 +87,8 @@ export default function App({ initialData = null }) {
 
         <div className="explorer-hero-copy">
           <p className="explorer-hero-eyebrow">DISCOVER TWO WORLDS. CONNECT THEIR TERRAIN.</p>
-          <h1>Mars-to-Earth<br />Analog Finder</h1>
-          <p className="subtitle">Rover mobility &amp; surface testing</p>
+          <h1>New<br />Horizon</h1>
+          <p className="subtitle">Mars-to-Earth Analog Finder</p>
         </div>
         <div className="explorer-hero-bottom" aria-hidden="true">
           <span>REAL PLANETARY DATA <span>•</span> TERRAIN ANALYSIS</span>
