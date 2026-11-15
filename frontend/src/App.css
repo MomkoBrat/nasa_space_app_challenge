@@ -1,109 +1,313 @@
+/* --------------------------------------------------------------------------
+   MARS / EARTH — COSMIC DESIGN SYSTEM
+   Deep observatory blacks, Martian rose/copper light, cool Earth-blue details.
+   Presentation only: map layers, application state and matching are unchanged.
+   -------------------------------------------------------------------------- */
 :root {
-  --bg: #0f1115;
-  --panel: #181b22;
-  --border: #2a2f3a;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --accent: #f97316;
-  --warn: #fbbf24;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: dark;
+  --bg: #080710;
+  --panel: #17121e;
+  --panel-elevated: #211824;
+  --border: rgba(231, 142, 132, 0.20);
+  --border-strong: rgba(247, 164, 148, 0.38);
+  --text: #f9edf0;
+  --muted: #bcaab9;
+  --accent: #ef927f;
+  --accent-strong: #ffb299;
+  --mars: #df795e;
+  --earth: #82bfd4;
+  --warn: #f2c38b;
+  --shadow: 0 14px 42px rgba(3, 2, 9, 0.36);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-synthesis: none;
   color: var(--text);
   background: var(--bg);
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); }
-h1, h2 { margin: 0 0 0.5rem; }
-h2 { font-size: 1.05rem; }
+html { min-height: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  line-height: 1.55;
+  color: var(--text);
+  /* Several tiny, static star clusters under soft nebula light. */
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 56% 37% at 9% -1%, rgba(131, 44, 63, .26), transparent 78%),
+    radial-gradient(ellipse 41% 39% at 100% 14%, rgba(71, 68, 128, .21), transparent 83%),
+    radial-gradient(ellipse 50% 44% at 66% 82%, rgba(99, 38, 65, .14), transparent 79%),
+    radial-gradient(circle at 25px 35px, rgba(255, 228, 215, .26) .75px, transparent 1.35px),
+    radial-gradient(circle at 135px 155px, rgba(191, 216, 248, .18) .8px, transparent 1.4px),
+    radial-gradient(circle at 95px 75px, rgba(255, 217, 213, .12) .65px, transparent 1.35px),
+    linear-gradient(155deg, #080710 0%, #100b16 49%, #0a0b16 100%);
+  background-size: auto, auto, auto, 245px 235px, 315px 285px, 190px 225px, auto;
+  background-attachment: fixed;
+}
 
-.app { max-width: 1400px; margin: 0 auto; padding: 1rem; }
-.app-header .subtitle { margin: 0; color: var(--muted); }
-.app-status { padding: 2rem; text-align: center; }
-.app-status.error { color: #f87171; }
+::selection { background: rgba(239, 146, 127, .35); color: #fff7f4; }
+button, input { font: inherit; }
+button:focus-visible, input:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+a { color: #a0d6e8; }
+a:hover { color: #d2eff7; }
+h1, h2, h3 { line-height: 1.25; letter-spacing: -.025em; }
+h1, h2 { margin: 0 0 .55rem; }
+h2 { font-size: 1.03rem; font-weight: 700; }
+
+.app {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: clamp(1rem, 3.2vw, 2.6rem);
+  position: relative;
+}
+
+/* The landing header is a small space observatory / mission-control hero. */
+.app-header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  border-radius: 22px;
+  border: 1px solid rgba(235, 145, 126, .28);
+  background:
+    radial-gradient(ellipse at 78% 38%, rgba(168, 64, 73, .20), transparent 52%),
+    linear-gradient(109deg, rgba(40, 21, 37, .97), rgba(20, 17, 34, .93) 65%, rgba(19, 18, 33, .94));
+  box-shadow: inset 0 1px rgba(255, 211, 192, .08), var(--shadow);
+}
+.app-header::before {
+  content: 'PLANETARY FIELD LAB  /  ANALOG EXPLORATION';
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: .8rem;
+  padding: .31rem .7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 171, 143, .24);
+  background: rgba(238, 125, 109, .07);
+  color: #eeb69d;
+  font-size: .64rem;
+  font-weight: 800;
+  letter-spacing: .17em;
+}
+.app-header::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  right: clamp(22px, 7%, 120px);
+  top: -72px;
+  width: 340px;
+  height: 340px;
+  max-width: 38%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 33% 29%, rgba(255, 204, 158, .67), transparent 19%),
+    radial-gradient(circle at 63% 55%, rgba(109, 39, 53, .63), transparent 36%),
+    radial-gradient(circle at 34% 71%, rgba(99, 30, 39, .42), transparent 23%),
+    radial-gradient(circle at 40% 35%, #d27664 0%, #9f4352 37%, #50283e 63%, #171223 76%);
+  opacity: .48;
+  box-shadow: 0 0 80px rgba(233, 102, 87, .17), inset -25px -22px 36px rgba(17, 7, 22, .62);
+  pointer-events: none;
+}
+.app-header h1 {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1.65rem, 3vw, 2.65rem);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  margin-bottom: .4rem;
+  max-width: 800px;
+  background: linear-gradient(105deg, #fff7f1 3%, #ffcab4 56%, #eb9f9e 97%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.app-header .subtitle {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #d7bbc0;
+  font-size: .95rem;
+  letter-spacing: .008em;
+}
+.app-status { padding: 2.3rem; text-align: center; }
+.app-status.error { color: #ff9f9e; }
 
 .mock-banner {
-  margin: 0.75rem 0;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--warn);
-  border-radius: 6px;
-  color: var(--warn);
+  margin: 1.2rem 0 0;
+  padding: .8rem 1rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(241, 177, 116, .30);
+  border-left: 3px solid #eab783;
+  border-radius: 11px;
+  color: #f4c995;
+  font-size: .83rem;
   font-weight: 600;
+  background: linear-gradient(95deg, rgba(107, 56, 37, .25), rgba(47, 29, 33, .25));
+  box-shadow: inset 0 1px rgba(255, 199, 142, .045);
 }
+.mock-banner::before { content: '✦'; font-size: 1.1rem; margin-right: .7rem; color: #f1b174; }
 
-.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
-.column { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
-/* Comparison chart + limitations span both columns below the maps. */
-.comparison-row { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.1rem; margin-top: 1.25rem; }
+.column { display: flex; flex-direction: column; gap: 1.1rem; min-width: 0; }
+.comparison-row { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.1rem; align-items: start; }
 .comparison-row > * { min-width: 0; }
-@media (max-width: 900px) {
-  .layout, .comparison-row { grid-template-columns: 1fr; }
-}
 
-.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+.panel {
+  position: relative;
+  background: linear-gradient(160deg, rgba(36, 25, 39, .96), rgba(21, 18, 32, .97));
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: clamp(1rem, 1.6vw, 1.35rem);
+  box-shadow: inset 0 1px rgba(255, 225, 214, .05), var(--shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.panel h2 { color: #fff1ef; }
+.mars-column .panel { border-color: rgba(235, 138, 112, .23); }
+.earth-column .panel { border-color: rgba(124, 181, 215, .23); }
+.earth-column .panel h2 { color: #e8f4fa; }
+.comparison-row .panel { border-color: rgba(223, 149, 158, .19); }
 .warning { color: var(--warn); }
 
-/* Maps need a fixed height for Leaflet. */
-.map { height: 360px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
-/* Dark space outside the planet; the planet itself is drawn by MarsMap (fallback + MOLA tiles). */
-.mars-map .leaflet-container { background: #07080b; }
-
-/* SiteInfo */
-.badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem; }
-.badge { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 999px; border: 1px solid var(--border); }
-.badge.verified { background: #14532d; border-color: #22c55e; }
-.badge.regional { background: #1e293b; }
-.badge.mock { background: #451a03; border-color: var(--warn); color: var(--warn); }
-.badge.group { text-transform: capitalize; color: var(--muted); }
-.coords { color: var(--muted); font-size: 0.85rem; margin: 0.25rem 0; }
-.feature-table th { text-align: left; font-weight: 500; color: var(--muted); padding-right: 1rem; }
-
-/* WeightSliders */
-.presets { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
-.presets button {
-  background: #232834; color: var(--text); border: 1px solid var(--border);
-  border-radius: 6px; padding: 0.35rem 0.7rem; cursor: pointer;
+/* Keep both Leaflet planet maps at their existing dimensions/behaviour. */
+.map {
+  height: 360px;
+  overflow: hidden;
+  border-radius: 13px;
+  border: 1px solid rgba(255, 210, 189, .24);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.035), 0 9px 24px rgba(2, 2, 10, .28);
 }
-.presets button:hover { border-color: var(--accent); }
-.slider-row { display: grid; grid-template-columns: 8rem 1fr 3rem; align-items: center; gap: 0.5rem; margin: 0.35rem 0; }
-.slider-share { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+.earth-map { border-color: rgba(129, 193, 226, .30); }
+.mars-map .leaflet-container { background: #0b0712; }
+.earth-map .leaflet-container { background: #08111d; }
+.map .leaflet-control-zoom {
+  overflow: hidden;
+  border: 1px solid rgba(245, 178, 166, .33) !important;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(2, 2, 10, .42);
+}
+.map .leaflet-control-zoom a {
+  background: #251b2b;
+  color: #f7c5b6;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  transition: background .16s ease, color .16s ease;
+}
+.map .leaflet-control-zoom a:hover { background: #4a2b3b; color: #ffffff; }
+.map .leaflet-control-zoom a.leaflet-disabled { color: #9a8790; background: #201923; }
+.map .leaflet-control-attribution {
+  background: rgba(14, 11, 24, .77);
+  color: #d8cfdd;
+  border-radius: 7px 0 0 0;
+  font-size: 9px;
+  backdrop-filter: blur(4px);
+}
+.map .leaflet-control-attribution a { color: #c2e4f5; }
+.map .leaflet-tooltip:not(.earth-pin-tooltip) {
+  background: rgba(34, 24, 38, .96);
+  border: 1px solid rgba(255, 180, 155, .35);
+  border-radius: 9px;
+  color: #fff3f0;
+  box-shadow: 0 8px 22px rgba(0,0,0,.35);
+}
+.map .leaflet-tooltip-top:not(.earth-pin-tooltip)::before { border-top-color: rgba(34,24,38,.96); }
 
-/* Temporary results table (until Person B's components land) */
+/* Selected site details */
+.site-info.empty { min-height: 82px; display: flex; align-items: center; }
+.site-info.empty p { color: var(--muted); margin: 0; }
+.site-info h2 { color: #ffccba; }
+.badges { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .65rem; }
+.badge { font-size: .73rem; padding: .22rem .58rem; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,.03); }
+.badge.verified { background: rgba(86, 146, 121, .13); border-color: rgba(112,195,154,.43); color: #b1e5d1; }
+.badge.regional { background: rgba(116, 153, 192, .13); border-color: rgba(135,173,218,.32); color: #c4d8f0; }
+.badge.mock { background: rgba(173, 94, 45, .13); border-color: rgba(237,176,112,.37); color: var(--warn); }
+.badge.group { text-transform: capitalize; color: var(--muted); }
+.coords { color: var(--muted); font-size: .84rem; margin: .35rem 0; }
+.feature-table { border-collapse: collapse; margin-top: .6rem; }
+.feature-table tr:not(:last-child) { border-bottom: 1px solid rgba(240, 186, 175, .10); }
+.feature-table th, .feature-table td { padding: .3rem .6rem .3rem 0; vertical-align: top; }
+.feature-table th { text-align: left; font-weight: 500; color: var(--muted); padding-right: 1.2rem; }
+.feature-table td { font-variant-numeric: tabular-nums; color: #ffddd1; }
 
-/* Ranked Earth pins. Numbers match the temporary results table. */
+/* Weight sliders and presets */
+.weight-sliders h2 { margin-bottom: .85rem; }
+.presets { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+.presets button {
+  background: linear-gradient(135deg, rgba(106, 58, 69, .36), rgba(68, 49, 75, .24));
+  color: #f6d8d4;
+  border: 1px solid rgba(242, 159, 148, .20);
+  border-radius: 999px;
+  padding: .4rem .83rem;
+  font-size: .77rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.presets button:hover {
+  background: rgba(174, 86, 96, .35);
+  border-color: rgba(255, 175, 153, .58);
+  box-shadow: 0 0 17px rgba(216, 102, 93, .13);
+  transform: translateY(-1px);
+}
+.slider-row { display: grid; grid-template-columns: minmax(7.4rem, 8.5rem) minmax(0, 1fr) 3.2rem; align-items: center; gap: .65rem; margin: .65rem 0; }
+.slider-label { font-size: .85rem; color: #e8d6de; }
+.slider-row input[type='range'] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+.slider-row input[type='range']::-webkit-slider-runnable-track { border-radius: 999px; }
+.slider-share { text-align: right; font-variant-numeric: tabular-nums; color: #ffb7aa; font-size: .84rem; }
+
+/* Numbered Earth pins: blue normally, red on hover, coral when selected. */
 .earth-numbered-pin-wrapper { background: none; border: none; }
 .earth-numbered-pin {
   display: flex; align-items: center; justify-content: center;
   width: 32px; height: 32px; border-radius: 50%;
-  background: #2563eb; color: #fff; border: 2px solid #fff;
-  font: 700 14px/1 system-ui, sans-serif;
-  box-shadow: 0 2px 7px rgb(0 0 0 / 45%);
+  background: #3f8fb9; color: #fff; border: 2px solid #e9f6ff;
+  font: 800 14px/1 system-ui, sans-serif;
+  box-shadow: 0 0 0 3px rgba(18, 56, 90, .20), 0 3px 12px rgba(0,0,0,.5);
+  transition: background .17s ease, transform .17s ease, box-shadow .17s ease;
 }
-/* Hover = red; the selected result (shown in the table/chart) = orange, slightly larger. */
-.earth-numbered-pin:hover {
-  background: #dc2626;
-}
+.earth-numbered-pin:hover { background: #df685e; box-shadow: 0 0 0 4px rgba(241,115,97,.19), 0 4px 15px rgba(0,0,0,.48); }
 .earth-numbered-pin.selected {
   background: var(--accent);
-  transform: scale(1.2);
-  box-shadow: 0 0 0 3px rgb(249 115 22 / 45%), 0 2px 7px rgb(0 0 0 / 45%);
+  transform: scale(1.18);
+  box-shadow: 0 0 0 4px rgba(239,146,127,.35), 0 4px 16px rgba(0,0,0,.5);
 }
+.earth-numbered-pin.selected:hover { background: #df685e; }
 
-/* Hover information for numbered Earth pins. */
 .leaflet-tooltip.earth-pin-tooltip {
-  background: #181b22;
-  border: 1px solid #444b58;
-  border-radius: 8px;
-  color: #e5e7eb;
-  padding: 0.6rem 0.8rem;
-  box-shadow: 0 4px 16px rgb(0 0 0 / 40%);
-  line-height: 1.6;
-  font-size: 0.85rem;
+  background: linear-gradient(150deg, #2b1d30, #171421);
+  border: 1px solid rgba(247, 163, 145, .42);
+  border-radius: 12px;
+  color: #f9edf0;
+  padding: .75rem 1rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,.45), 0 0 24px rgba(159,62,81,.13);
+  line-height: 1.65;
+  font-size: .83rem;
 }
-.leaflet-tooltip-top.earth-pin-tooltip::before {
-  border-top-color: #181b22;
+.leaflet-tooltip-top.earth-pin-tooltip::before { border-top-color: #241a2b; }
+.earth-pin-tooltip-title { color: #ffcab4; font-weight: 800; font-size: .94rem; margin-bottom: .3rem; }
+
+@media (max-width: 900px) {
+  .layout, .comparison-row { grid-template-columns: 1fr; }
+  .app-header::after { right: -30px; width: 260px; height: 260px; top: -55px; opacity: .32; }
 }
-.earth-pin-tooltip-title {
-  font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 0.2rem;
+@media (max-width: 520px) {
+  .app { padding: .8rem; }
+  .app-header { min-height: 155px; padding: 1.25rem; border-radius: 16px; }
+  .app-header::before { font-size: .57rem; letter-spacing: .10em; }
+  .app-header h1 { font-size: 1.78rem; }
+  .panel { border-radius: 14px; padding: .9rem; }
+  .map { height: 290px; }
+  .slider-row { grid-template-columns: minmax(5.8rem, 7rem) minmax(0, 1fr) 2.65rem; gap: .4rem; }
+  .slider-label { font-size: .75rem; }
+  .slider-share { font-size: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }

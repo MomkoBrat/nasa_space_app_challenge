@@ -1,17 +1,14 @@
 .comparison-charts { min-width: 0; }
-.comparison-subtitle { margin: 0.3rem 0 0.6rem; font-weight: 600; }
-.comparison-note, .comparison-empty { color: var(--muted, #9ca3af); font-size: 0.85rem; line-height: 1.5; }
-.comparison-chart-container { width: 100%; min-width: 0; margin-top: 0.6rem; }
+.comparison-subtitle { margin: .35rem 0 .7rem; font-weight: 750; color: #ffd2c1; }
+.comparison-note, .comparison-empty { color: var(--muted); font-size: .85rem; line-height: 1.6; }
+.comparison-chart-container { width: 100%; min-width: 0; margin-top: .85rem; padding: .6rem .2rem; background: rgba(17,14,27,.38); border: 1px solid rgba(240, 162, 145, .12); border-radius: 13px; }
 .comparison-tooltip {
-  background: #20242d;
-  color: #e5e7eb;
-  border: 1px solid #424a5a;
-  border-radius: 6px;
-  padding: 0.65rem 0.8rem;
-  line-height: 1.6;
-  font-size: 0.8rem;
-  box-shadow: 0 3px 12px rgb(0 0 0 / 40%);
+  background: linear-gradient(145deg, #302134, #1b1729);
+  color: #fff0eb; border: 1px solid rgba(255, 180, 157, .38);
+  border-radius: 11px; padding: .75rem .9rem; line-height: 1.7;
+  font-size: .8rem; box-shadow: 0 12px 28px rgba(0,0,0,.45);
 }
-.comparison-tooltip-scale { color: #aeb4c1; margin-top: 0.2rem; }
-.comparison-error { color: #f87171; }
-.comparison-mock { color: var(--warn, #fbbf24); font-size: 0.82rem; }
+.comparison-tooltip strong { color: #ffc6b0; }
+.comparison-tooltip-scale { color: #c8b2c2; margin-top: .25rem; }
+.comparison-error { color: #ffb2aa; }
+.comparison-mock { color: var(--warn); font-size: .82rem; }
