@@ -1,0 +1,43 @@
+{
+  "location_id": "nili_patera_01",
+  "category": "geology",
+  "analysis": {
+    "scale": "detailed",
+    "width_m": 5000.0,
+    "height_m": 5000.0,
+    "center_projected_m": {
+      "x": 3935300.692421062,
+      "y": 527544.8079574254
+    }
+  },
+  "data_status": "processed",
+  "features": {
+    "dominant_unit": "Early Hesperian volcanic unit",
+    "mapped_units": [
+      {
+        "unit_code": "eHv",
+        "name": "Early Hesperian volcanic unit",
+        "fraction_of_region": 1.0
+      }
+    ],
+    "mapped_fraction": 1.0
+  },
+  "quality": {
+    "coverage_fraction": 1.0,
+    "flags": [
+      "global_geologic_map_coarse_1_to_20_million",
+      "not_equivalent_to_local_geologic_mapping"
+    ]
+  },
+  "source": {
+    "dataset": "USGS SIM 3292 Global Geologic Map of Mars (Tanaka et al., 2014)",
+    "url": "https://doi.org/10.3133/sim3292",
+    "feature_service": "https://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/Mars_Geology_feature_layer/FeatureServer/0",
+    "map_scale": "1:20,000,000",
+    "type": "broad_geologic_unit_interpretation"
+  },
+  "methods": {
+    "area": "USGS Mars geological polygons transformed to the site metric CRS; clipped to the footprint; area fraction computed",
+    "caveat": "Global geology cannot resolve local lava/silica exposures at 5km scale. Do not equate global USGS codes with detailed local Nili Patera geological units."
+  }
+}

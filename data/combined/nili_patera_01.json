@@ -1,0 +1,595 @@
+{
+  "location_id": "nili_patera_01",
+  "name": "Nili Patera",
+  "center_geographic": {
+    "lat": 8.9,
+    "lon_east": 67.2
+  },
+  "terrain": {
+    "id": "nili_patera_01",
+    "name": "Nili Patera",
+    "source_dem": "megt44n000hb.img",
+    "source_crs_wkt": "PROJCS[\"Mars_Nili_Patera_local_EQC\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",8.9],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "source_pixel_size_m": [
+      457.508,
+      463.084
+    ],
+    "center_projected_m": {
+      "x": 3935300.692421062,
+      "y": 527544.8079574254
+    },
+    "center_geographic": {
+      "lat": 8.9,
+      "lon_east": 67.2
+    },
+    "coordinate_source": "8.9N, 67.2E project reference from existing TI/albedo sources; transformed using Mars sphere",
+    "regional": {
+      "features": {
+        "median_slope_deg": 1.366285143498895,
+        "steep_fraction": 0.0,
+        "relief_m": 187.0,
+        "roughness_m": 8.527703599899557
+      },
+      "additional_features": {
+        "mean_slope_deg": 1.4283382146223458,
+        "slope_p90_deg": 2.406815497705013,
+        "flat_fraction": 1.0,
+        "elevation_std_m": 61.36619700670648,
+        "roughness_100m_m": 0.0003061216650585152,
+        "roughness_500m_m": 3.9328193887524723
+      },
+      "quality": {
+        "valid_fraction_resampled": 1.0,
+        "valid_slope_fraction_resampled": 1.0,
+        "samples": 484
+      },
+      "region_km": 10.0,
+      "grid_width": 22,
+      "grid_height": 22,
+      "effective_pixel_size_m": [
+        457.508,
+        463.084
+      ],
+      "quality_note": "MOLA bins may contain interpolated elevations where no laser shot existed; this is not 30m DEM data."
+    },
+    "detailed": {
+      "features": {
+        "median_slope_deg": 1.465992671653823,
+        "steep_fraction": 0.0,
+        "relief_m": 97.0,
+        "roughness_m": 9.950052854345852
+      },
+      "additional_features": {
+        "mean_slope_deg": 1.537058386639201,
+        "slope_p90_deg": 2.467260062234543,
+        "flat_fraction": 1.0,
+        "elevation_std_m": 31.27278624214733,
+        "roughness_100m_m": 0.0003606331831311751,
+        "roughness_500m_m": 4.802774552880828
+      },
+      "quality": {
+        "valid_fraction_resampled": 1.0,
+        "valid_slope_fraction_resampled": 1.0,
+        "samples": 121
+      },
+      "region_km": 5.0,
+      "grid_width": 11,
+      "grid_height": 11,
+      "effective_pixel_size_m": [
+        457.508,
+        463.084
+      ],
+      "quality_note": "MOLA bins may contain interpolated elevations where no laser shot existed; this is not 30m DEM data."
+    },
+    "methods": {
+      "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+      "steep_fraction": "fraction of slope samples greater than 15 degrees",
+      "relief": "elevation percentile 95 minus percentile 5, in metres",
+      "roughness_m": "SD of elevation minus weighted Gaussian-smoothed elevation; sigma=1000m, matching mars_prep.py",
+      "resampling": "NONE: native MOLA 128 pixels/degree, pixel centres inside a projected 10km/5km square",
+      "nodata": "NASA PDS MOLA gridded topography; some source bins are interpolated when shot coverage is absent",
+      "native_source_grid": "Planetocentric 0E-90E, 44N-0N, 128 pixels/degree, MSB signed int16 topography metres",
+      "resolution_limit": "Both regional and detailed computed at native ~460m. NO 30m detail exists in this source."
+    }
+  },
+  "modules": {
+    "geology": {
+      "location_id": "nili_patera_01",
+      "category": "geology",
+      "analysis": {
+        "scale": "detailed",
+        "width_m": 5000.0,
+        "height_m": 5000.0,
+        "center_projected_m": {
+          "x": 3935300.692421062,
+          "y": 527544.8079574254
+        }
+      },
+      "data_status": "processed",
+      "features": {
+        "dominant_unit": "Early Hesperian volcanic unit",
+        "mapped_units": [
+          {
+            "unit_code": "eHv",
+            "name": "Early Hesperian volcanic unit",
+            "fraction_of_region": 1.0
+          }
+        ],
+        "mapped_fraction": 1.0
+      },
+      "quality": {
+        "coverage_fraction": 1.0,
+        "flags": [
+          "global_geologic_map_coarse_1_to_20_million",
+          "not_equivalent_to_local_geologic_mapping"
+        ]
+      },
+      "source": {
+        "dataset": "USGS SIM 3292 Global Geologic Map of Mars (Tanaka et al., 2014)",
+        "url": "https://doi.org/10.3133/sim3292",
+        "feature_service": "https://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/Mars_Geology_feature_layer/FeatureServer/0",
+        "map_scale": "1:20,000,000",
+        "type": "broad_geologic_unit_interpretation"
+      },
+      "methods": {
+        "area": "USGS Mars geological polygons transformed to the site metric CRS; clipped to the footprint; area fraction computed",
+        "caveat": "Global geology cannot resolve local lava/silica exposures at 5km scale. Do not equate global USGS codes with detailed local Nili Patera geological units."
+      }
+    },
+    "minerals": {
+      "location_id": "nili_patera_01",
+      "category": "minerals",
+      "analysis": {
+        "scale": "detailed",
+        "width_m": 5000.0,
+        "height_m": 5000.0,
+        "center_projected_m": {
+          "x": 3935300.692421062,
+          "y": 527544.8079574254
+        },
+        "center_geographic": {
+          "lat": 8.9,
+          "lon_east": 67.2
+        },
+        "regional_window_km": 10.0,
+        "planet_radius_km": 3396.19
+      },
+      "data_status": "literature_supported",
+      "features": {
+        "dominant_mapped_class": null,
+        "mapped_classes": [],
+        "mapped_fraction": 0.0,
+        "reported_mineral_classes": [
+          {
+            "mineral_class": "olivine",
+            "spatial_scope": "nili_patera_caldera_not_verified_in_5km_footprint",
+            "evidence_strength": "published_orbital_spectral_interpretation",
+            "evidence": "CRISM maps identify an olivine-rich smooth volcanic unit along the western caldera ring-fault area; the published spatial extent has not been intersected with the selected site footprint.",
+            "references": [
+              "https://doi.org/10.1002/2015JE004795",
+              "https://doi.org/10.1029/2020JE006383"
+            ],
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": false
+          },
+          {
+            "mineral_class": "pyroxene",
+            "spatial_scope": "nili_patera_caldera_not_verified_in_5km_footprint",
+            "evidence_strength": "published_orbital_spectral_interpretation",
+            "evidence": "CRISM olivine/low-calcium-pyroxene/high-calcium-pyroxene parameter maps show pyroxene-bearing basaltic units and dunes in Nili Patera; exact area at this chosen location not established.",
+            "references": [
+              "https://doi.org/10.1002/2015JE004795",
+              "https://doi.org/10.1029/2020JE006383"
+            ],
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": false
+          },
+          {
+            "mineral_class": "feldspar",
+            "spatial_scope": "nili_patera_caldera_not_verified_in_5km_footprint",
+            "evidence_strength": "published_orbital_spectral_interpretation",
+            "evidence": "CRISM near-infrared signatures identify a feldspathic rock unit in the caldera; its exact lithology is debated and the reported 104-145 km2 caldera-wide extent is NOT a fraction of this site.",
+            "references": [
+              "https://doi.org/10.1029/2020JE006383"
+            ],
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": false
+          },
+          {
+            "mineral_class": "hydrated_silica",
+            "spatial_scope": "nearby_caldera_locality_outside_nominal_10km_square",
+            "evidence_strength": "published_orbital_spectral_interpretation",
+            "evidence": "CRISM identified localized hydrated silica deposits on the flanks of a volcanic cone. A published approximate locality at 8.92 N, 67.29 E is about 5.4 km from this reference center and just outside the nominal 10 km square footprint.",
+            "references": [
+              "https://doi.org/10.1038/ngeo990",
+              "https://www.geophys.washington.edu/content/people/student_publications_files/r-smith--matthew/Smith_washington_0250E_10411.pdf"
+            ],
+            "is_quantified": false,
+            "confirmed_within_5km_footprint": false
+          }
+        ],
+        "published_observations": [
+          {
+            "feature": "hydrated_silica_crism_locality_approximate",
+            "latitude_deg": 8.92,
+            "longitude_east_deg": 67.29,
+            "coordinate_precision": "approximate_representative_location_from_literature_compilation_not_a_polygon_or_sample_point",
+            "within_5km_detailed_footprint": false,
+            "within_10km_regional_footprint": false,
+            "approx_distance_from_site_center_km": 5.402,
+            "approx_east_offset_km": 5.27,
+            "approx_north_offset_km": 1.185,
+            "interpretation": "Hydrated silica reported in Nili Patera by CRISM; approximate compiled location lies just east of nominal 10 km square (5 km half-width). Does not establish an absence of silica in the footprint.",
+            "instrument": "MRO CRISM",
+            "source_url": "https://www.geophys.washington.edu/content/people/student_publications_files/r-smith--matthew/Smith_washington_0250E_10411.pdf"
+          }
+        ]
+      },
+      "quality": {
+        "coverage_fraction": 0.0,
+        "flags": [
+          "literature_based_mineralogy_not_spatial_mineral_class_mapping",
+          "mineral_class_area_is_not_mineral_abundance",
+          "no_quantitative_mineral_map_coverage",
+          "caldera_wide_observations_not_proven_in_selected_5km_footprint",
+          "hydrated_silica_reported_nearby_not_inside_nominal_10km_square",
+          "exclude_from_stage2_quantitative_similarity_until_compatible_map_available"
+        ],
+        "intersecting_source_polygons": 0,
+        "stage2_quantitative_scoring_eligible": false
+      },
+      "source": {
+        "dataset": "Published MRO/CRISM mineral observations for Nili Patera",
+        "url": "https://doi.org/10.1002/2015JE004795",
+        "references": [
+          {
+            "authors": "Fawdon et al.",
+            "year": 2015,
+            "title": "The geological history of Nili Patera, Mars",
+            "url": "https://doi.org/10.1002/2015JE004795",
+            "role": "CRISM-constrained volcanic and mineralogical units across the caldera"
+          },
+          {
+            "authors": "Eggers et al.",
+            "year": 2021,
+            "title": "Compositional Mapping of the Nili Patera Feldspathic Unit: Extent and Implications for Formation",
+            "url": "https://doi.org/10.1029/2020JE006383",
+            "role": "CRISM-based feldspathic, pyroxene-rich and olivine-bearing exposures across the caldera"
+          },
+          {
+            "authors": "Skok et al.",
+            "year": 2010,
+            "title": "Silica deposits in the Nili Patera caldera on the Syrtis Major volcanic complex on Mars",
+            "url": "https://doi.org/10.1038/ngeo990",
+            "role": "Localized hydrated silica deposits on the flanks of a volcanic cone"
+          },
+          {
+            "authors": "Smith",
+            "year": 2012,
+            "title": "Hydrated silica locations compilation (PhD dissertation, Table 1.1)",
+            "url": "https://www.geophys.washington.edu/content/people/student_publications_files/r-smith--matthew/Smith_washington_0250E_10411.pdf",
+            "role": "Approximate published geographic locality for Nili Patera hydrated silica (8.92 N, 67.29 E)"
+          }
+        ],
+        "type": "peer_reviewed_literature_mineral_observations",
+        "instrument": "Mars Reconnaissance Orbiter CRISM; supporting THEMIS and CTX geological context",
+        "map_product_used": false
+      },
+      "methods": {
+        "area": "No georeferenced mineral-class polygons were clipped to the actual 5 km site. mapped_fraction=0 denotes no mapped area coverage, not absence of minerals.",
+        "literature_extraction": "Mineral classes summarized from published orbital spectral studies for the Nili Patera caldera, with interpretations and citations; they are not site-specific abundance detections.",
+        "location_test": "The approximate 8.92 N, 67.29 E silica locality was compared to the 5 km and 10 km projected square analysis footprints using spherical Mars R=3396190 m; approximate location precision limits boundary interpretations.",
+        "caveat": "Do not interpret published caldera-wide mineral occurrences as identified inside this 5 km footprint or as concentrations, percentages by mass, or polygon area fractions.",
+        "stage2_scoring": "Context only. Do not calculate Earth–Mars mineral-similarity scores from this literature profile."
+      }
+    },
+    "thermal": {
+      "location_id": "nili_patera_01",
+      "category": "thermal",
+      "data_status": "processed",
+      "features": {
+        "median_ti": 558.0,
+        "mean_ti": 564.25,
+        "p10_ti": 509.9,
+        "p90_ti": 623.6,
+        "min_ti": 500.0,
+        "max_ti": 641.0
+      },
+      "analysis": {
+        "center_geographic": {
+          "lat": 8.9,
+          "lon_east": 67.2
+        },
+        "source_center_geographic": {
+          "lat": 8.9,
+          "lon_east": 67.2
+        },
+        "source_center_distance_km": 0.0,
+        "source_resolution_m": 2963.6,
+        "measurement_type": "coarse_satellite_context"
+      },
+      "quality": {
+        "detailed_valid_fraction": 1.0,
+        "flags": [
+          "coarse_resolution",
+          "not_used_in_default_terrain_similarity",
+          "requires_comparable_earth_thermal_data_for_stage2"
+        ]
+      },
+      "source": {
+        "dataset": "MGS TES dayside thermal inertia (Putzig & Mellon 2007)",
+        "original_source_id": "nili_patera",
+        "source_file": "global_ti_day_2007.img",
+        "source_mask_file": "global_ti_msk_day_2007.img",
+        "unit": "thermal inertia, J m^-2 K^-1 s^-0.5 (tiu); raw int16 used as-is",
+        "original_role": "quantitative_feature",
+        "input_json": "data/ti/nili_patera_ti.json",
+        "role": "conditional_quantitative_context"
+      },
+      "scoring_eligible": false,
+      "regional": {
+        "region_km": 10.0,
+        "grid_width": 4,
+        "grid_height": 4,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 528.0,
+          "mean_ti": 552.625,
+          "p10_ti": 439.5,
+          "p90_ti": 702.0,
+          "min_ti": 324.0,
+          "max_ti": 711.0
+        },
+        "quality": {
+          "samples": 16,
+          "samples_valid": 16,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "quantitative_feature",
+        "data_status": "processed"
+      },
+      "detailed": {
+        "region_km": 5.0,
+        "grid_width": 3,
+        "grid_height": 3,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 558.0,
+          "mean_ti": 564.25,
+          "p10_ti": 509.9,
+          "p90_ti": 623.6,
+          "min_ti": 500.0,
+          "max_ti": 641.0
+        },
+        "quality": {
+          "samples": 4,
+          "samples_valid": 4,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "quantitative_feature",
+        "data_status": "processed"
+      },
+      "context": {
+        "region_km": 50.0,
+        "grid_width": 18,
+        "grid_height": 18,
+        "effective_pixel_size_m": [
+          2963.6,
+          2963.6
+        ],
+        "features": {
+          "median_ti": 280.0,
+          "mean_ti": 332.4651898734177,
+          "p10_ti": 219.5,
+          "p90_ti": 513.5,
+          "min_ti": 179.0,
+          "max_ti": 790.0
+        },
+        "quality": {
+          "samples": 324,
+          "samples_valid": 316,
+          "valid_fraction": 0.975,
+          "status": "ok"
+        },
+        "role": "quantitative_feature",
+        "data_status": "processed"
+      }
+    },
+    "albedo": {
+      "location_id": "nili_patera_01",
+      "category": "albedo",
+      "data_status": "processed",
+      "features": {
+        "median_albedo": 0.11476019024848938,
+        "mean_albedo": 0.11814481019973755,
+        "p10_albedo": 0.11300298571586609,
+        "p90_albedo": 0.129877969622612,
+        "min_albedo": 0.11168146133422852,
+        "max_albedo": 0.13140282034873962
+      },
+      "analysis": {
+        "center_geographic": {
+          "lat": 8.9,
+          "lon_east": 67.2
+        },
+        "source_center_geographic": {
+          "lat": 8.9,
+          "lon_east": 67.2
+        },
+        "source_center_distance_km": 0.0,
+        "source_resolution_m": 1481.8,
+        "measurement_type": "coarse_satellite_context"
+      },
+      "quality": {
+        "detailed_valid_fraction": 1.0,
+        "flags": [
+          "coarse_resolution",
+          "not_used_in_default_terrain_similarity",
+          "nir_albedo_not_directly_equivalent_to_earth_broadband_albedo"
+        ]
+      },
+      "source": {
+        "dataset": "OMEGA/MEx NIR albedo (Ody et al. 2012), 1.08 um",
+        "original_source_id": "nili_patera",
+        "source_file": "ALBEDO_R1080_EQU_MAP.tiff",
+        "source_mask_file": null,
+        "unit": "albedo (dimensionless, I/F / cos(i) at 1.08 um, Lambertian); decoded as raw * 1.4522365285e-05 + 0.52414565669 per the PDS label",
+        "original_role": "contextual_only",
+        "input_json": "data/albedo/nili_patera_albedo.json",
+        "role": "contextual_only"
+      },
+      "scoring_eligible": false,
+      "regional": {
+        "region_km": 10.0,
+        "grid_width": 8,
+        "grid_height": 8,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.11727982759475708,
+          "mean_albedo": 0.12159410119056702,
+          "p10_albedo": 0.11417640000581741,
+          "p90_albedo": 0.13190530240535736,
+          "min_albedo": 0.11168146133422852,
+          "max_albedo": 0.1377491056919098
+        },
+        "quality": {
+          "samples": 64,
+          "samples_valid": 64,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "contextual_only",
+        "data_status": "processed"
+      },
+      "detailed": {
+        "region_km": 5.0,
+        "grid_width": 4,
+        "grid_height": 4,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.11476019024848938,
+          "mean_albedo": 0.11814481019973755,
+          "p10_albedo": 0.11300298571586609,
+          "p90_albedo": 0.129877969622612,
+          "min_albedo": 0.11168146133422852,
+          "max_albedo": 0.13140282034873962
+        },
+        "quality": {
+          "samples": 16,
+          "samples_valid": 16,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "contextual_only",
+        "data_status": "processed"
+      },
+      "context": {
+        "region_km": 50.0,
+        "grid_width": 35,
+        "grid_height": 35,
+        "effective_pixel_size_m": [
+          1481.8,
+          1481.8
+        ],
+        "features": {
+          "median_albedo": 0.13395151495933533,
+          "mean_albedo": 0.13340018689632416,
+          "p10_albedo": 0.11588131636381149,
+          "p90_albedo": 0.14913755655288696,
+          "min_albedo": 0.10498663783073425,
+          "max_albedo": 0.1893470585346222
+        },
+        "quality": {
+          "samples": 1224,
+          "samples_valid": 1224,
+          "valid_fraction": 1.0,
+          "status": "ok"
+        },
+        "role": "contextual_only",
+        "data_status": "processed"
+      }
+    },
+    "wind": {
+      "location_id": "nili_patera_01",
+      "category": "wind",
+      "data_status": "processed_regional_context",
+      "features": {
+        "mean_wind_speed_ms": 4.864499337718038,
+        "p95_wind_speed_ms": 9.735230713548027,
+        "wind_speed_std_ms": 2.7677955726181396,
+        "prevailing_wind_direction_deg": 144.8032872523849,
+        "mean_surface_pressure_pa": 478.1622757169935
+      },
+      "analysis": {
+        "requested_center": {
+          "lat": 8.9,
+          "lon_east": 67.2
+        },
+        "source_reference_center": {
+          "lat": 8.8,
+          "lon_east": 67.3
+        },
+        "distance_from_site_km": 8.333,
+        "measurement_type": "regional_modeled_atmospheric_context"
+      },
+      "quality": {
+        "sample_count": 1440,
+        "valid_wind_samples": 1440,
+        "valid_pressure_samples": 1440,
+        "flags": [
+          "model_not_direct_observation",
+          "source_model_grid_point_not_confirmed",
+          "sampled_periods_not_full_martian_year",
+          "not_used_in_any_similarity_score",
+          "source_reference_differs_from_site"
+        ]
+      },
+      "source": {
+        "dataset": "MACDA v2.0",
+        "source_location_id": "nili_patera",
+        "data_type": "modeled atmospheric reanalysis",
+        "coordinate_quality": "approximate_reference",
+        "sampled_period_count": 4,
+        "mars_years_sampled": [
+          25
+        ],
+        "wind_height_note": "Lowest model sigma level; not necessarily 10 m above ground",
+        "sampling_note": "Combined statistics across 4 downloaded MACDA periods; only sampled portions of the Martian year are covered, not a full-year average.",
+        "input_json": "data/atmosphere/nili_patera.json"
+      },
+      "scoring_eligible": false
+    }
+  },
+  "missing_modules": [],
+  "invalid_modules": [],
+  "similarity_readiness": {
+    "stage_1_terrain": true,
+    "stage_2_surface_material": false,
+    "stage_2_geology": false,
+    "stage_2_minerals": false,
+    "note": "Stage 2 depends on validated comparable Earth TI/albedo and shared geological/mineral class mappings. The Nili mineral module is literature-based and not quantified."
+  },
+  "scientific_limitations": [
+    "Regional and detailed MOLA terrain have approximately 460 m pixel resolution; detailed is not 30 m terrain.",
+    "Global USGS geological mapping (1:20,000,000) cannot resolve local volcanic units within a 5 km site.",
+    "Mineral classes are literature-based occurrences across Nili Patera, not verified 5 km mapped mineral-area fractions.",
+    "MGS/TES thermal inertia is coarse and needs a comparable Earth-side product before similarity scoring.",
+    "OMEGA near-infrared 1.08 micrometre albedo cannot be directly scored against Earth's broadband albedo.",
+    "MACDA wind and pressure are modeled atmospheric context, never part of Earth similarity scores.",
+    "Atmospheric reference coordinates are 8.33 km from Nili terrain center; they are not confirmed model cell coordinates."
+  ]
+}

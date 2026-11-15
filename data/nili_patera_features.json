@@ -1,0 +1,87 @@
+{
+  "id": "nili_patera_01",
+  "name": "Nili Patera",
+  "source_dem": "megt44n000hb.img",
+  "source_crs_wkt": "PROJCS[\"Mars_Nili_Patera_local_EQC\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",8.9],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "source_pixel_size_m": [
+    457.508,
+    463.084
+  ],
+  "center_projected_m": {
+    "x": 3935300.692421062,
+    "y": 527544.8079574254
+  },
+  "center_geographic": {
+    "lat": 8.9,
+    "lon_east": 67.2
+  },
+  "coordinate_source": "8.9N, 67.2E project reference from existing TI/albedo sources; transformed using Mars sphere",
+  "regional": {
+    "features": {
+      "median_slope_deg": 1.366285143498895,
+      "steep_fraction": 0.0,
+      "relief_m": 187.0,
+      "roughness_m": 8.527703599899557
+    },
+    "additional_features": {
+      "mean_slope_deg": 1.4283382146223458,
+      "slope_p90_deg": 2.406815497705013,
+      "flat_fraction": 1.0,
+      "elevation_std_m": 61.36619700670648,
+      "roughness_100m_m": 0.0003061216650585152,
+      "roughness_500m_m": 3.9328193887524723
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 484
+    },
+    "region_km": 10.0,
+    "grid_width": 22,
+    "grid_height": 22,
+    "effective_pixel_size_m": [
+      457.508,
+      463.084
+    ],
+    "quality_note": "MOLA bins may contain interpolated elevations where no laser shot existed; this is not 30m DEM data."
+  },
+  "detailed": {
+    "features": {
+      "median_slope_deg": 1.465992671653823,
+      "steep_fraction": 0.0,
+      "relief_m": 97.0,
+      "roughness_m": 9.950052854345852
+    },
+    "additional_features": {
+      "mean_slope_deg": 1.537058386639201,
+      "slope_p90_deg": 2.467260062234543,
+      "flat_fraction": 1.0,
+      "elevation_std_m": 31.27278624214733,
+      "roughness_100m_m": 0.0003606331831311751,
+      "roughness_500m_m": 4.802774552880828
+    },
+    "quality": {
+      "valid_fraction_resampled": 1.0,
+      "valid_slope_fraction_resampled": 1.0,
+      "samples": 121
+    },
+    "region_km": 5.0,
+    "grid_width": 11,
+    "grid_height": 11,
+    "effective_pixel_size_m": [
+      457.508,
+      463.084
+    ],
+    "quality_note": "MOLA bins may contain interpolated elevations where no laser shot existed; this is not 30m DEM data."
+  },
+  "methods": {
+    "slope": "degrees(arctan(hypot(gradient_x, gradient_y)))",
+    "steep_fraction": "fraction of slope samples greater than 15 degrees",
+    "relief": "elevation percentile 95 minus percentile 5, in metres",
+    "roughness_m": "SD of elevation minus weighted Gaussian-smoothed elevation; sigma=1000m, matching mars_prep.py",
+    "resampling": "NONE: native MOLA 128 pixels/degree, pixel centres inside a projected 10km/5km square",
+    "nodata": "NASA PDS MOLA gridded topography; some source bins are interpolated when shot coverage is absent",
+    "native_source_grid": "Planetocentric 0E-90E, 44N-0N, 128 pixels/degree, MSB signed int16 topography metres",
+    "resolution_limit": "Both regional and detailed computed at native ~460m. NO 30m detail exists in this source."
+  }
+}
